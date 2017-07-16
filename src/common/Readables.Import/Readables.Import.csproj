@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F53E477A-0336-4435-8382-BBD6797E41D1}</ProjectGuid>
+    <ProjectGuid>{5BE5643C-297E-4F44-ACBB-29DBD4BD0A92}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Readables.Common</RootNamespace>
-    <AssemblyName>Readables.Common</AssemblyName>
+    <RootNamespace>Readables.Import</RootNamespace>
+    <AssemblyName>Readables.Import</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,19 +44,23 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="VersFx.Formats.Text.Epub, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\VersFx.Formats.Text.Epub.1.0.2\lib\VersFx.Formats.Text.Epub.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IOC.cs" />
-    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="ePub\EPubImportService.cs" />
+    <Compile Include="Installer.cs" />
+    <Compile Include="IReadableImportService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Readables.Import\Readables.Import.csproj">
-      <Project>{5be5643c-297e-4f44-acbb-29dbd4bd0a92}</Project>
-      <Name>Readables.Import</Name>
+    <ProjectReference Include="..\Readables.Domain\Readables.Domain.csproj">
+      <Project>{c3ac8e36-a0d2-4368-8c85-675b11e4903f}</Project>
+      <Name>Readables.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
