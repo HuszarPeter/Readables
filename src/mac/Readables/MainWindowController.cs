@@ -20,6 +20,8 @@ namespace Readables
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
+
+            this.Window.ContentViewController = new ReadableViewController();
         }
 
         public new MainWindow Window
@@ -29,11 +31,6 @@ namespace Readables
 
         partial void mainViewSelectorChanged(NSSegmentedControl sender)
         {
-            var viewController = this.Window.ContentViewController as Readables.BooksViewController;
-            if (viewController != null)
-            {
-                viewController.ViewMode = (BooksViewMode)((int)sender.SelectedSegment);
-            }
         }
     }
 }

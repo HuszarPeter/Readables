@@ -84,15 +84,30 @@
     <Compile Include="MainWindowController.designer.cs">
       <DependentUpon>MainWindowController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewController\BooksViewController.cs" />
-    <Compile Include="ViewController\BooksViewController.designer.cs">
-      <DependentUpon>BooksViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewController\BooksViewMode.cs" />
     <Compile Include="RootInstaller.cs" />
+    <Compile Include="ViewController\ReadableView.cs" />
+    <Compile Include="ViewController\ReadableViewController.cs" />
+    <Compile Include="ViewController\ReadableView.designer.cs">
+      <DependentUpon>ReadableView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\ReadableViewController.designer.cs">
+      <DependentUpon>ReadableViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\ReadableCollectionViewDataSource.cs" />
+    <Compile Include="ViewController\ReadableItemView.cs" />
+    <Compile Include="ViewController\ReadableItemViewController.cs" />
+    <Compile Include="ViewController\ReadableItemView.designer.cs">
+      <DependentUpon>ReadableItemView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\ReadableItemViewController.designer.cs">
+      <DependentUpon>ReadableItemViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="ViewController\ReadableView.xib" />
+    <InterfaceDefinition Include="ViewController\ReadableItemViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\common\Readables.Common\Readables.Common.csproj">

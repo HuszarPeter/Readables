@@ -58,5 +58,15 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Readables.Domain\Readables.Domain.csproj">
+      <Project>{C3AC8E36-A0D2-4368-8C85-675B11E4903F}</Project>
+      <Name>Readables.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Readables.Common\Readables.Common.csproj">
+      <Project>{F53E477A-0336-4435-8382-BBD6797E41D1}</Project>
+      <Name>Readables.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,14 +7,20 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace Readables
+namespace Readables.ViewController
 {
-	[Register ("BooksViewController")]
-	partial class BooksViewController
+	[Register ("ReadableViewController")]
+	partial class ReadableViewController
 	{
+		[Outlet]
+		AppKit.NSCollectionView collectionView { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (collectionView != null) {
+				collectionView.Dispose ();
+				collectionView = null;
+			}
 		}
 	}
 }

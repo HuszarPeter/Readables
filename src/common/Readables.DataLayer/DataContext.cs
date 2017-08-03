@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Readables.DataLayer
@@ -9,6 +10,15 @@ namespace Readables.DataLayer
 
         public DataContext() : base(dbPath)
         {
+        }
+
+        public IEnumerable<Readables.Domain.Readable> Readables 
+        { 
+            get
+            {
+                return this.Query<Readables.Domain.Readable>()
+                           .ToEnumerable();
+            }
         }
 
         public void Insert<T>(T entity)

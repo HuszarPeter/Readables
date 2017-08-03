@@ -15,8 +15,8 @@ namespace Readables.Domain
 
         public string Description { get; set; }
 
-        public IList<String> Subjects { get; set; }
+        public string[] Subjects { get; set; }
 
-        public IList<ReadableFile> Files { get; set; }
+        public ReadableFile[] Files { get; set; }
     }
 }
