@@ -13,8 +13,7 @@ namespace Readables.Common
 
         static IOC()
         {
-            Container = new WindsorContainer()
-                    .Install(new Import.Installer());
+            Container = new WindsorContainer();
         }
     }
 }

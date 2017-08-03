@@ -7,10 +7,16 @@ namespace Readables.Domain
 {
     public class Readable
     {
-        public string Id;
+        public string Id { get; set; }
 
-        public string Title;
+        public string Title { get; set; }
 
-        public IList<ReadableFile> Files;
+        public string Author { get; set; }
+
+        public string Description { get; set; }
+
+        public IList<String> Subjects { get; set; }
+
+        public IList<ReadableFile> Files { get; set; }
     }
 }
