@@ -1,5 +1,6 @@
 ﻿using AppKit;
 using Foundation;
+using Readables.Common;
 
 namespace Readables
 {
@@ -8,6 +9,7 @@ namespace Readables
     {
         public AppDelegate()
         {
+            var container = IOC.Container;
         }
 
         public override void DidFinishLaunching(NSNotification notification)
