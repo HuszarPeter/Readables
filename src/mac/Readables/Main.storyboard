@@ -659,37 +659,50 @@
                         <value key="minSize" type="size" width="532" height="368"/>
                         <toolbar key="toolbar" implicitIdentifier="D236D1DF-B953-4249-8343-DFA44DF8D90C" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="TAY-ku-txP">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="42D6CF2D-2460-4D8E-B6EA-41D92EE7560C" label="Mode" paletteLabel="Mode" id="2DU-7V-3Co">
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="vk7-BS-gLk"/>
+                                <toolbarItem implicitItemIdentifier="3FB59DC7-5B44-4014-9EF5-9A181F97A934" label="" paletteLabel="" image="NSActionTemplate" id="Ntk-Yx-bva">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="100" height="26"/>
-                                    <size key="maxSize" width="296" height="28"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="4xJ-Nt-zow">
-                                        <rect key="frame" x="0.0" y="14" width="295" height="26"/>
+                                    <size key="minSize" width="37" height="32"/>
+                                    <size key="maxSize" width="114" height="32"/>
+                                    <button key="view" verticalHuggingPriority="750" id="sWG-3q-wKl">
+                                        <rect key="frame" x="0.0" y="14" width="96" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Xck-7q-Px3">
+                                        <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" image="NSActionTemplate" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vJy-08-sOz">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="EE3E15DD-98DB-4B38-9A35-2C04A53D9EDB" label="Custom View" paletteLabel="Custom View" id="ux5-In-vb1">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="64" height="26"/>
+                                    <size key="maxSize" width="193" height="28"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="Hh8-Of-h4v">
+                                        <rect key="frame" x="6" y="14" width="65" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="IjK-0C-s1S">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="All readables" width="97" selected="YES"/>
-                                                <segment label="Books" width="97" tag="1"/>
-                                                <segment label="Comics" width="97"/>
+                                                <segment image="NSListViewTemplate" width="31"/>
+                                                <segment image="NSIconViewTemplate" width="31" selected="YES" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="mainViewSelectorChanged:" target="B8D-0N-5wS" id="HHi-r5-MqF"/>
+                                            <action selector="onViewChanged:" target="B8D-0N-5wS" id="IwT-PN-dFL"/>
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="vk7-BS-gLk"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="Ntk-Yx-bva"/>
+                                <toolbarItem reference="ux5-In-vb1"/>
                                 <toolbarItem reference="vk7-BS-gLk"/>
-                                <toolbarItem reference="2DU-7V-3Co"/>
                                 <toolbarItem reference="vk7-BS-gLk"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
                     <connections>
-                        <outlet property="mainViewSelector" destination="4xJ-Nt-zow" id="RDx-7h-r3R"/>
+                        <outlet property="changeView" destination="Hh8-Of-h4v" id="azA-mB-DZ7"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -697,4 +710,9 @@
             <point key="canvasLocation" x="196.5" y="334.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSIconViewTemplate" width="10" height="10"/>
+        <image name="NSListViewTemplate" width="14" height="10"/>
+    </resources>
 </document>

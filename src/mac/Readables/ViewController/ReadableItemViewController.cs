@@ -35,6 +35,12 @@ namespace Readables.ViewController
         {
         }
 
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            UpdateView();
+        }
+
         #endregion
 
         //strongly typed view accessor
@@ -60,6 +66,25 @@ namespace Readables.ViewController
                 View.Readable = readable;
                 DidChangeValue(nameof(Readable));
             }
+        }
+
+        public override bool Selected
+        {
+            get
+            {
+                return base.Selected;
+            }
+            set
+            {
+                base.Selected = value;
+                UpdateView();
+            }
+        }
+
+        void UpdateView()
+        {
+            selectionBorder.AlphaValue = (nfloat)((Selected) ? 0.6 : 1.0);
+            //selectionBorder.BorderColor = NSColor.Clear;
         }
     }
 }

@@ -9,21 +9,21 @@ using System.CodeDom.Compiler;
 
 namespace Readables
 {
-    [Register ("MainWindowController")]
-    partial class MainWindowController
-    {
-        [Outlet]
-        AppKit.NSSegmentedControl mainViewSelector { get; set; }
+	[Register ("MainWindowController")]
+	partial class MainWindowController
+	{
+		[Outlet]
+		AppKit.NSSegmentedControl changeView { get; set; }
 
-        [Action ("mainViewSelectorChanged:")]
-        partial void mainViewSelectorChanged (AppKit.NSSegmentedControl sender);
-        
-        void ReleaseDesignerOutlets ()
-        {
-            if (mainViewSelector != null) {
-                mainViewSelector.Dispose ();
-                mainViewSelector = null;
-            }
-        }
-    }
+		[Action ("onViewChanged:")]
+		partial void onViewChanged (AppKit.NSSegmentedControl sender);
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (changeView != null) {
+				changeView.Dispose ();
+				changeView = null;
+			}
+		}
+	}
 }

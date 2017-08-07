@@ -7,19 +7,19 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace Readables.ViewController
+namespace Readables.ViewController.List
 {
-	[Register ("ReadableItemViewController")]
-	partial class ReadableItemViewController
+	[Register ("ReadableListViewController")]
+	partial class ReadableListViewController
 	{
 		[Outlet]
-		AppKit.NSBox selectionBorder { get; set; }
+		AppKit.NSTableView readablesTableView { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (selectionBorder != null) {
-				selectionBorder.Dispose ();
-				selectionBorder = null;
+			if (readablesTableView != null) {
+				readablesTableView.Dispose ();
+				readablesTableView = null;
 			}
 		}
 	}

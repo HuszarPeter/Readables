@@ -21,7 +21,8 @@ namespace Readables
         {
             base.AwakeFromNib();
 
-            this.Window.ContentViewController = new ReadableViewController();
+            this.changeView.SelectedSegment = 0;
+            this.UpdateViewController();
         }
 
         public new MainWindow Window
@@ -29,8 +30,24 @@ namespace Readables
             get { return (MainWindow)base.Window; }
         }
 
-        partial void mainViewSelectorChanged(NSSegmentedControl sender)
+        partial void onViewChanged(NSSegmentedControl sender)
         {
+            this.UpdateViewController();
+        }
+
+        private void UpdateViewController()
+        {
+            switch (this.changeView.SelectedSegment)
+            {
+                case 0:
+                    this.Window.ContentViewController = new ViewController.List.ReadableListViewController();
+                    break;
+                case 1:
+                    this.Window.ContentViewController = new ReadableViewController();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -4,31 +4,35 @@ using System.IO;
 
 namespace Readables.DataLayer
 {
-    public class DataContext : LiteDB.LiteRepository, IDataContext
+    public class DataContext : IDataContext
     {
-        static string dbPath = "readables.db";
-
-        public DataContext() : base(dbPath)
-        {
-        }
+        static string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "readables.db");
 
         public IEnumerable<Readables.Domain.Readable> Readables 
         { 
             get
             {
-                return this.Query<Readables.Domain.Readable>()
-                           .ToEnumerable();
+                using(var repo = new LiteDB.LiteRepository(dbPath))
+                {
+                    return repo.Query<Readables.Domain.Readable>().ToArray();
+                }
             }
         }
 
         public void Insert<T>(T entity)
         {
-            base.Insert(entity);
+            using(var repo = new LiteDB.LiteRepository(dbPath))
+            {
+                repo.Insert(entity);
+            }
         }
 
         public void Upsert<T>(T entity)
         {
-            base.Upsert(entity);
+            using(var repo = new LiteDB.LiteRepository(dbPath))
+            {
+                repo.Upsert(entity);
+            }
         }
     }
 }

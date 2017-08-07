@@ -67,6 +67,8 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="ViewController\" />
+    <Folder Include="ViewController\List\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -103,11 +105,22 @@
     <Compile Include="ViewController\ReadableItemViewController.designer.cs">
       <DependentUpon>ReadableItemViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewController\List\ReadableListView.cs" />
+    <Compile Include="ViewController\List\ReadableListViewController.cs" />
+    <Compile Include="ViewController\List\ReadableListView.designer.cs">
+      <DependentUpon>ReadableListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\List\ReadableListViewController.designer.cs">
+      <DependentUpon>ReadableListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ReadableModel.cs" />
+    <Compile Include="ViewController\List\ReadableListViewDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="ViewController\ReadableView.xib" />
     <InterfaceDefinition Include="ViewController\ReadableItemViewController.xib" />
+    <InterfaceDefinition Include="ViewController\List\ReadableListView.xib" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\common\Readables.Common\Readables.Common.csproj">
