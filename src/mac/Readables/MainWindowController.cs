@@ -3,6 +3,7 @@
 using Foundation;
 using AppKit;
 using Readables.ViewController;
+using Readables.Common;
 
 namespace Readables
 {

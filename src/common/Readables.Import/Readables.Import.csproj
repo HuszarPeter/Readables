@@ -53,6 +53,9 @@
     <Compile Include="Installer.cs" />
     <Compile Include="IReadableImportService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IImportService.cs" />
+    <Compile Include="ImportService.cs" />
+    <Compile Include="Comic\ComicImportService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -66,6 +69,9 @@
       <Project>{C241E606-EEB4-442C-A2C7-98411C2E6236}</Project>
       <Name>Readables.DataLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Comic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -29,7 +29,7 @@ namespace Readables.ViewController.List
                 case "titleColumn":
                     return new NSString(readable.Title);
                 case "authorColumn":
-                    return new NSString(readable.Author);
+                    return new NSString(readable.Author ?? "");
                 default:
                     return new NSString("??");
             }

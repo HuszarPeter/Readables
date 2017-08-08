@@ -11,11 +11,19 @@ namespace Readables.Import.ePub
 {
     public class EPubImportService : IReadableImportService
     {
-        readonly IDataContext dataContext;
+		public string FormatName 
+        { 
+            get{
+                return "ePub";
+            } 
+        }
 
-        public EPubImportService(IDataContext dataContext)
-        {
-            this.dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
+		public string[] SupportedExtensions 
+        { 
+            get
+            {
+                return new[] { ".epub" };   
+            }
         }
 
         public Readable Import(string fileName)
@@ -37,8 +45,6 @@ namespace Readables.Import.ePub
                 Subjects = book.Schema.Package.Metadata.Subjects.ToArray(),
                 Description = book.Schema.Package.Metadata.Description
             };
-
-            this.dataContext.Upsert(result);
 
             return result;
         }

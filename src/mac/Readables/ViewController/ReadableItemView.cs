@@ -48,7 +48,7 @@ namespace Readables.ViewController
                 WillChangeValue(nameof(Readable));
                 readable = value;
                 this.titleLabel.StringValue = readable.Title;
-                this.authorLabel.StringValue = readable.Author;
+                this.authorLabel.StringValue = readable.Author ?? "";
                 DidChangeValue(nameof(Readable));
             }
         }

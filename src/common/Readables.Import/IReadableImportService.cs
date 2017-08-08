@@ -9,6 +9,10 @@ namespace Readables.Import
 {
     public interface IReadableImportService
     {
+        string FormatName { get; }
+
+        string[] SupportedExtensions { get; }
+
         Readable Import(string fileName);
     }
 }

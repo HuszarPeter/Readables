@@ -13,7 +13,9 @@ namespace Readables.Import
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IReadableImportService>().ImplementedBy<ePub.EPubImportService>());
+            container.Register(Component.For<IImportService>().ImplementedBy<ImportService>().LifestyleTransient());
+            container.Register(Component.For<IReadableImportService>().ImplementedBy<ePub.EPubImportService>().LifestyleTransient());
+            container.Register(Component.For<IReadableImportService>().ImplementedBy<Comic.ComicImportService>().LifestyleTransient());
         }
     }
 }
