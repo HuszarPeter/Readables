@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using Readables.DataLayer;
 using Readables.Domain;
+using Readables.Common;
+using Readables.Import.AggregatedEvents;
 
 namespace Readables.Import
 {
@@ -13,9 +15,11 @@ namespace Readables.Import
 
         readonly IDataContext dataContext;
 
-        public ImportService(IDataContext dataContext, IEnumerable<IReadableImportService> importServices)
+        readonly IEventAggregator eventAggregator;
+
+        public ImportService(IDataContext dataContext, IEventAggregator eventAggregator, IEnumerable<IReadableImportService> importServices)
         {
-			// Readables.Common.IOC.Container.ResolveAll<IReadableImportService>()
+            this.eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
 			this.importServices = importServices ?? throw new ArgumentNullException(nameof(importServices));
 			this.dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
         }
@@ -55,7 +59,7 @@ namespace Readables.Import
         private void StoreReadable(Readable readable)
         {
             this.dataContext.Upsert(readable);
-            // send notification using event aggregate
+            this.eventAggregator.Publish(new ImportFinishedAggregatedEvent(readable.Title));
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Readables.ViewController.List
     {
         private IDataContext dataContext;
 
+        private IEventAggregator eventAggregator;
+
         #region Constructors
 
         // Called when created from unmanaged code
@@ -37,6 +39,8 @@ namespace Readables.ViewController.List
         void Initialize()
         {
             this.dataContext = IOC.Container.Resolve<IDataContext>();
+            this.eventAggregator = IOC.Container.Resolve<IEventAggregator>();
+            this.eventAggregator.Subscribe(item => readablesTableView.ReloadData());
         }
 
 

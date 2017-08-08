@@ -56,6 +56,7 @@
     <Compile Include="IImportService.cs" />
     <Compile Include="ImportService.cs" />
     <Compile Include="Comic\ComicImportService.cs" />
+    <Compile Include="AggregatedEvents\ImportFinishedAggregatedEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -69,9 +70,14 @@
       <Project>{C241E606-EEB4-442C-A2C7-98411C2E6236}</Project>
       <Name>Readables.DataLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Readables.Common\Readables.Common.csproj">
+      <Project>{F53E477A-0336-4435-8382-BBD6797E41D1}</Project>
+      <Name>Readables.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Comic\" />
+    <Folder Include="AggregatedEvents\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

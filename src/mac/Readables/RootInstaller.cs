@@ -10,6 +10,7 @@ namespace Readables
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {			
             container
+                .Install(new Common.Installer())
                 .Install(new Import.Installer())
                 .Install(new DataLayer.Installer());
         }
