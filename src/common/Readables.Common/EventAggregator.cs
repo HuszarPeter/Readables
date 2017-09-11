@@ -1,40 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
+﻿using System.Collections.Generic;
+using Readables.Common.Extensions;
 
 namespace Readables.Common
 {
-    public class EventAggregator : IEventAggregator
-    {
-        readonly ConcurrentQueue<AggregatedEvent> events = new ConcurrentQueue<AggregatedEvent>();
+	public class EventAggregator : IEventAggregator
+	{
+        private readonly List<IListenTo> listeners = new List<IListenTo>();
 
-        readonly ConcurrentBag<Action<AggregatedEvent>> actions = new ConcurrentBag<Action<AggregatedEvent>>();
+        public void AddListener(IListenTo listener)
+		{
+			this.listeners.Add(listener);
+		}
 
-        public void Publish(AggregatedEvent eventObject)
-        {
-            this.events.Enqueue(eventObject);
-            HandleLast();
-        }
-
-        public void Subscribe(Action<AggregatedEvent> eventHandler)
-        {
-            actions.Add(eventHandler);
-        }
-
-        private void HandleLast()
-        {
-            if (this.events.TryDequeue(out AggregatedEvent evt))
-            {
-                this.Handle(evt);
-            }
-        }
-
-        private void Handle(AggregatedEvent eventObject)
-        {
-            foreach(var action in actions)
-            {
-                action(eventObject);
-            }
-        }
-    }
+		public void SendMessage<T>(T message) where T : IEvent
+		{
+			this.listeners.CallOnEach<IListenTo<T>>((obj) => {
+				obj.HandleMessage(message);
+			});
+		}
+	}
 }

@@ -1,8 +1,6 @@
-﻿using System;
-using AppKit;
+﻿using AppKit;
 using Foundation;
 using Readables.Common;
-using System.IO;
 
 namespace Readables
 {
@@ -19,12 +17,8 @@ namespace Readables
         {
 			// Insert code here to initialize your application
 			var import = IOC.Container.Resolve<Import.IImportService>();
-
-			import.ImportFile(@"/Users/mac/Desktop/Amerikai istenek - Neil Gaiman.epub");
-			import.ImportFile(@"/Users/mac/Desktop/Alapitvany - Isaac Asimov.epub");
-			import.ImportFile(@"/Users/mac/Desktop/Abaddon kapuja - James S. A. Corey.epub");
-			import.ImportFile(@"/Users/mac/Desktop/James S. A. Corey - A nemezis játékai.epub.epub");
-            import.ImportFile(@"/Users/mac/Desktop/asd/Darth Maul.cbz");
+            import.ImportFolder(@"/Users/mac/Desktop");
+            import.ImportFile(@"/Users/mac/Desktop/Amerikai istenek - Neil Gaiman.epub");
 		}
 
         public override void WillTerminate(NSNotification notification)

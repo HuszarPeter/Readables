@@ -56,7 +56,8 @@
     <Compile Include="IImportService.cs" />
     <Compile Include="ImportService.cs" />
     <Compile Include="Comic\ComicImportService.cs" />
-    <Compile Include="AggregatedEvents\ImportFinishedAggregatedEvent.cs" />
+    <Compile Include="AggregatedEvents\PathImportedEvent.cs" />
+    <Compile Include="AggregatedEvents\FileImportedEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

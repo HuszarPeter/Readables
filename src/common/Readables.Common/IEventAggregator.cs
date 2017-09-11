@@ -1,10 +1,21 @@
-﻿using System;
-namespace Readables.Common
+﻿namespace Readables.Common
 {
-    public interface IEventAggregator
-    {
-        void Publish(AggregatedEvent eventObject);
+    public interface IEventAggregator {
+		
+        void SendMessage<T>(T message) where T : IEvent;
 
-        void Subscribe(Action<AggregatedEvent> eventHandler);
+		void AddListener(IListenTo listener);
+    }
+
+    public interface IEvent {
+        
+    }
+
+    public interface IListenTo {
+        
+    }
+
+    public interface IListenTo<T>: IListenTo where T : IEvent {
+        void HandleMessage(T message);
     }
 }

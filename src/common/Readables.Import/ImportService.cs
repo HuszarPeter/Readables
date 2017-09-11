@@ -26,9 +26,46 @@ namespace Readables.Import
 
         public void ImportFolder(string path)
         {
+            if(string.IsNullOrEmpty(path)) 
+            {
+                throw new ArgumentNullException(path);
+            }
+
+			int success = 0;
+			int failed = 0;
+			
+            foreach (var fileName in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories))
+            {
+                try
+                {
+                    this.ImportFileInternal(fileName);
+                    success++;
+                }
+                catch (Exception) 
+                {
+                    // do nothing, just count the errors    
+                    failed++;
+                }
+            }
+
+            this.eventAggregator.SendMessage(new PathImportedEvent { 
+                NumberOfFailedImport = failed, 
+                NumberOfSuccessfullyImported = success});
+
         }
 
-        public void ImportFile(string fileName)
+        public void ImportFile(string fileName) 
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException(fileName);
+            }
+
+            this.ImportFileInternal(fileName);
+            this.eventAggregator.SendMessage(new FileImportedEvent(fileName));
+		}
+
+        private void ImportFileInternal(string fileName)
         {
             var fileInfo = new FileInfo(fileName);
             var importService = this.FindReadableImportServiceByExtension(fileInfo.Extension);
@@ -59,7 +96,6 @@ namespace Readables.Import
         private void StoreReadable(Readable readable)
         {
             this.dataContext.Upsert(readable);
-            this.eventAggregator.Publish(new ImportFinishedAggregatedEvent(readable.Title));
         }
     }
 }
