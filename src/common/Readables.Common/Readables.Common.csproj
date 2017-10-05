@@ -53,7 +53,6 @@
     <Compile Include="IEventAggregator.cs" />
     <Compile Include="EventAggregator.cs" />
     <Compile Include="Installer.cs" />
-    <Compile Include="AggregatedEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -16,9 +16,6 @@ namespace Readables
         public override void DidFinishLaunching(NSNotification notification)
         {
 			// Insert code here to initialize your application
-			var import = IOC.Container.Resolve<Import.IImportService>();
-            import.ImportFolder(@"/Users/mac/Desktop");
-            import.ImportFile(@"/Users/mac/Desktop/Amerikai istenek - Neil Gaiman.epub");
 		}
 
         public override void WillTerminate(NSNotification notification)

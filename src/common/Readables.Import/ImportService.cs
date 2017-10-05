@@ -6,6 +6,7 @@ using Readables.DataLayer;
 using Readables.Domain;
 using Readables.Common;
 using Readables.Import.AggregatedEvents;
+using Readables.Import.Exceptions;
 
 namespace Readables.Import
 {
@@ -22,6 +23,24 @@ namespace Readables.Import
             this.eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
 			this.importServices = importServices ?? throw new ArgumentNullException(nameof(importServices));
 			this.dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
+        }
+
+        public bool CanImportFile(string fileName)
+        {
+            var fileInfo = new FileInfo(fileName);
+            return this.FindReadableImportServiceByExtension(fileInfo.Extension) != null;
+        }
+
+        public void ImportPath(string folderOrFile) {
+            var attributes = File.GetAttributes(folderOrFile);
+            if (attributes.HasFlag(FileAttributes.Directory)) 
+            {
+                this.ImportFolder(folderOrFile);
+            }
+            else 
+            {
+                this.ImportFile(folderOrFile);
+            }
         }
 
         public void ImportFolder(string path)
@@ -41,7 +60,7 @@ namespace Readables.Import
                     this.ImportFileInternal(fileName);
                     success++;
                 }
-                catch (Exception) 
+                catch (Exception ex) when (ex is ReadableImportException || ex is UnknownFileTypeException)
                 {
                     // do nothing, just count the errors    
                     failed++;
@@ -71,13 +90,13 @@ namespace Readables.Import
             var importService = this.FindReadableImportServiceByExtension(fileInfo.Extension);
             if (importService == null)
             {
-                throw new Exception("Unknown file type"); // TODO: Create custom exception
+                throw new UnknownFileTypeException();
             }
 
             var readable = this.ReadFile(importService, fileName);
             if (readable == null)
             {
-                throw new Exception("Cannot import file"); // TODO: Create custom exception    
+                throw new ReadableImportException();
             }
 
             this.StoreReadable(readable);

@@ -36,7 +36,7 @@ namespace Readables.ViewController.List
         // Shared initialization code
         void Initialize()
         {
-            this.dataContext = IOC.Container.Resolve<IDataContext>();
+			this.dataContext = IOC.Container.Resolve<IDataContext>();
 			this.eventAggregator = IOC.Container.Resolve<IEventAggregator>();
             this.eventAggregator.AddListener(this);
         }

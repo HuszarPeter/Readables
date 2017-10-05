@@ -58,6 +58,8 @@
     <Compile Include="Comic\ComicImportService.cs" />
     <Compile Include="AggregatedEvents\PathImportedEvent.cs" />
     <Compile Include="AggregatedEvents\FileImportedEvent.cs" />
+    <Compile Include="Exceptions\UnknownFileTypeException.cs" />
+    <Compile Include="Exceptions\ReadableImportException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -79,6 +81,7 @@
   <ItemGroup>
     <Folder Include="Comic\" />
     <Folder Include="AggregatedEvents\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
