@@ -10,7 +10,7 @@ namespace Readables.ViewController
 {
     public partial class ReadableViewController : AppKit.NSViewController
     {
-        private IDataContext dataContext;
+        private IReadableRepository readableRepository;
 
         #region Constructors
 
@@ -36,7 +36,7 @@ namespace Readables.ViewController
         // Shared initialization code
         void Initialize()
         {
-            this.dataContext = IOC.Container.Resolve<IDataContext>();
+            this.readableRepository = IOC.Container.Resolve<IReadableRepository>();
         }
 
         #endregion
@@ -55,7 +55,7 @@ namespace Readables.ViewController
 
 			this.collectionView.WantsLayer = true;
             this.collectionView.RegisterClassForItem(typeof(ReadableItemViewController), "ReadableCell");
-            this.collectionView.DataSource = new ReadableCollectionViewDataSource(this.dataContext);
+            this.collectionView.DataSource = new ReadableCollectionViewDataSource(this.readableRepository);
             this.collectionView.ReloadData();
         }
     }

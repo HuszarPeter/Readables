@@ -54,6 +54,8 @@
     <Compile Include="DataContext.cs" />
     <Compile Include="IDataContext.cs" />
     <Compile Include="Installer.cs" />
+    <Compile Include="IReadableRepository.cs" />
+    <Compile Include="ReadableRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

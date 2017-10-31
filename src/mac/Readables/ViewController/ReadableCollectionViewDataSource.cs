@@ -1,31 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AppKit;
 using Foundation;
 using Readables.DataLayer;
+using Readables.Domain;
 
 namespace Readables.ViewController
 {
     public class ReadableCollectionViewDataSource : AppKit.NSCollectionViewDataSource
     {
-        readonly IDataContext dataContext;
+        readonly IReadableRepository readableRepository;
+        private List<Readable> allReadables;
 
-        public ReadableCollectionViewDataSource(IDataContext dataContext)
+        public ReadableCollectionViewDataSource(IReadableRepository readableRepository)
         {
-            this.dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));   
+            this.readableRepository = readableRepository ?? throw new ArgumentNullException(nameof(readableRepository));   
         }
 
         public override NSCollectionViewItem GetItem(NSCollectionView collectionView, NSIndexPath indexPath)
         {
             var result = collectionView.MakeItem("ReadableCell", indexPath) as ReadableItemViewController;
-            result.Readable = this.dataContext.Readables.ElementAt((int)indexPath.Item);
+            result.Readable = this.allReadables.ElementAt((int)indexPath.Item);
             return result;
         }
 
         public override nint GetNumberofItems(NSCollectionView collectionView, nint section)
         {
-            var result = this.dataContext.Readables.Count();
-            return result;
+            this.allReadables = this.readableRepository.GetAllReadables().ToList();
+            return this.allReadables.Count();
         }
     }
 }

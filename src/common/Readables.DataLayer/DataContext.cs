@@ -8,17 +8,6 @@ namespace Readables.DataLayer
     {
         static string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "readables.db");
 
-        public IEnumerable<Readables.Domain.Readable> Readables 
-        { 
-            get
-            {
-                using(var repo = new LiteDB.LiteRepository(dbPath))
-                {
-                    return repo.Query<Readables.Domain.Readable>().ToArray();
-                }
-            }
-        }
-
         public void Insert<T>(T entity)
         {
             using(var repo = new LiteDB.LiteRepository(dbPath))
@@ -32,6 +21,12 @@ namespace Readables.DataLayer
             using(var repo = new LiteDB.LiteRepository(dbPath))
             {
                 repo.Upsert(entity);
+            }
+        }
+
+        public IEnumerable<T> Query<T>(string collectionName = null) {
+            using (var repo = new LiteDB.LiteRepository(dbPath)) {
+                return repo.Query<T>(collectionName).ToList();
             }
         }
     }

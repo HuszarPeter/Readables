@@ -8,7 +8,7 @@ namespace Readables.ViewController.List
 {
     public partial class ReadableListViewController : AppKit.NSViewController, IListenTo<FileImportedEvent>, IListenTo<PathImportedEvent>
     {
-        private IDataContext dataContext;
+        private IReadableRepository readableRepository;
 
         private IEventAggregator eventAggregator;
 
@@ -36,7 +36,7 @@ namespace Readables.ViewController.List
         // Shared initialization code
         void Initialize()
         {
-			this.dataContext = IOC.Container.Resolve<IDataContext>();
+            this.readableRepository = IOC.Container.Resolve<IReadableRepository>();
 			this.eventAggregator = IOC.Container.Resolve<IEventAggregator>();
             this.eventAggregator.AddListener(this);
         }
@@ -45,7 +45,7 @@ namespace Readables.ViewController.List
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
-            this.readablesTableView.DataSource = new ReadableListViewDataSource(this.dataContext);
+            this.readablesTableView.DataSource = new ReadableListViewDataSource(this.readableRepository);
             this.refrestData();
 		}
 

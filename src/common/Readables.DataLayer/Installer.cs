@@ -18,6 +18,7 @@ namespace Readables.DataLayer
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IDataContext>().ImplementedBy<DataContext>().LifestyleSingleton());
+            container.Register(Component.For<IReadableRepository>().ImplementedBy<ReadableRepository>());
 		}
     }
 }

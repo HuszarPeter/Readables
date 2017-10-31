@@ -15,14 +15,16 @@ namespace Readables.Import
         readonly IEnumerable<IReadableImportService> importServices;
 
         readonly IDataContext dataContext;
+        readonly IReadableRepository readableRepository;
 
         readonly IEventAggregator eventAggregator;
 
-        public ImportService(IDataContext dataContext, IEventAggregator eventAggregator, IEnumerable<IReadableImportService> importServices)
+        public ImportService(IDataContext dataContext, IEventAggregator eventAggregator, IEnumerable<IReadableImportService> importServices, IReadableRepository readableRepository)
         {
             this.eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
 			this.importServices = importServices ?? throw new ArgumentNullException(nameof(importServices));
 			this.dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
+            this.readableRepository = readableRepository ?? throw new ArgumentNullException(nameof(readableRepository));
         }
 
         public bool CanImportFile(string fileName)
@@ -114,7 +116,7 @@ namespace Readables.Import
 
         private void StoreReadable(Readable readable)
         {
-            this.dataContext.Upsert(readable);
+            this.readableRepository.UpsertReadable(readable);
         }
     }
 }

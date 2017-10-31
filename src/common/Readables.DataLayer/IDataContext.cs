@@ -8,6 +8,8 @@ namespace Readables.DataLayer
         void Insert<T>(T entity);
         void Upsert<T>(T entity);
 
-        IEnumerable<Readables.Domain.Readable> Readables { get; }
+
+        IEnumerable<T> Query<T>(string collectionName = null);
+
     }
 }
