@@ -1,8 +1,9 @@
 ﻿using Readables.Domain;
 using System.Linq;
 using VersFx.Formats.Text.Epub;
+using System.Threading.Tasks;
 
-namespace Readables.Import.ePub
+namespace Readables.Import.FileFormat.ePub
 {
     public class EPubImportService : IReadableImportService
     {
@@ -33,7 +34,8 @@ namespace Readables.Import.ePub
                     }
                 },
                 Subjects = book.Schema.Package.Metadata.Subjects.ToArray(),
-                Description = book.Schema.Package.Metadata.Description
+                Description = book.Schema.Package.Metadata.Description,
+                Publisher = string.Join(", ", book.Schema.Package.Metadata.Publishers),
             };
 
             return result;

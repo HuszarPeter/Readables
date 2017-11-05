@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Readables.Import
+namespace Readables.Import.FileFormat
 {
     public interface IReadableImportService
     {

@@ -66,6 +66,9 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\128x128.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\256x256.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\512x512.png" />
+    <ImageAsset Include="Assets.xcassets\format_epub.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\format_epub.imageset\epub.png" />
+    <ImageAsset Include="Assets.xcassets\format_epub.imageset\epub%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -73,6 +76,7 @@
     <Folder Include="ViewController\List\" />
     <Folder Include="Model\" />
     <Folder Include="Utils\" />
+    <Folder Include="Assets.xcassets\format_epub.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -120,12 +124,21 @@
     <Compile Include="Model\ReadableModel.cs" />
     <Compile Include="ViewController\List\ReadableListViewDataSource.cs" />
     <Compile Include="Utils\PathDropHandler.cs" />
+    <Compile Include="ReadableTableView.cs" />
+    <Compile Include="ReadableTableViewController.cs" />
+    <Compile Include="ReadableTableView.designer.cs">
+      <DependentUpon>ReadableTableView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReadableTableViewController.designer.cs">
+      <DependentUpon>ReadableTableViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="ViewController\ReadableView.xib" />
     <InterfaceDefinition Include="ViewController\ReadableItemViewController.xib" />
     <InterfaceDefinition Include="ViewController\List\ReadableListView.xib" />
+    <InterfaceDefinition Include="ReadableTableView.xib" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\common\Readables.Common\Readables.Common.csproj">

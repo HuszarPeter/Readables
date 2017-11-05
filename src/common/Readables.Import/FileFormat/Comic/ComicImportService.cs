@@ -2,7 +2,7 @@
 using System.IO;
 using Readables.Domain;
 
-namespace Readables.Import.Comic
+namespace Readables.Import.FileFormat.Comic
 {
     public class ComicImportService : IReadableImportService
     {

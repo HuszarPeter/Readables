@@ -1,0 +1,8 @@
+﻿https://moly.hu/api/books.json?q=vándorünnep&key=55f59e22279134469219915552df7d49
+
+key = ApiKey, generted by moly.hu
+q = search pattern
+
+Result:
+
+{"books":[{"id":15331,"author":"Ernest Hemingway","title":"Vándorünnep"},{"id":77512,"author":"Ernest Hemingway","title":"Vándorünnep / Tavaszi zuhatag"},{"id":95021,"author":"Ernest Hemingway","title":"Vándorünnep / Tavaszi zuhatag / Az ötödik hadoszlop / Cikkek, vallomások"}]}

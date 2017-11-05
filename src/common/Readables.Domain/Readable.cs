@@ -18,5 +18,17 @@ namespace Readables.Domain
         public string[] Subjects { get; set; }
 
         public ReadableFile[] Files { get; set; }
+
+        public string Series { get; set; }
+
+        public int Rating { get; set; }
+
+        public string Publisher { get; set; }
+
+        public int PublishedYear { get; set; }
+
+        public System.Drawing.Image Cover { get; set; }
+
+        public ReadableMetadata[] Metadata { get; set; }
     }
 }

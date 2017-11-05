@@ -1,6 +1,8 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Readables.Import.FileFormat;
+using Readables.Import.Metadata;
 
 namespace Readables.Import
 {
@@ -9,9 +11,18 @@ namespace Readables.Import
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IImportService>().ImplementedBy<ImportService>().LifestyleTransient());
-            container.Register(Component.For<IReadableImportService>().ImplementedBy<ePub.EPubImportService>().LifestyleTransient());
-            container.Register(Component.For<IReadableImportService>().ImplementedBy<Comic.ComicImportService>().LifestyleTransient());
-            container.Register(Component.For<IReadableImportService>().ImplementedBy<Mobi.MobiImportService>().LifestyleTransient());
+
+            container.Register(
+                Classes.FromThisAssembly()
+                .BasedOn<IReadableImportService>()
+                .WithService.FromInterface()
+                .LifestyleTransient());
+
+            container.Register(
+                Classes.FromThisAssembly()
+                .BasedOn<IMetadataScraperService>()
+                .WithService.FromInterface()
+                .LifestyleTransient());
         }
     }
 }

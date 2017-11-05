@@ -1,6 +1,6 @@
 ﻿using Readables.Domain;
 
-namespace Readables.Import.Mobi
+namespace Readables.Import.FileFormat.Mobi
 {
     public class MobiImportService: IReadableImportService
     {

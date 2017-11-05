@@ -7,6 +7,7 @@ using Readables.Domain;
 using Readables.Common;
 using Readables.Import.AggregatedEvents;
 using Readables.Import.Exceptions;
+using Readables.Import.FileFormat;
 
 namespace Readables.Import
 {
