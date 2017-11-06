@@ -67,8 +67,17 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\256x256.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\512x512.png" />
     <ImageAsset Include="Assets.xcassets\format_epub.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\format_epub.imageset\epub.png" />
-    <ImageAsset Include="Assets.xcassets\format_epub.imageset\epub%402x.png" />
+    <ImageAsset Include="Assets.xcassets\format_comic.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\format_epub.imageset\format_epub.png" />
+    <ImageAsset Include="Assets.xcassets\format_epub.imageset\format_epub%402x.png" />
+    <ImageAsset Include="Assets.xcassets\format_epub.imageset\format_epub%403x.png" />
+    <ImageAsset Include="Assets.xcassets\format_comic.imageset\format_comic.png" />
+    <ImageAsset Include="Assets.xcassets\format_comic.imageset\format_comic%402x.png" />
+    <ImageAsset Include="Assets.xcassets\format_comic.imageset\format_comic%403x.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\format_azw3.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\format_azw3%402x.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\format_azw3%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -77,6 +86,9 @@
     <Folder Include="Model\" />
     <Folder Include="Utils\" />
     <Folder Include="Assets.xcassets\format_epub.imageset\" />
+    <Folder Include="Assets.xcassets\format_comic.imageset\" />
+    <Folder Include="Assets.xcassets\format_azw3.imageset\" />
+    <Folder Include="ViewControllers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -124,12 +136,8 @@
     <Compile Include="Model\ReadableModel.cs" />
     <Compile Include="ViewController\List\ReadableListViewDataSource.cs" />
     <Compile Include="Utils\PathDropHandler.cs" />
-    <Compile Include="ReadableTableView.cs" />
-    <Compile Include="ReadableTableViewController.cs" />
-    <Compile Include="ReadableTableView.designer.cs">
-      <DependentUpon>ReadableTableView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ReadableTableViewController.designer.cs">
+    <Compile Include="ViewControllers\ReadableTableViewController.cs" />
+    <Compile Include="ViewControllers\ReadableTableViewController.designer.cs">
       <DependentUpon>ReadableTableViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -138,7 +146,6 @@
     <InterfaceDefinition Include="ViewController\ReadableView.xib" />
     <InterfaceDefinition Include="ViewController\ReadableItemViewController.xib" />
     <InterfaceDefinition Include="ViewController\List\ReadableListView.xib" />
-    <InterfaceDefinition Include="ReadableTableView.xib" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\common\Readables.Common\Readables.Common.csproj">
