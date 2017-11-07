@@ -1,6 +1,7 @@
 ﻿using AppKit;
 using Foundation;
 using Readables.Common;
+using Readables.Import;
 using Readables.Import.Metadata.Moly;
 
 namespace Readables
@@ -17,10 +18,8 @@ namespace Readables
         public override void DidFinishLaunching(NSNotification notification)
         {
             // Insert code here to initialize your application
-
-            //var s = new MolyMetadataScraperService();
-            //var ss = s.ScrapeMetadataAsync(new Domain.Readable(){ Title = "Babilon hamvai"});
-            //System.Console.WriteLine(ss);
+            //var importService = IOC.Container.Resolve<IImportService>();
+            //importService.ImportFolder("/Users/mac/Desktop");
         }
 
         public override void WillTerminate(NSNotification notification)

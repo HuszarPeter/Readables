@@ -30,5 +30,7 @@ namespace Readables.Domain
         public System.Drawing.Image Cover { get; set; }
 
         public ReadableMetadata[] Metadata { get; set; }
+
+        public DateTime DateAdded { get; set; }
     }
 }

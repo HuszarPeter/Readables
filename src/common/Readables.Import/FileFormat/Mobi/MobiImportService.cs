@@ -18,12 +18,14 @@ namespace Readables.Import.FileFormat.Mobi
                 Files = new[]{
                     new ReadableFile {
                         Language = "hu",
-                        Location = fileName
+                        Location = fileName,
+                        Format = "mobi"
                     }
                 },
                 Description = metadataReader.MobiHeader.EXTHHeader.Description,
                 Subjects = new[] { metadataReader.MobiHeader.EXTHHeader.Subject },
-                Id = metadataReader.MobiHeader.EXTHHeader.ASIN
+                Id = metadataReader.MobiHeader.EXTHHeader.ASIN,
+                DateAdded = System.DateTime.Now
             };
             return result;
         }

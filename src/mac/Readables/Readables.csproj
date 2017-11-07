@@ -89,6 +89,8 @@
     <Folder Include="Assets.xcassets\format_comic.imageset\" />
     <Folder Include="Assets.xcassets\format_azw3.imageset\" />
     <Folder Include="ViewControllers\" />
+    <Folder Include="ViewControllers\TableView\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -136,9 +138,17 @@
     <Compile Include="Model\ReadableModel.cs" />
     <Compile Include="ViewController\List\ReadableListViewDataSource.cs" />
     <Compile Include="Utils\PathDropHandler.cs" />
-    <Compile Include="ViewControllers\ReadableTableViewController.cs" />
-    <Compile Include="ViewControllers\ReadableTableViewController.designer.cs">
+    <Compile Include="ViewControllers\TableView\ReadableTableViewController.cs" />
+    <Compile Include="ViewControllers\TableView\ReadableTableViewController.designer.cs">
       <DependentUpon>ReadableTableViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\NSTableViewExtensions.cs" />
+    <Compile Include="ViewControllers\TableView\ReadableTextTableCellView.cs" />
+    <Compile Include="Extensions\NSLayoutConstraintExtensions.cs" />
+    <Compile Include="ViewControllers\TableView\ReadableTagsTableCellView.cs" />
+    <Compile Include="ViewControllers\PathDropHelperView.cs" />
+    <Compile Include="ViewControllers\PathDropHelperView.designer.cs">
+      <DependentUpon>PathDropHelperView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

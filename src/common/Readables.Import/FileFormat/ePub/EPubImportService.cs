@@ -30,12 +30,14 @@ namespace Readables.Import.FileFormat.ePub
                     new ReadableFile
                     {
                         Language = book.Schema.Package.Metadata.Languages.FirstOrDefault(),
-                        Location = fileName
+                        Location = fileName,
+                        Format = "epub"
                     }
                 },
                 Subjects = book.Schema.Package.Metadata.Subjects.ToArray(),
                 Description = book.Schema.Package.Metadata.Description,
                 Publisher = string.Join(", ", book.Schema.Package.Metadata.Publishers),
+                DateAdded = System.DateTime.Now
             };
 
             return result;

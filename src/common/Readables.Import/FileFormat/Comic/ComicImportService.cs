@@ -22,10 +22,12 @@ namespace Readables.Import.FileFormat.Comic
                 {
                     new ReadableFile
                     {
-                        Location = fileName
+                        Location = fileName,
+                        Format = "comic"
                     }
                 },
                 Description = "",
+                DateAdded = System.DateTime.Now
             };
         }
     }

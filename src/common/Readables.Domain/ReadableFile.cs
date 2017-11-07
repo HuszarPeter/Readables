@@ -7,6 +7,8 @@ namespace Readables.Domain
 {
     public class ReadableFile
     {
+        public string Format { get; set; }
+
         public string Language { get; set; }
 
         public string Location { get; set; }
