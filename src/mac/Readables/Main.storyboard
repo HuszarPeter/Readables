@@ -653,14 +653,14 @@
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="MainWindowController" sceneMemberID="viewController">
                     <window key="window" title="Readables" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" titleVisibility="hidden" id="IQv-IB-iLA" customClass="MainWindow">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <rect key="contentRect" x="196" y="240" width="767" height="561"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="532" height="368"/>
-                        <toolbar key="toolbar" implicitIdentifier="D236D1DF-B953-4249-8343-DFA44DF8D90C" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="TAY-ku-txP">
+                        <toolbar key="toolbar" implicitIdentifier="D236D1DF-B953-4249-8343-DFA44DF8D90C" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="TAY-ku-txP">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="vk7-BS-gLk"/>
-                                <toolbarItem implicitItemIdentifier="38335EAA-B1DF-4E57-B2DD-8725285F8227" label="Custom View" paletteLabel="Custom View" id="smu-Bd-A7v">
+                                <toolbarItem implicitItemIdentifier="38335EAA-B1DF-4E57-B2DD-8725285F8227" label="Search" paletteLabel="Search" id="smu-Bd-A7v">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="96" height="22"/>
                                     <size key="maxSize" width="96" height="22"/>
@@ -707,12 +707,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="648" height="422"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" headerView="AZz-Od-uQb" viewBased="YES" id="OqQ-Xs-KuK">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" headerView="nY4-XL-UEz" viewBased="YES" id="OqQ-Xs-KuK">
                                             <rect key="frame" x="0.0" y="0.0" width="648" height="399"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="titleColumn" editable="NO" width="300" minWidth="40" maxWidth="1000" id="gnR-SI-hIR">
@@ -861,11 +860,11 @@
                                     <rect key="frame" x="0.0" y="406" width="648" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="6zi-m5-Ds4">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="6zi-m5-Ds4">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" id="AZz-Od-uQb">
+                                <tableHeaderView key="headerView" id="nY4-XL-UEz">
                                     <rect key="frame" x="0.0" y="0.0" width="648" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
