@@ -18,5 +18,13 @@ namespace Readables.Common
             Container.Kernel.Resolver.AddSubResolver(new CollectionResolver(Container.Kernel, true));
 			Container.Kernel.Resolver.AddSubResolver(new ArrayResolver(Container.Kernel, true));
 		}
+
+        public static T Resolve<T>() {
+            return Container.Resolve<T>();
+        }
+
+        public static IEnumerable<T> ResolveAll<T>() {
+            return Container.ResolveAll<T>();
+        }
     }
 }

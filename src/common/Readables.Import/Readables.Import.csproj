@@ -76,6 +76,9 @@
     <Compile Include="Metadata\IMetadataScraperService.cs" />
     <Compile Include="Metadata\Moly\MolyMetadataScraperService.cs" />
     <Compile Include="Metadata\ReadableMetadata.cs" />
+    <Compile Include="StartableImportComponent.cs" />
+    <Compile Include="AggregatedEvents\FilesImportRequestEvent.cs" />
+    <Compile Include="AggregatedEvents\FoldersImportRequestEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

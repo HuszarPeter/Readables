@@ -91,6 +91,7 @@
     <Folder Include="ViewControllers\" />
     <Folder Include="ViewControllers\TableView\" />
     <Folder Include="Extensions\" />
+    <Folder Include="AggregatedEvents\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -150,6 +151,13 @@
     <Compile Include="ViewControllers\PathDropHelperView.designer.cs">
       <DependentUpon>PathDropHelperView.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppDelegate.designer.cs">
+      <DependentUpon>AppDelegate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AggregatedEvents\MenuImportFileRequest.cs" />
+    <Compile Include="AggregatedEvents\MenuImportFileRequestCompleted.cs" />
+    <Compile Include="AggregatedEvents\MenuImportDirectoryRequest.cs" />
+    <Compile Include="AggregatedEvents\MenuImportDirectoryRequestCompleted.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

@@ -46,14 +46,18 @@ namespace Readables.Import
             }
         }
 
+        public void ImportFolder(Uri folder) {
+            ImportFolder(folder.LocalPath);
+        }
+
         public void ImportFolder(string path)
         {
             if(string.IsNullOrEmpty(path)) 
             {
                 throw new ArgumentNullException(path);
             }
-
-			int success = 0;
+            Console.WriteLine($"Import folder {path}");
+            int success = 0;
 			int failed = 0;
 			
             foreach (var fileName in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories))
@@ -69,11 +73,16 @@ namespace Readables.Import
                     failed++;
                 }
             }
-
+            Console.WriteLine($"Path imported");
             this.eventAggregator.SendMessage(new PathImportedEvent { 
                 NumberOfFailedImport = failed, 
                 NumberOfSuccessfullyImported = success});
 
+        }
+
+        public void ImportFile(Uri file) 
+        {
+            ImportFile(file.LocalPath);
         }
 
         public void ImportFile(string fileName) 
@@ -89,18 +98,21 @@ namespace Readables.Import
 
         private void ImportFileInternal(string fileName)
         {
+            Console.WriteLine($"Import file: {fileName}");
             var fileInfo = new FileInfo(fileName);
             var importService = this.FindReadableImportServiceByExtension(fileInfo.Extension);
             if (importService == null)
             {
                 throw new UnknownFileTypeException();
             }
+            Console.WriteLine($"\tusing {importService}");
 
             var readable = this.ReadFile(importService, fileName);
             if (readable == null)
             {
                 throw new ReadableImportException();
             }
+            Console.WriteLine($"Store {readable.Title}");
 
             this.StoreReadable(readable);
         }

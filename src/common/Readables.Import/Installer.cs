@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using Castle.Facilities.Startable;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Readables.Import.FileFormat;
@@ -10,6 +11,8 @@ namespace Readables.Import
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.AddFacility<StartableFacility>();
+
             container.Register(Component.For<IImportService>().ImplementedBy<ImportService>().LifestyleTransient());
 
             container.Register(
@@ -23,6 +26,8 @@ namespace Readables.Import
                 .BasedOn<IMetadataScraperService>()
                 .WithService.FromInterface()
                 .LifestyleTransient());
+
+            container.Register(Component.For<StartableImportComponent>().Start());
         }
     }
 }
