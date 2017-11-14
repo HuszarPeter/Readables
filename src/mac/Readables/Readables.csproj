@@ -56,16 +56,10 @@
     <Reference Include="Castle.Core">
       <HintPath>..\..\..\packages\Castle.Core.4.1.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\16x16.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\32x32.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\64x64.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\128x128.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\256x256.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\512x512.png" />
     <ImageAsset Include="Assets.xcassets\format_epub.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\format_comic.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\format_azw3.imageset\Contents.json" />
@@ -78,6 +72,27 @@
     <ImageAsset Include="Assets.xcassets\format_azw3.imageset\format_azw3.png" />
     <ImageAsset Include="Assets.xcassets\format_azw3.imageset\format_azw3%402x.png" />
     <ImageAsset Include="Assets.xcassets\format_azw3.imageset\format_azw3%403x.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\AppIcon.appiconset\icon128.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\AppIcon.appiconset\icon128%402x.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\AppIcon.appiconset\icon16.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\AppIcon.appiconset\icon16%402x.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\AppIcon.appiconset\icon256.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\AppIcon.appiconset\icon256%402x.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\AppIcon.appiconset\icon32.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\AppIcon.appiconset\icon32%402x.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\AppIcon.appiconset\icon512.png" />
+    <ImageAsset Include="Assets.xcassets\format_azw3.imageset\AppIcon.appiconset\icon512%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon16.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon16%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon32.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon32%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon128.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon128%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon256.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon256%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon512.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon512%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -92,6 +107,9 @@
     <Folder Include="ViewControllers\TableView\" />
     <Folder Include="Extensions\" />
     <Folder Include="AggregatedEvents\" />
+    <Folder Include="ViewControllers\Outline\" />
+    <Folder Include="ViewControllers\Outline\Model\" />
+    <Folder Include="Assets.xcassets\AppIcon.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -158,6 +176,23 @@
     <Compile Include="AggregatedEvents\MenuImportFileRequestCompleted.cs" />
     <Compile Include="AggregatedEvents\MenuImportDirectoryRequest.cs" />
     <Compile Include="AggregatedEvents\MenuImportDirectoryRequestCompleted.cs" />
+    <Compile Include="Model\OutLine.cs" />
+    <Compile Include="ViewControllers\Outline\ReadableOutlineViewController.cs" />
+    <Compile Include="ViewControllers\Outline\Model\Group.cs" />
+    <Compile Include="ViewControllers\Outline\Model\Subject.cs" />
+    <Compile Include="ViewControllers\Outline\ReadableOutlineDataSource.cs" />
+    <Compile Include="ViewControllers\Outline\ReadableOutlineViewController.designer.cs">
+      <DependentUpon>ReadableOutlineViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\NSDateExtensions.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewControllers\Outline\ReadableOutlineDataCellView.cs" />
+    <Compile Include="ViewControllers\Outline\ReadableOutlineDataCellView.designer.cs">
+      <DependentUpon>ReadableOutlineDataCellView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Outline\Model\LibraryItem.cs" />
+    <Compile Include="AggregatedEvents\FilterForLibraryItemRequest.cs" />
+    <Compile Include="AggregatedEvents\FilterForSubjectRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

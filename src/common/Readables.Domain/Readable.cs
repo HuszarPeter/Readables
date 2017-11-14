@@ -21,6 +21,8 @@ namespace Readables.Domain
 
         public string Series { get; set; }
 
+		public string SeriesIndex { get; set; }
+  
         public int Rating { get; set; }
 
         public string Publisher { get; set; }
@@ -32,5 +34,6 @@ namespace Readables.Domain
         public ReadableMetadata[] Metadata { get; set; }
 
         public DateTime DateAdded { get; set; }
+
     }
 }

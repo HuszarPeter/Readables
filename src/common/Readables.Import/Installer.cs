@@ -27,6 +27,10 @@ namespace Readables.Import
                 .WithService.FromInterface()
                 .LifestyleTransient());
 
+            container.Register(
+                Component.For<IFileFormatImageManager>().ImplementedBy<FileFormatImageManager>().LifestyleSingleton()
+            );
+
             container.Register(Component.For<StartableImportComponent>().Start());
         }
     }

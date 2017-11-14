@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AppKit;
+using Foundation;
 using Readables.Domain;
 using Readables.Extensions;
 
@@ -55,13 +56,17 @@ namespace Readables.ViewControllers.TableView
                 BackgroundColor = NSColor.Clear,
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 Alignment = NSTextAlignment.Natural,
-                LineBreakMode = NSLineBreakMode.TruncatingTail
+                LineBreakMode = NSLineBreakMode.TruncatingTail,
+                Editable = false,
+                //Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize)
             };
+            this.textField.SetContentCompressionResistancePriority(10, NSLayoutConstraintOrientation.Horizontal);
+
             this.AddSubview(this.textField);
 
-            NSLayoutConstraint.FromVisualFormat("H:|-(0)-[label]-(0)-|", NSLayoutFormatOptions.None, "label", this.textField)
+            NSLayoutConstraint.FromVisualFormat("H:|-(2)-[label]-(2)-|", NSLayoutFormatOptions.None, "label", this.textField)
                               .ActivateAll();
-            NSLayoutConstraint.FromVisualFormat("V:|-(0)-[label]-(0)-|", NSLayoutFormatOptions.None, "label", this.textField)
+            NSLayoutConstraint.FromVisualFormat("V:|-(2)-[label]-(2)-|", NSLayoutFormatOptions.None, "label", this.textField)
                               .ActivateAll();
         }
 
@@ -85,12 +90,24 @@ namespace Readables.ViewControllers.TableView
                     }
                 case ReadableFieldView.DateAdded:
                     {
-                        this.textField.StringValue = $"{this.readable.DateAdded}";
+                        this.textField.StringValue = $"{this.readable.DateAdded.AsSystemDateString()}";
                         break;
                     }
                 case ReadableFieldView.Formats:
                     {
                         this.textField.StringValue = String.Join(", ", this.readable.Files.Select(f => f.Format));
+                        break;
+                    }
+                case ReadableFieldView.Series:
+                    {
+                        if (string.IsNullOrEmpty(this.readable.SeriesIndex))
+                        {
+                            this.textField.StringValue = $"{this.readable.Series}";
+                        }
+                        else
+                        {
+                            this.textField.StringValue = $"{this.readable.Series} [{this.readable.SeriesIndex}]";
+                        }
                         break;
                     }
                 default:
@@ -99,6 +116,7 @@ namespace Readables.ViewControllers.TableView
                         break;
                     }
             }
+            this.textField.ToolTip = this.textField.StringValue;
         }
     }
 
@@ -106,6 +124,7 @@ namespace Readables.ViewControllers.TableView
         Title,
         Author,
         DateAdded,
+        Series,
         Formats
     }
 }

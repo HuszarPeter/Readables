@@ -79,6 +79,8 @@
     <Compile Include="StartableImportComponent.cs" />
     <Compile Include="AggregatedEvents\FilesImportRequestEvent.cs" />
     <Compile Include="AggregatedEvents\FoldersImportRequestEvent.cs" />
+    <Compile Include="FileFormatImageManager.cs" />
+    <Compile Include="IFileFormatImageManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
