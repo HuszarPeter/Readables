@@ -175,6 +175,9 @@
                                                 <segment label="Detailed" width="80"/>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="onViewChanged:" target="B8D-0N-5wS" id="P2h-ra-mGb"/>
+                                        </connections>
                                     </segmentedControl>
                                 </toolbarItem>
                             </allowedToolbarItems>
@@ -189,6 +192,7 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="changeView" destination="UjF-HO-ubc" id="3gs-8O-Jab"/>
                         <segue destination="9EM-3K-8u4" kind="relationship" relationship="window.shadowedContentViewController" id="aoB-7g-GST"/>
                     </connections>
                 </windowController>
@@ -199,7 +203,7 @@
         <!--Readable Table View Controller-->
         <scene sceneID="mSP-6A-4vZ">
             <objects>
-                <viewController id="8mg-08-t7x" customClass="ReadableTableViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="readableTableList" id="8mg-08-t7x" customClass="ReadableTableViewController" sceneMemberID="viewController">
                     <view key="view" id="gcs-ds-Bc2" customClass="PathDropHelperView">
                         <rect key="frame" x="0.0" y="0.0" width="633" height="157"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -422,7 +426,7 @@
         <!--Cover view-->
         <scene sceneID="2Os-9i-r8H">
             <objects>
-                <viewController title="Cover view" id="Ywj-QW-He9" sceneMemberID="viewController">
+                <viewController title="Cover view" storyboardIdentifier="readableCoverList" id="Ywj-QW-He9" customClass="ReadableCoverViewController" sceneMemberID="viewController">
                     <view key="view" id="6Wx-lM-q8L">
                         <rect key="frame" x="0.0" y="0.0" width="437" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -463,6 +467,9 @@
                             <constraint firstItem="Rh1-cU-dwK" firstAttribute="top" secondItem="6Wx-lM-q8L" secondAttribute="top" id="gGW-5j-OQ6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Q01-q9-Cdb" id="jha-fe-xKU"/>
+                    </connections>
                 </viewController>
                 <customObject id="td0-nW-7E9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -551,7 +558,7 @@
                 </viewController>
                 <customObject id="bkv-EB-uZl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="588" y="668"/>
+            <point key="canvasLocation" x="695" y="668"/>
         </scene>
         <!--Readable Outline View Controller-->
         <scene sceneID="m7B-XQ-r6y">
@@ -685,6 +692,7 @@
                                             </connections>
                                         </outlineView>
                                     </subviews>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="KTP-el-jhG">
                                     <rect key="frame" x="0.0" y="141" width="300" height="16"/>
@@ -712,10 +720,10 @@
             </objects>
             <point key="canvasLocation" x="194" y="1135"/>
         </scene>
-        <!--View Controller-->
+        <!--Readable Main Embed View Controller-->
         <scene sceneID="Gqj-eX-vIO">
             <objects>
-                <viewController id="ZNh-9q-PfZ" sceneMemberID="viewController">
+                <viewController id="ZNh-9q-PfZ" customClass="ReadableMainEmbedViewController" sceneMemberID="viewController">
                     <view key="view" id="eXq-8y-mIm">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -734,15 +742,18 @@
                             <constraint firstAttribute="trailing" secondItem="Dii-sd-amn" secondAttribute="trailing" id="qGY-kG-a35"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="containerView" destination="Dii-sd-amn" id="jYN-oR-ntN"/>
+                    </connections>
                 </viewController>
                 <customObject id="Nit-Zs-gTA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="587" y="1206"/>
+            <point key="canvasLocation" x="694" y="1193"/>
         </scene>
         <!--Detailed list view-->
         <scene sceneID="W94-fC-MJk">
             <objects>
-                <viewController title="Detailed list view" id="qvh-X6-Ten" sceneMemberID="viewController">
+                <viewController title="Detailed list view" storyboardIdentifier="readableTableListWithDetail" id="qvh-X6-Ten" sceneMemberID="viewController">
                     <view key="view" id="1VD-Mh-Rp1">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

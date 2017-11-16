@@ -110,6 +110,7 @@
     <Folder Include="ViewControllers\Outline\" />
     <Folder Include="ViewControllers\Outline\Model\" />
     <Folder Include="Assets.xcassets\AppIcon.imageset\" />
+    <Folder Include="ViewControllers\CoverView\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -193,6 +194,15 @@
     <Compile Include="ViewControllers\Outline\Model\LibraryItem.cs" />
     <Compile Include="AggregatedEvents\FilterForLibraryItemRequest.cs" />
     <Compile Include="AggregatedEvents\FilterForSubjectRequest.cs" />
+    <Compile Include="ViewControllers\CoverView\ReadableCoverViewController.cs" />
+    <Compile Include="ViewControllers\CoverView\ReadableCoverViewController.designer.cs">
+      <DependentUpon>ReadableCoverViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AggregatedEvents\ViewChangeRequest.cs" />
+    <Compile Include="ViewControllers\ReadableMainEmbedViewController.cs" />
+    <Compile Include="ViewControllers\ReadableMainEmbedViewController.designer.cs">
+      <DependentUpon>ReadableMainEmbedViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

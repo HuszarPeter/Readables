@@ -14,12 +14,18 @@ using Readables.AggregatedEvents;
 
 namespace Readables.ViewControllers.TableView
 {
-    public partial class ReadableTableViewController : AppKit.NSViewController, INSTableViewDataSource, INSTableViewDelegate, 
-    IListenTo<FileImportedEvent>, IListenTo<PathImportedEvent>, IListenTo<FilterForLibraryItemRequest>, IListenTo<FilterForSubjectRequest>
+    public partial class ReadableTableViewController : NSViewController,
+    INSTableViewDataSource,
+    INSTableViewDelegate,
+    IEventAggregatorSubscriber,
+    IListenTo<FileImportedEvent>,
+    IListenTo<PathImportedEvent>,
+    IListenTo<FilterForLibraryItemRequest>,
+    IListenTo<FilterForSubjectRequest>
     {
         private IReadableRepository readableRepository;
         private List<Readable> readables;
-		private IEventAggregator eventAggregator;
+        private IEventAggregator eventAggregator;
 
         private const string TextCellIdentifier = "textColumnCell";
         private const string ImageCellIdentifier = "imageColumnCell";
@@ -47,7 +53,6 @@ namespace Readables.ViewControllers.TableView
         {
             this.readableRepository = IOC.Container.Resolve<IReadableRepository>();
             this.eventAggregator = IOC.Container.Resolve<IEventAggregator>();
-            this.eventAggregator.AddListener(this);
             this.ReadReadables();
         }
 
@@ -166,6 +171,16 @@ namespace Readables.ViewControllers.TableView
             this.subjectFilter = message.Subject;
             this.ReadReadables();
             this.tableView.ReloadData();
+        }
+
+        public void SubscribeToAggregatedEvents()
+        {
+            this.eventAggregator.AddListener(this);
+        }
+
+        public void UnSubscribeFromAggregatedEvents()
+        {
+            this.eventAggregator.RemoveListener(this);
         }
     }
 }

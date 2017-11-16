@@ -12,9 +12,20 @@ namespace Readables.Common
 			this.listeners.Add(listener);
 		}
 
-		public void SendMessage<T>(T message) where T : IEvent
+        public void RemoveListener(IListenTo listener)
+        {
+            if (this.listeners.Contains(listener))
+            {
+                this.listeners.Remove(listener);
+            }
+        }
+
+        public void SendMessage<T>(T message) where T : IEvent
 		{
-			this.listeners.CallOnEach<IListenTo<T>>((obj) => {
+            IListenTo[] copy = new IListenTo[this.listeners.Count];
+            this.listeners.CopyTo(copy);
+
+			copy.CallOnEach<IListenTo<T>>((obj) => {
 				obj.HandleMessage(message);
 			});
 		}

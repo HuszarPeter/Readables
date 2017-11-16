@@ -28,6 +28,8 @@ namespace Readables
 
             this.eventAggregator = IOC.Resolve<IEventAggregator>();
             this.eventAggregator.AddListener(this);
+
+            SetViewMode(ViewMode.Collection);
         }
 
         public new MainWindow Window
@@ -82,5 +84,18 @@ namespace Readables
             });
         }
 		#endregion
+
+        private void SetViewMode(ViewMode viewMode) {
+            this.changeView.SetSelected(true, viewMode.AsNint());
+            this.eventAggregator.SendMessage(new ViewChangeRequest { ViewMode = viewMode });
+        }
+
+        partial void onViewChanged(NSSegmentedControl sender)
+        {
+            var viewMode = sender.SelectedSegment.AsViewMode();
+            this.SetViewMode(viewMode);
+        }
+
+
     }
 }
