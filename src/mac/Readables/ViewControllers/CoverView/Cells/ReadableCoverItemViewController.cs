@@ -7,8 +7,7 @@ namespace Readables.ViewControllers.CoverView.Cells
 {
     public partial class ReadableCoverItemViewController : NSCollectionViewItem
     {
-        #region Constructors
-
+        #region Constructors and initializers
         // Called when created from unmanaged code
         public ReadableCoverItemViewController(IntPtr handle) : base(handle)
         {
@@ -36,9 +35,7 @@ namespace Readables.ViewControllers.CoverView.Cells
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
-            UpdateView();
         }
-
         #endregion
 
         //strongly typed view accessor
@@ -75,14 +72,7 @@ namespace Readables.ViewControllers.CoverView.Cells
             set
             {
                 base.Selected = value;
-                UpdateView();
             }
-        }
-
-        void UpdateView()
-        {
-            //selectionBorder.AlphaValue = (nfloat)((Selected) ? 1.0 : 0.8);
-            //selectionBorder.BorderColor = NSColor.Clear;
         }
     }
 }

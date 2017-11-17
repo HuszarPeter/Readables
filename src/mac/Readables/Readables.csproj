@@ -192,6 +192,8 @@
       <DependentUpon>ReadableOutlineDataCellView.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewControllers\ReadableListInteractor.cs" />
+    <Compile Include="Extensions\ReadableExtensions.cs" />
+    <Compile Include="AggregatedEvents\DataRepositoryChanged.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Foundation;
 using AppKit;
-using Readables.DataLayer;
-using Readables.Common;
-using Readables.Domain;
-using Readables.Extensions;
-using Readables.Import.AggregatedEvents;
-using Readables.Import;
-using Readables.Utils;
+using Foundation;
 using Readables.AggregatedEvents;
-using Readables.ViewControllers.TableView.Cells;
+using Readables.Common;
 
 namespace Readables.ViewControllers.TableView
 {
@@ -19,16 +11,13 @@ namespace Readables.ViewControllers.TableView
     INSTableViewDataSource,
     INSTableViewDelegate,
     IEventAggregatorSubscriber,
-    IListenTo<FileImportedEvent>,
-    IListenTo<PathImportedEvent>,
     IListenTo<FilterForLibraryItemRequest>,
-    IListenTo<FilterForSubjectRequest>
+    IListenTo<FilterForSubjectRequest>,
+    IListenTo<DataRepositoryChanged>
     {
         private ReadableTableViewPresenter presenter;
+        private ReadableListInteractor interactor;
         private IEventAggregator eventAggregator;
-
-        private const string TextCellIdentifier = "textColumnCell";
-        private const string ImageCellIdentifier = "imageColumnCell";
 
         private string formatFilter;
         private string subjectFilter;
@@ -52,6 +41,8 @@ namespace Readables.ViewControllers.TableView
         void Initialize()
         {
             this.presenter = new ReadableTableViewPresenter();
+            this.interactor = new ReadableListInteractor();
+
             this.eventAggregator = IOC.Container.Resolve<IEventAggregator>();
         }
 
@@ -66,23 +57,20 @@ namespace Readables.ViewControllers.TableView
         [Export("numberOfRowsInTableView:")]
         public nint GetRowCount(NSTableView tableView)
         {
-            return this.presenter.ItemsCount();
+            return this.interactor.Readables.Count();
         }
 
         [Export("tableView:viewForTableColumn:row:")]
         public NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
         {
-            return this.presenter.ItemAt((int)row, tableColumn.Identifier, tableView);
+            var readable = this.interactor.Readables.ElementAt((int)row);
+
+            return this.presenter.CellViewForColumn(tableView, tableColumn.Identifier, (int)row, readable);
         }
         #endregion
 
         #region Message handling
-        public void HandleMessage(PathImportedEvent message)
-        {
-            this.tableView.ReloadData();
-        }
-
-        public void HandleMessage(FileImportedEvent message)
+        public void HandleMessage(DataRepositoryChanged message)
         {
             this.tableView.ReloadData();
         }

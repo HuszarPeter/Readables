@@ -1,48 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Readables.AggregatedEvents;
 using Readables.Common;
 using Readables.Data.Model;
 using Readables.DataLayer;
 using Readables.Domain;
+using Readables.Import.AggregatedEvents;
 
 namespace Readables.Data
 {
     public interface IDataRepository
     {
-        int NumberOfItemsInRepository();
-
-        Readable ItemAtPosition(int index);
+        IEnumerable<Readable> VisibleReadables { get; }
 
         void SetLibraryItemFilter(OutlineItemLibrary item);
 
         void SetSubjectFilter(OutlineItemSubject subject);
     }
 
-    public class DataRepository: IDataRepository
+    public class DataRepository: IDataRepository,
+    IListenTo<FileImportedEvent>,
+    IListenTo<PathImportedEvent>
     {
         readonly IEventAggregator eventAggregator;
         readonly IReadableRepository readableRepository;
         private List<Readable> readables;
+
         private IEnumerable<Readable> visibleReadables;
+        public IEnumerable<Readable> VisibleReadables
+        {
+            get
+            {
+                this.FetchItems();
+                return visibleReadables;    
+            }
+        }
 
         public DataRepository(IEventAggregator eventAggregator, IReadableRepository readableRepository)
         {
             this.eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             this.readableRepository = readableRepository ?? throw new ArgumentNullException(nameof(readableRepository));
-        }
 
-        public int NumberOfItemsInRepository()
-        {
-            this.FetchItems();
-            return this.visibleReadables.Count();
-        }
-
-        public Readable ItemAtPosition(int index)
-        {
-            this.FetchItems();
-            var result = this.visibleReadables.ElementAt(index);
-            return result;
+            this.eventAggregator.AddListener(this);
         }
 
         public void SetLibraryItemFilter(OutlineItemLibrary item)
@@ -65,5 +65,21 @@ namespace Readables.Data
             this.visibleReadables = readables
                 .OrderBy(r => r.Title);
         }
+
+        #region Aggregated event handling
+        public void HandleMessage(FileImportedEvent message)
+        {
+            this.readables = null;
+            this.visibleReadables = null;
+            this.eventAggregator.SendMessage(new DataRepositoryChanged());
+        }
+
+        public void HandleMessage(PathImportedEvent message)
+        {
+            this.readables = null;
+            this.visibleReadables = null;
+            this.eventAggregator.SendMessage(new DataRepositoryChanged());
+        }
+        #endregion
     }
 }

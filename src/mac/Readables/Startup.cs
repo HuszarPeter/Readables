@@ -16,7 +16,7 @@ namespace Readables
 
         public void RunAtStartup()
         {
-            Console.WriteLine($"Run at startup : {this.GetType()}");
+            //Console.WriteLine($"Run at startup : {this.GetType()}");
 
             //this.fileFormatManager.RegisterTagImageForFileFormat(".epub", NSBundle.MainBundle.ImageForResource("format_epub"));
         }

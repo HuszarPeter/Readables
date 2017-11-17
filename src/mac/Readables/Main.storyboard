@@ -442,7 +442,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="437" height="300"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="8" minimumLineSpacing="8" id="gro-gd-aV8">
-                                                <size key="itemSize" width="212" height="249"/>
+                                                <size key="itemSize" width="168" height="205"/>
                                                 <size key="headerReferenceSize" width="0.0" height="8"/>
                                                 <size key="footerReferenceSize" width="0.0" height="8"/>
                                                 <edgeInsets key="sectionInset" left="8" right="8" top="0.0" bottom="0.0"/>
@@ -582,6 +582,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="897" height="508"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <visualEffectView wantsLayer="YES" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="mub-xP-VNy">
+                                <rect key="frame" x="0.0" y="471" width="897" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="15D-nK-RLL"/>
+                                </constraints>
+                            </visualEffectView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ERc-JO-ui5">
                                 <rect key="frame" x="0.0" y="0.0" width="897" height="471"/>
                                 <constraints>
@@ -593,10 +599,13 @@
                             </containerView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="ERc-JO-ui5" firstAttribute="top" secondItem="IyK-pc-tob" secondAttribute="top" constant="37" id="6Z9-hl-mfO"/>
+                            <constraint firstItem="mub-xP-VNy" firstAttribute="leading" secondItem="IyK-pc-tob" secondAttribute="leading" id="B69-RO-AoP"/>
                             <constraint firstItem="ERc-JO-ui5" firstAttribute="leading" secondItem="IyK-pc-tob" secondAttribute="leading" id="CUD-L3-XuM"/>
                             <constraint firstAttribute="bottom" secondItem="ERc-JO-ui5" secondAttribute="bottom" id="Ev3-rX-08n"/>
-                            <constraint firstItem="ERc-JO-ui5" firstAttribute="top" secondItem="IyK-pc-tob" secondAttribute="top" constant="37" id="XWO-ch-0Y8"/>
                             <constraint firstAttribute="trailing" secondItem="ERc-JO-ui5" secondAttribute="trailing" id="Xgd-i1-wzp"/>
+                            <constraint firstItem="mub-xP-VNy" firstAttribute="top" secondItem="IyK-pc-tob" secondAttribute="top" id="oFo-1Y-8wA"/>
+                            <constraint firstAttribute="trailing" secondItem="mub-xP-VNy" secondAttribute="trailing" id="vHM-oI-nKO"/>
                         </constraints>
                     </view>
                 </viewController>

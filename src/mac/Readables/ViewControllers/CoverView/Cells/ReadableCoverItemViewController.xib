@@ -15,26 +15,29 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="4" customClass="ReadableCoverItemView">
-            <rect key="frame" x="0.0" y="0.0" width="210" height="247"/>
+        <customView wantsLayer="YES" id="4" customClass="ReadableCoverItemView">
+            <rect key="frame" x="0.0" y="0.0" width="168" height="205"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <box boxType="custom" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="wDY-po-tY2">
-                    <rect key="frame" x="0.0" y="0.0" width="210" height="247"/>
+                <box wantsLayer="YES" boxType="custom" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="wDY-po-tY2">
+                    <rect key="frame" x="0.0" y="0.0" width="168" height="205"/>
                     <view key="contentView" id="CBn-Gp-pPc">
-                        <rect key="frame" x="1" y="1" width="208" height="245"/>
+                        <rect key="frame" x="1" y="1" width="166" height="203"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Awg-e9-pOm">
-                                <rect key="frame" x="4" y="41" width="200" height="200"/>
+                                <rect key="frame" x="8" y="45" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="Bqf-GW-53s"/>
-                                    <constraint firstAttribute="width" constant="200" id="amq-RP-ILJ"/>
+                                    <constraint firstAttribute="height" constant="150" id="Bqf-GW-53s"/>
+                                    <constraint firstAttribute="width" constant="150" id="amq-RP-ILJ"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="cover" id="sWh-qX-DQr"/>
+                                <shadow key="shadow" blurRadius="2">
+                                    <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </shadow>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="cover" id="sWh-qX-DQr"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jhG-jc-fo4">
-                                <rect key="frame" x="2" y="4" width="204" height="14"/>
+                                <rect key="frame" x="2" y="4" width="162" height="14"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="oRk-hp-GH2">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -42,7 +45,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yPB-sx-2zf">
-                                <rect key="frame" x="2" y="20" width="204" height="17"/>
+                                <rect key="frame" x="2" y="20" width="162" height="17"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="gkk-xR-PSJ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -51,16 +54,16 @@
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="yPB-sx-2zf" firstAttribute="top" secondItem="Awg-e9-pOm" secondAttribute="bottom" constant="4" id="2YW-Hr-B8u"/>
+                            <constraint firstItem="yPB-sx-2zf" firstAttribute="top" secondItem="Awg-e9-pOm" secondAttribute="bottom" constant="8" id="2YW-Hr-B8u"/>
                             <constraint firstItem="yPB-sx-2zf" firstAttribute="leading" secondItem="CBn-Gp-pPc" secondAttribute="leading" constant="4" id="33r-vf-96p"/>
                             <constraint firstAttribute="trailing" secondItem="yPB-sx-2zf" secondAttribute="trailing" constant="4" id="BoU-qr-Z2d"/>
                             <constraint firstAttribute="bottom" secondItem="jhG-jc-fo4" secondAttribute="bottom" constant="4" id="FIY-lf-2gU"/>
                             <constraint firstAttribute="trailing" secondItem="jhG-jc-fo4" secondAttribute="trailing" constant="4" id="Nn4-kG-2S5"/>
                             <constraint firstItem="jhG-jc-fo4" firstAttribute="top" secondItem="yPB-sx-2zf" secondAttribute="bottom" constant="2" id="Z8c-Ad-XSb"/>
-                            <constraint firstItem="Awg-e9-pOm" firstAttribute="leading" secondItem="CBn-Gp-pPc" secondAttribute="leading" constant="4" id="cNe-qH-Nfx"/>
-                            <constraint firstAttribute="trailing" secondItem="Awg-e9-pOm" secondAttribute="trailing" constant="4" id="iTj-v8-zmj"/>
+                            <constraint firstItem="Awg-e9-pOm" firstAttribute="leading" secondItem="CBn-Gp-pPc" secondAttribute="leading" constant="8" id="cNe-qH-Nfx"/>
+                            <constraint firstAttribute="trailing" secondItem="Awg-e9-pOm" secondAttribute="trailing" constant="8" id="iTj-v8-zmj"/>
                             <constraint firstItem="jhG-jc-fo4" firstAttribute="leading" secondItem="CBn-Gp-pPc" secondAttribute="leading" constant="4" id="jiW-Dp-ajx"/>
-                            <constraint firstItem="Awg-e9-pOm" firstAttribute="top" secondItem="CBn-Gp-pPc" secondAttribute="top" constant="4" id="rki-VF-Mea"/>
+                            <constraint firstItem="Awg-e9-pOm" firstAttribute="top" secondItem="CBn-Gp-pPc" secondAttribute="top" constant="8" id="rki-VF-Mea"/>
                         </constraints>
                     </view>
                     <color key="borderColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

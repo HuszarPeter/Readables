@@ -56,7 +56,6 @@ namespace Readables.Import
             {
                 throw new ArgumentNullException(path);
             }
-            Console.WriteLine($"Import folder {path}");
             int success = 0;
 			int failed = 0;
 			
@@ -73,7 +72,6 @@ namespace Readables.Import
                     failed++;
                 }
             }
-            Console.WriteLine($"Path imported");
             this.eventAggregator.SendMessage(new PathImportedEvent { 
                 NumberOfFailedImport = failed, 
                 NumberOfSuccessfullyImported = success});
@@ -98,21 +96,18 @@ namespace Readables.Import
 
         private void ImportFileInternal(string fileName)
         {
-            Console.WriteLine($"Import file: {fileName}");
             var fileInfo = new FileInfo(fileName);
             var importService = this.FindReadableImportServiceByExtension(fileInfo.Extension);
             if (importService == null)
             {
                 throw new UnknownFileTypeException();
             }
-            Console.WriteLine($"\tusing {importService}");
 
             var readable = this.ReadFile(importService, fileName);
             if (readable == null)
             {
                 throw new ReadableImportException();
             }
-            Console.WriteLine($"Store {readable.Title}");
 
             this.StoreReadable(readable);
         }

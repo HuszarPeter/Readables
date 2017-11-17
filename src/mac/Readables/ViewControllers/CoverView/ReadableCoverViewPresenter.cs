@@ -1,28 +1,16 @@
-﻿using System;
-using AppKit;
+﻿using AppKit;
 using Foundation;
+using Readables.Domain;
 using Readables.ViewControllers.CoverView.Cells;
 
 namespace Readables.ViewControllers.CoverView
 {
     public class ReadableCoverViewPresenter
     {
-        private ReadableListInteractor interactor;
-
-        public ReadableCoverViewPresenter()
+        internal NSCollectionViewItem PresentItemView(NSCollectionView collectionView, Readable readable, NSIndexPath index)
         {
-            this.interactor = new ReadableListInteractor();
-        }
-
-        internal int NumberOfItems()
-        {
-            return this.interactor.GetNumberofItems();
-        }
-
-        internal NSCollectionViewItem ItemAt(NSCollectionView collectionView, NSIndexPath indexPath)
-        {
-            var result = collectionView.MakeItem("coverItem", indexPath) as ReadableCoverItemViewController;
-            result.Readable = this.interactor.ItemAt((int)indexPath.Item);
+            var result = collectionView.MakeItem("coverItem", index) as ReadableCoverItemViewController;
+            result.Readable = readable;
             return result;
         }
     }

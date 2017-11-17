@@ -23,7 +23,6 @@ namespace Readables.ViewControllers.Outline
 
         public ReadableOutlineDataSource(IReadableRepository readableRepository)
         {
-            Console.WriteLine("ctor");
             this.LibraryGroup = new OutlineGroup { Text = "Library" };
             this.SubjectsGroup = new OutlineGroup { Text = "Subjects" };
 

@@ -2,8 +2,8 @@
 using System.Linq;
 using Readables.Domain;
 using Readables.Import.Exceptions;
-using VersFx.Formats.Text.Epub;
-using VersFx.Formats.Text.Epub.Schema.Opf;
+using VersOne.Epub;
+using VersOne.Epub.Schema;
 
 namespace Readables.Import.FileFormat.ePub
 {
@@ -17,7 +17,8 @@ namespace Readables.Import.FileFormat.ePub
         {
             try
             {
-                var book = EpubReader.OpenBook(fileName);
+
+                var book = EpubReader.ReadBook(fileName);
                 if (book == null)
                 {
                     throw new ReadableImportException($"Can't read book: {fileName}");
@@ -25,7 +26,7 @@ namespace Readables.Import.FileFormat.ePub
 
                 var result = new Readable
                 {
-                    Title = book.Title,
+                    Title = $"{book.Title}",
                     Author = book.Author,
                     Id = book.Schema.Package.Metadata.Identifiers.FirstOrDefault(m => m.Id == "uuid_id").Identifier,
                     Files = new[]
@@ -42,7 +43,8 @@ namespace Readables.Import.FileFormat.ePub
                     Publisher = string.Join(", ", book.Schema.Package.Metadata.Publishers),
                     DateAdded = System.DateTime.Now,
                     Series = book.Schema.Package.Metadata.GetSeries(),
-                    SeriesIndex = book.Schema.Package.Metadata.GetSeriesIndex()
+                    SeriesIndex = book.Schema.Package.Metadata.GetSeriesIndex(),
+                    CoverImageBytes = book.CoverImage
                 };
 
                 return result;

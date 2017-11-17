@@ -1,5 +1,4 @@
-﻿using System;
-using AppKit;
+﻿using AppKit;
 using Readables.Domain;
 using Readables.ViewControllers.TableView.Cells;
 
@@ -10,23 +9,9 @@ namespace Readables.ViewControllers.TableView
         private const string TextCellIdentifier = "textColumnCell";
         private const string ImageCellIdentifier = "imageColumnCell";
 
-        private ReadableListInteractor interactor;
-
-        public ReadableTableViewPresenter()
+        internal NSView CellViewForColumn(NSTableView tableView, string column, int row, Readable readable)
         {
-            this.interactor = new ReadableListInteractor();
-        }
-
-        internal nint ItemsCount()
-        {
-            return this.interactor.GetNumberofItems();
-        }
-
-        internal NSView ItemAt(int row, string columnIdentifier, NSTableView tableView)
-        {
-            var readable = this.interactor.ItemAt(row);
-
-            switch (columnIdentifier)
+            switch (column)
             {
                 case "titleColumn":
                     {
@@ -37,7 +22,7 @@ namespace Readables.ViewControllers.TableView
                         var result = tableView.MakeView(ImageCellIdentifier, tableView) as ReadableTagsTableCellView;
                         if (result == null)
                         {
-                            result = new ReadableTagsTableCellView()
+                            result = new ReadableTagsTableCellView
                             {
                                 Identifier = ImageCellIdentifier
                             };

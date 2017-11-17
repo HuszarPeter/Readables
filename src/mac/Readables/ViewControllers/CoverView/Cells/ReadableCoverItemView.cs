@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Foundation;
-using AppKit;
 using Readables.Domain;
+using Readables.Extensions;
 
 namespace Readables.ViewControllers.CoverView.Cells
 {
@@ -37,7 +35,7 @@ namespace Readables.ViewControllers.CoverView.Cells
         #endregion
 
         private Readable readable;
-        public Readable Readable 
+        public Readable Readable
         {
             get
             {
@@ -49,6 +47,7 @@ namespace Readables.ViewControllers.CoverView.Cells
                 readable = value;
                 this.titleLabel.StringValue = readable.Title;
                 this.authorLabel.StringValue = readable.Author ?? "";
+                this.coverImage.Image = readable.CoverImage();
                 DidChangeValue(nameof(Readable));
             }
         }

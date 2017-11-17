@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Readables.Domain
 {
@@ -29,11 +26,11 @@ namespace Readables.Domain
 
         public int PublishedYear { get; set; }
 
-        public System.Drawing.Image Cover { get; set; }
-
         public ReadableMetadata[] Metadata { get; set; }
 
         public DateTime DateAdded { get; set; }
+
+        public byte[] CoverImageBytes { get; set; }
 
     }
 }
