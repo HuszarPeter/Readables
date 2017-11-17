@@ -5,21 +5,21 @@ using Foundation;
 using AppKit;
 using Readables.Domain;
 
-namespace Readables.ViewController
+namespace Readables.ViewControllers.CoverView.Cells
 {
-    public partial class ReadableItemView : AppKit.NSView
+    public partial class ReadableCoverItemView : AppKit.NSView
     {
         #region Constructors
 
         // Called when created from unmanaged code
-        public ReadableItemView(IntPtr handle) : base(handle)
+        public ReadableCoverItemView(IntPtr handle) : base(handle)
         {
             Initialize();
         }
 
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
-        public ReadableItemView(NSCoder coder) : base(coder)
+        public ReadableCoverItemView(NSCoder coder) : base(coder)
         {
             Initialize();
         }

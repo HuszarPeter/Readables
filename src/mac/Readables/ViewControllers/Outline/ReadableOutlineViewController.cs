@@ -4,8 +4,9 @@ using Foundation;
 using Readables.AggregatedEvents;
 using Readables.Common;
 using Readables.Import.AggregatedEvents;
+using Readables.Data.Model;
 using Readables.ViewControllers.Outline;
-using Readables.ViewControllers.Outline.Model;
+using Readables.ViewControllers.Outline.Cells;
 
 namespace Readables.ViewControllers
 {
@@ -38,20 +39,20 @@ namespace Readables.ViewControllers
         [Export("outlineView:isGroupItem:")]
         public bool IsGroupItem(NSOutlineView outlineView, NSObject item)
         {
-            return item is Group;
+            return item is OutlineGroup;
         }
 
         [Export("outlineView:viewForTableColumn:item:")]
         public NSView GetView(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item)
         {
-            if (item is Group outline)
+            if (item is OutlineGroup outline)
             {
                 var view = outlineView.MakeView("HeaderCell", this) as NSTableCellView;
                 view.TextField.StringValue = outline.Text;
                 view.TextField.ToolTip = view.TextField.StringValue;
                 return view;
             }
-            if (item is LibraryItem f) 
+            if (item is OutlineItemLibrary f) 
             {
                 var view = outlineView.MakeView("DataCellWithBadge", this) as ReadableOutlineDataCellView;
                 view.TextField.StringValue = $"{f.Text}";
@@ -59,7 +60,7 @@ namespace Readables.ViewControllers
                 view.BadgeText.StringValue = $"{f.Count}";
                 return view;
             }
-            if (item is Subject it)
+            if (item is OutlineItemSubject it)
             {
                 var view = outlineView.MakeView("DataCellWithBadge", this) as ReadableOutlineDataCellView;
                 view.TextField.StringValue = $"{it.Text}";
@@ -75,11 +76,11 @@ namespace Readables.ViewControllers
         {
             var index = this.outlineView.SelectedRows;
             var itemAtRow = this.outlineView.ItemAtRow((nint)index.FirstIndex);
-            if (itemAtRow is LibraryItem item) 
+            if (itemAtRow is OutlineItemLibrary item) 
             {
                 this.eventAggregator.SendMessage(new FilterForLibraryItemRequest{ Format = item.Text });
             }
-            if (itemAtRow is Subject subject) 
+            if (itemAtRow is OutlineItemSubject subject) 
             {
                 this.eventAggregator.SendMessage(new FilterForSubjectRequest { Subject = subject.Text });
             }

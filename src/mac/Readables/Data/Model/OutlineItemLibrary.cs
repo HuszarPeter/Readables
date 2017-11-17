@@ -1,9 +1,9 @@
 ﻿using System;
 using Foundation;
 
-namespace Readables.ViewControllers.Outline.Model
+namespace Readables.Data.Model
 {
-    public class LibraryItem: NSObject
+    public class OutlineItemLibrary: NSObject
     {
         public string Text;
 

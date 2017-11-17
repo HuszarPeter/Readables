@@ -11,6 +11,7 @@ using Readables.Import.AggregatedEvents;
 using Readables.Import;
 using Readables.Utils;
 using Readables.AggregatedEvents;
+using Readables.ViewControllers.TableView.Cells;
 
 namespace Readables.ViewControllers.TableView
 {
@@ -23,8 +24,7 @@ namespace Readables.ViewControllers.TableView
     IListenTo<FilterForLibraryItemRequest>,
     IListenTo<FilterForSubjectRequest>
     {
-        private IReadableRepository readableRepository;
-        private List<Readable> readables;
+        private ReadableTableViewPresenter presenter;
         private IEventAggregator eventAggregator;
 
         private const string TextCellIdentifier = "textColumnCell";
@@ -51,9 +51,8 @@ namespace Readables.ViewControllers.TableView
         // Shared initialization code
         void Initialize()
         {
-            this.readableRepository = IOC.Container.Resolve<IReadableRepository>();
+            this.presenter = new ReadableTableViewPresenter();
             this.eventAggregator = IOC.Container.Resolve<IEventAggregator>();
-            this.ReadReadables();
         }
 
         public override void AwakeFromNib()
@@ -61,99 +60,30 @@ namespace Readables.ViewControllers.TableView
             base.AwakeFromNib();
         }
 
-        private void ReadReadables() {
-            var readableList = this.readableRepository
-                                   .GetAllReadables()
-                                   .AsEnumerable();
-            
-            if (!string.IsNullOrEmpty(this.formatFilter)) 
-            {
-                readableList = readableList.Where(r => r.Files.Any(f => f.Format == this.formatFilter));
-            }
-
-            if (!string.IsNullOrEmpty(this.subjectFilter)) 
-            {
-                readableList = readableList.Where(r => r.Subjects.Any(s => s == this.subjectFilter));
-            }
-
-            this.readables = readableList
-                .OrderBy(r => r.Title)
-                .ToList();
-        }
-
         #endregion
 
+        #region DataSource
         [Export("numberOfRowsInTableView:")]
         public nint GetRowCount(NSTableView tableView)
         {
-            return this.readables.Count();
-        }  
+            return this.presenter.ItemsCount();
+        }
 
         [Export("tableView:viewForTableColumn:row:")]
         public NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
         {
-            var readable = this.readables[(int)row];
-
-            switch(tableColumn.Identifier) 
-            {
-                case "titleColumn": 
-                    {
-                        return MakeTextCellView(readable, ReadableFieldView.Title);
-                    }
-                case "formatsColumn":
-                    {
-                        var result = this.tableView.MakeView(ImageCellIdentifier, this) as ReadableTagsTableCellView;
-                        if (result == null)
-                        {
-                            result = new ReadableTagsTableCellView()
-                            {
-                                Identifier = ImageCellIdentifier
-                            };
-                        }
-                        result.Readable = readable;
-                        return result;
-                    }
-                case "seriesColumn":
-                    {
-                        return MakeTextCellView(readable, ReadableFieldView.Series);
-                    }
-                case "dateAddedColumn":
-                    {
-                        return MakeTextCellView(readable, ReadableFieldView.DateAdded);
-                    }
-                case "authorColumn":
-                    {
-                        return MakeTextCellView(readable, ReadableFieldView.Author);
-                    }
-                default:
-                    {
-                        return null;
-                    }
-            }
+            return this.presenter.ItemAt((int)row, tableColumn.Identifier, tableView);
         }
+        #endregion
 
-        private ReadableTextTableCellView MakeTextCellView(Readable readable, ReadableFieldView field) {
-            var result = this.tableView.MakeView(TextCellIdentifier, this) as ReadableTextTableCellView;
-            if (result == null) {
-                result = new ReadableTextTableCellView
-                {
-                    Identifier = TextCellIdentifier
-                };
-            }
-            result.Readable = readable;
-            result.Field = field;
-            return result;
-        }
-
+        #region Message handling
         public void HandleMessage(PathImportedEvent message)
         {
-            this.ReadReadables();
             this.tableView.ReloadData();
         }
 
         public void HandleMessage(FileImportedEvent message)
         {
-            this.ReadReadables();
             this.tableView.ReloadData();
         }
 
@@ -161,7 +91,6 @@ namespace Readables.ViewControllers.TableView
         {
             this.formatFilter = message.Format == "All readables" ? string.Empty : message.Format;
             this.subjectFilter = string.Empty;
-            this.ReadReadables();
             this.tableView.ReloadData();
         }
 
@@ -169,9 +98,9 @@ namespace Readables.ViewControllers.TableView
         {
             this.formatFilter = string.Empty;
             this.subjectFilter = message.Subject;
-            this.ReadReadables();
             this.tableView.ReloadData();
         }
+        #endregion
 
         public void SubscribeToAggregatedEvents()
         {

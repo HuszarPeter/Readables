@@ -2,7 +2,7 @@ using System;
 using AppKit;
 using Foundation;
 
-namespace Readables.ViewControllers.Outline
+namespace Readables.ViewControllers.Outline.Cells
 {
     public partial class ReadableOutlineDataCellView: NSTableCellView
     {

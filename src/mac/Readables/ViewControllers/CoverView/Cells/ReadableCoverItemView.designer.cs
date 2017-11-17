@@ -7,10 +7,10 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace Readables.ViewController
+namespace Readables.ViewControllers.CoverView.Cells
 {
-	[Register ("ReadableItemView")]
-	partial class ReadableItemView
+    [Register (nameof(ReadableCoverItemView))]
+	partial class ReadableCoverItemView
 	{
 		[Outlet]
 		AppKit.NSTextField authorLabel { get; set; }

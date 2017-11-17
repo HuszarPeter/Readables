@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Readables.Model
+namespace Readables.Data.Model
 {
     [Register(nameof(ReadableModel))]
     public class ReadableModel: NSObject

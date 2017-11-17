@@ -5,7 +5,7 @@ using Foundation;
 using Readables.Domain;
 using Readables.Extensions;
 
-namespace Readables.ViewControllers.TableView
+namespace Readables.ViewControllers.TableView.Cells
 {
     public class ReadableTagsTableCellView: NSTableCellView
     {

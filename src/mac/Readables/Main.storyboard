@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -440,13 +441,17 @@
                                         <collectionView selectable="YES" allowsMultipleSelection="YES" id="Q01-q9-Cdb">
                                             <rect key="frame" x="0.0" y="0.0" width="437" height="300"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="gro-gd-aV8">
-                                                <size key="itemSize" width="200" height="200"/>
-                                                <size key="headerReferenceSize" width="0.0" height="20"/>
-                                                <size key="footerReferenceSize" width="0.0" height="20"/>
-                                                <edgeInsets key="sectionInset" left="10" right="10" top="20" bottom="20"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="8" minimumLineSpacing="8" id="gro-gd-aV8">
+                                                <size key="itemSize" width="212" height="249"/>
+                                                <size key="headerReferenceSize" width="0.0" height="8"/>
+                                                <size key="footerReferenceSize" width="0.0" height="8"/>
+                                                <edgeInsets key="sectionInset" left="8" right="8" top="0.0" bottom="0.0"/>
                                             </collectionViewFlowLayout>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <outlet property="dataSource" destination="Ywj-QW-He9" id="p6m-3t-PoJ"/>
+                                                <outlet property="delegate" destination="Ywj-QW-He9" id="k0Y-qt-8e2"/>
+                                            </connections>
                                         </collectionView>
                                     </subviews>
                                 </clipView>
@@ -474,6 +479,45 @@
                 <customObject id="td0-nW-7E9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="1880"/>
+        </scene>
+        <!--Collection View Item-->
+        <scene sceneID="cB5-9c-ISW">
+            <objects>
+                <collectionViewItem storyboardIdentifier="simpleCoverItemView" id="bpL-wt-cbF" sceneMemberID="viewController">
+                    <view key="view" id="WT2-EU-Rlv">
+                        <rect key="frame" x="0.0" y="0.0" width="81" height="100"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JLU-BZ-0cL">
+                                <rect key="frame" x="2" y="21" width="77" height="77"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="JLU-BZ-0cL" secondAttribute="height" multiplier="90:90" id="r6o-EH-laV"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="format_epub" id="Caf-Zg-qff"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tys-B8-YId">
+                                <rect key="frame" x="0.0" y="2" width="81" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="26Y-Tc-CnP">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="tys-B8-YId" firstAttribute="top" secondItem="JLU-BZ-0cL" secondAttribute="bottom" constant="2" id="3qy-Hv-qBf"/>
+                            <constraint firstAttribute="bottom" secondItem="tys-B8-YId" secondAttribute="bottom" constant="2" id="YIb-eq-bwp"/>
+                            <constraint firstAttribute="trailing" secondItem="tys-B8-YId" secondAttribute="trailing" constant="2" id="Z2v-0y-41b"/>
+                            <constraint firstItem="JLU-BZ-0cL" firstAttribute="top" secondItem="WT2-EU-Rlv" secondAttribute="top" constant="2" id="e4d-To-HK1"/>
+                            <constraint firstItem="JLU-BZ-0cL" firstAttribute="leading" secondItem="WT2-EU-Rlv" secondAttribute="leading" constant="2" id="lQe-do-x2f"/>
+                            <constraint firstAttribute="trailing" secondItem="JLU-BZ-0cL" secondAttribute="trailing" constant="2" id="lgf-Px-zOU"/>
+                            <constraint firstItem="tys-B8-YId" firstAttribute="leading" secondItem="WT2-EU-Rlv" secondAttribute="leading" constant="2" id="tWO-Ox-Kxf"/>
+                        </constraints>
+                    </view>
+                </collectionViewItem>
+                <customObject id="pXb-c3-BX9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="31" y="1780"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="jDI-oN-6AI">
@@ -535,11 +579,11 @@
             <objects>
                 <viewController id="1vm-bw-yC8" sceneMemberID="viewController">
                     <view key="view" id="IyK-pc-tob">
-                        <rect key="frame" x="0.0" y="0.0" width="515" height="426"/>
+                        <rect key="frame" x="0.0" y="0.0" width="897" height="508"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ERc-JO-ui5">
-                                <rect key="frame" x="0.0" y="0.0" width="515" height="389"/>
+                                <rect key="frame" x="0.0" y="0.0" width="897" height="471"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="0Id-u2-Kd9"/>
                                 </constraints>
@@ -558,7 +602,7 @@
                 </viewController>
                 <customObject id="bkv-EB-uZl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="695" y="668"/>
+            <point key="canvasLocation" x="885.5" y="627"/>
         </scene>
         <!--Readable Outline View Controller-->
         <scene sceneID="m7B-XQ-r6y">
@@ -764,4 +808,7 @@
             <point key="canvasLocation" x="763" y="1880"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="format_epub" width="42" height="16"/>
+    </resources>
 </document>

@@ -7,7 +7,7 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace Readables.ViewControllers.Outline
+namespace Readables.ViewControllers.Outline.Cells
 {
     [Register(nameof(ReadableOutlineDataCellView))]
 	partial class ReadableOutlineDataCellView

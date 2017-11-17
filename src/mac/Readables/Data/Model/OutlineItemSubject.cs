@@ -1,8 +1,8 @@
 ﻿using Foundation;
 
-namespace Readables.ViewControllers.Outline.Model
+namespace Readables.Data.Model
 {
-    public class Subject: NSObject
+    public class OutlineItemSubject: NSObject
     {
         public string Text;
 

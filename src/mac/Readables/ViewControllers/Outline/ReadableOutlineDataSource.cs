@@ -4,16 +4,16 @@ using AppKit;
 using Foundation;
 using Readables.Common;
 using Readables.DataLayer;
-using Readables.ViewControllers.Outline.Model;
+using Readables.Data.Model;
 
 namespace Readables.ViewControllers.Outline
 {
     [Register(nameof(ReadableOutlineDataSource))]
     public class ReadableOutlineDataSource : NSObject, INSOutlineViewDataSource
     {
-        readonly Group LibraryGroup;
-        readonly Group SubjectsGroup;
-        readonly Group[] groups;
+        readonly OutlineGroup LibraryGroup;
+        readonly OutlineGroup SubjectsGroup;
+        readonly OutlineGroup[] groups;
 
         readonly IReadableRepository readableRepository;
 
@@ -24,8 +24,8 @@ namespace Readables.ViewControllers.Outline
         public ReadableOutlineDataSource(IReadableRepository readableRepository)
         {
             Console.WriteLine("ctor");
-            this.LibraryGroup = new Group { Text = "Library" };
-            this.SubjectsGroup = new Group { Text = "Subjects" };
+            this.LibraryGroup = new OutlineGroup { Text = "Library" };
+            this.SubjectsGroup = new OutlineGroup { Text = "Subjects" };
 
             this.groups = new[] { LibraryGroup, SubjectsGroup };
             this.readableRepository = readableRepository ?? throw new ArgumentNullException(nameof(readableRepository));
@@ -47,14 +47,14 @@ namespace Readables.ViewControllers.Outline
         {
             var readables = this.readableRepository.GetAllReadables();
 
-            var allLibraryItem = new[] { new LibraryItem { Text = "All readables", Count = readables.Count } };
+            var allLibraryItem = new[] { new OutlineItemLibrary { Text = "All readables", Count = readables.Count } };
 
             this.LibraryGroup.Items = allLibraryItem.Union(
                 readables
                 .SelectMany(r => r.Files)
                 .Where(file => !String.IsNullOrEmpty(file.Format))
                 .GroupBy(file => file.Format, StringComparer.InvariantCultureIgnoreCase)
-                .Select(x => new LibraryItem { Text = x.Key, Count = x.Count() })
+                .Select(x => new OutlineItemLibrary { Text = x.Key, Count = x.Count() })
                 .OrderBy(format => format.Text))
                 .ToArray();
 
@@ -62,7 +62,7 @@ namespace Readables.ViewControllers.Outline
                 .SelectMany(r => r.Subjects)
                 .Where(subj => !string.IsNullOrEmpty(subj))
                 .GroupBy(subj => subj, StringComparer.InvariantCultureIgnoreCase)
-                .Select(grp => new Subject { Text = grp.Key, Count = grp.Count() })
+                .Select(grp => new OutlineItemSubject { Text = grp.Key, Count = grp.Count() })
                 .OrderBy(s => s.Text)
                 .ToArray();
 
@@ -71,15 +71,15 @@ namespace Readables.ViewControllers.Outline
         [Export("outlineView:isGroupItem:")]
         public bool IsGroupItem(NSOutlineView outlineView, NSObject item)
         {
-            return item is Group;
+            return item is OutlineGroup;
         }
 
         [Export("outlineView:numberOfChildrenOfItem:")]
         public nint GetChildrenCount(NSOutlineView outlineView, NSObject item)
         {
-            if (item is Group)
+            if (item is OutlineGroup)
             {
-                return ((Group)item).Items.Length;
+                return ((OutlineGroup)item).Items.Length;
             }
 
             return this.groups.Length;
@@ -88,13 +88,13 @@ namespace Readables.ViewControllers.Outline
         [Export("outlineView:isItemExpandable:")]
         public bool ItemExpandable(NSOutlineView outlineView, NSObject item)
         {
-            return item is Group;
+            return item is OutlineGroup;
         }
 
         [Export("outlineView:child:ofItem:")]
         public NSObject GetChild(NSOutlineView outlineView, nint childIndex, NSObject item)
         {
-            if (item is Group outline)
+            if (item is OutlineGroup outline)
             {
                 return outline.Items[childIndex];
             }

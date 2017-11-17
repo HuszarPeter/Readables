@@ -1,31 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Foundation;
 using AppKit;
 using Readables.Domain;
 
-namespace Readables.ViewController
+namespace Readables.ViewControllers.CoverView.Cells
 {
-    public partial class ReadableItemViewController : NSCollectionViewItem
+    public partial class ReadableCoverItemViewController : NSCollectionViewItem
     {
         #region Constructors
 
         // Called when created from unmanaged code
-        public ReadableItemViewController(IntPtr handle) : base(handle)
+        public ReadableCoverItemViewController(IntPtr handle) : base(handle)
         {
             Initialize();
         }
 
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
-        public ReadableItemViewController(NSCoder coder) : base(coder)
+        public ReadableCoverItemViewController(NSCoder coder) : base(coder)
         {
             Initialize();
         }
 
         // Call to load from the XIB/NIB file
-        public ReadableItemViewController() : base("ReadableItemView", NSBundle.MainBundle)
+        public ReadableCoverItemViewController() : base("ReadableCoverItemView", NSBundle.MainBundle)
         {
             Initialize();
         }
@@ -44,11 +42,11 @@ namespace Readables.ViewController
         #endregion
 
         //strongly typed view accessor
-        public new ReadableItemView View
+        public new ReadableCoverItemView View
         {
             get
             {
-                return (ReadableItemView)base.View;
+                return (ReadableCoverItemView)base.View;
             }
         }
 
@@ -83,7 +81,7 @@ namespace Readables.ViewController
 
         void UpdateView()
         {
-            selectionBorder.AlphaValue = (nfloat)((Selected) ? 0.6 : 1.0);
+            //selectionBorder.AlphaValue = (nfloat)((Selected) ? 1.0 : 0.8);
             //selectionBorder.BorderColor = NSColor.Clear;
         }
     }

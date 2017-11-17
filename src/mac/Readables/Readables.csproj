@@ -93,12 +93,12 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon256%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon512.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon512%402x.png" />
+    <ImageAsset Include="Assets.xcassets\cover.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\cover.imageset\if_blog_465048.png" />
+    <ImageAsset Include="Assets.xcassets\cover.imageset\if_blog_465048-2.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="ViewController\" />
-    <Folder Include="ViewController\List\" />
-    <Folder Include="Model\" />
     <Folder Include="Utils\" />
     <Folder Include="Assets.xcassets\format_epub.imageset\" />
     <Folder Include="Assets.xcassets\format_comic.imageset\" />
@@ -108,9 +108,14 @@
     <Folder Include="Extensions\" />
     <Folder Include="AggregatedEvents\" />
     <Folder Include="ViewControllers\Outline\" />
-    <Folder Include="ViewControllers\Outline\Model\" />
     <Folder Include="Assets.xcassets\AppIcon.imageset\" />
     <Folder Include="ViewControllers\CoverView\" />
+    <Folder Include="ViewControllers\CoverView\Cells\" />
+    <Folder Include="Assets.xcassets\cover.imageset\" />
+    <Folder Include="Data\" />
+    <Folder Include="Data\Model\" />
+    <Folder Include="ViewControllers\TableView\Cells\" />
+    <Folder Include="ViewControllers\Outline\Cells\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -128,44 +133,14 @@
     <Compile Include="MainWindowController.designer.cs">
       <DependentUpon>MainWindowController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewController\BooksViewMode.cs" />
     <Compile Include="RootInstaller.cs" />
-    <Compile Include="ViewController\ReadableView.cs" />
-    <Compile Include="ViewController\ReadableViewController.cs" />
-    <Compile Include="ViewController\ReadableView.designer.cs">
-      <DependentUpon>ReadableView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewController\ReadableViewController.designer.cs">
-      <DependentUpon>ReadableViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewController\ReadableCollectionViewDataSource.cs" />
-    <Compile Include="ViewController\ReadableItemView.cs" />
-    <Compile Include="ViewController\ReadableItemViewController.cs" />
-    <Compile Include="ViewController\ReadableItemView.designer.cs">
-      <DependentUpon>ReadableItemView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewController\ReadableItemViewController.designer.cs">
-      <DependentUpon>ReadableItemViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewController\List\ReadableListView.cs" />
-    <Compile Include="ViewController\List\ReadableListViewController.cs" />
-    <Compile Include="ViewController\List\ReadableListView.designer.cs">
-      <DependentUpon>ReadableListView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewController\List\ReadableListViewController.designer.cs">
-      <DependentUpon>ReadableListViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ReadableModel.cs" />
-    <Compile Include="ViewController\List\ReadableListViewDataSource.cs" />
     <Compile Include="Utils\PathDropHandler.cs" />
     <Compile Include="ViewControllers\TableView\ReadableTableViewController.cs" />
     <Compile Include="ViewControllers\TableView\ReadableTableViewController.designer.cs">
       <DependentUpon>ReadableTableViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\NSTableViewExtensions.cs" />
-    <Compile Include="ViewControllers\TableView\ReadableTextTableCellView.cs" />
     <Compile Include="Extensions\NSLayoutConstraintExtensions.cs" />
-    <Compile Include="ViewControllers\TableView\ReadableTagsTableCellView.cs" />
     <Compile Include="ViewControllers\PathDropHelperView.cs" />
     <Compile Include="ViewControllers\PathDropHelperView.designer.cs">
       <DependentUpon>PathDropHelperView.cs</DependentUpon>
@@ -177,21 +152,13 @@
     <Compile Include="AggregatedEvents\MenuImportFileRequestCompleted.cs" />
     <Compile Include="AggregatedEvents\MenuImportDirectoryRequest.cs" />
     <Compile Include="AggregatedEvents\MenuImportDirectoryRequestCompleted.cs" />
-    <Compile Include="Model\OutLine.cs" />
     <Compile Include="ViewControllers\Outline\ReadableOutlineViewController.cs" />
-    <Compile Include="ViewControllers\Outline\Model\Group.cs" />
-    <Compile Include="ViewControllers\Outline\Model\Subject.cs" />
     <Compile Include="ViewControllers\Outline\ReadableOutlineDataSource.cs" />
     <Compile Include="ViewControllers\Outline\ReadableOutlineViewController.designer.cs">
       <DependentUpon>ReadableOutlineViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\NSDateExtensions.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewControllers\Outline\ReadableOutlineDataCellView.cs" />
-    <Compile Include="ViewControllers\Outline\ReadableOutlineDataCellView.designer.cs">
-      <DependentUpon>ReadableOutlineDataCellView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewControllers\Outline\Model\LibraryItem.cs" />
     <Compile Include="AggregatedEvents\FilterForLibraryItemRequest.cs" />
     <Compile Include="AggregatedEvents\FilterForSubjectRequest.cs" />
     <Compile Include="ViewControllers\CoverView\ReadableCoverViewController.cs" />
@@ -203,12 +170,32 @@
     <Compile Include="ViewControllers\ReadableMainEmbedViewController.designer.cs">
       <DependentUpon>ReadableMainEmbedViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\CoverView\Cells\ReadableCoverItemView.cs" />
+    <Compile Include="ViewControllers\CoverView\Cells\ReadableCoverItemView.designer.cs">
+      <DependentUpon>ReadableCoverItemView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\CoverView\Cells\ReadableCoverItemViewController.cs" />
+    <Compile Include="ViewControllers\CoverView\Cells\ReadableCoverItemViewController.designer.cs">
+      <DependentUpon>ReadableCoverItemViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\CoverView\ReadableCoverViewPresenter.cs" />
+    <Compile Include="Data\DataRepository.cs" />
+    <Compile Include="Data\Model\OutlineGroup.cs" />
+    <Compile Include="Data\Model\OutlineItemLibrary.cs" />
+    <Compile Include="Data\Model\OutlineItemSubject.cs" />
+    <Compile Include="Data\Model\ReadableModel.cs" />
+    <Compile Include="ViewControllers\TableView\Cells\ReadableTagsTableCellView.cs" />
+    <Compile Include="ViewControllers\TableView\Cells\ReadableTextTableCellView.cs" />
+    <Compile Include="ViewControllers\TableView\ReadableTableViewPresenter.cs" />
+    <Compile Include="ViewControllers\Outline\Cells\ReadableOutlineDataCellView.cs" />
+    <Compile Include="ViewControllers\Outline\Cells\ReadableOutlineDataCellView.designer.cs">
+      <DependentUpon>ReadableOutlineDataCellView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\ReadableListInteractor.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
-    <InterfaceDefinition Include="ViewController\ReadableView.xib" />
-    <InterfaceDefinition Include="ViewController\ReadableItemViewController.xib" />
-    <InterfaceDefinition Include="ViewController\List\ReadableListView.xib" />
+    <InterfaceDefinition Include="ViewControllers\CoverView\Cells\ReadableCoverItemViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\common\Readables.Common\Readables.Common.csproj">

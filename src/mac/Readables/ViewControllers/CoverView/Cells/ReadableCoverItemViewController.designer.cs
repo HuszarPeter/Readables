@@ -7,19 +7,19 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace Readables.ViewController
+namespace Readables.ViewControllers.CoverView.Cells
 {
-	[Register ("ReadableViewController")]
-	partial class ReadableViewController
+    [Register (nameof(ReadableCoverItemViewController))]
+	partial class ReadableCoverItemViewController
 	{
 		[Outlet]
-		AppKit.NSCollectionView collectionView { get; set; }
+		AppKit.NSBox selectionBorder { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (collectionView != null) {
-				collectionView.Dispose ();
-				collectionView = null;
+			if (selectionBorder != null) {
+				selectionBorder.Dispose ();
+				selectionBorder = null;
 			}
 		}
 	}

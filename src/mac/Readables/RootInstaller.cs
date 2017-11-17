@@ -7,6 +7,7 @@ using Castle.Windsor;
 using Foundation;
 using Readables.Common;
 using Readables.Common.Extensions;
+using Readables.Data;
 
 namespace Readables
 {
@@ -31,6 +32,12 @@ namespace Readables
                 .BasedOn(typeof(IFileFormatImage<>))
                 .WithService.FromInterface()
                 .LifestyleTransient()
+            );
+
+            container.Register(
+                Component.For<IDataRepository>()
+                .ImplementedBy<DataRepository>()
+                .LifestyleSingleton()
             );
 
             var startup = container.ResolveAll<IStartup>();
