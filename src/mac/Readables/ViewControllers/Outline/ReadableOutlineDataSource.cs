@@ -3,8 +3,8 @@ using System.Linq;
 using AppKit;
 using Foundation;
 using Readables.Common;
-using Readables.DataLayer;
 using Readables.Data.Model;
+using Readables.Data;
 
 namespace Readables.ViewControllers.Outline
 {
@@ -15,19 +15,19 @@ namespace Readables.ViewControllers.Outline
         readonly OutlineGroup SubjectsGroup;
         readonly OutlineGroup[] groups;
 
-        readonly IReadableRepository readableRepository;
+        readonly IDataRepository dataRepository;
 
-        public ReadableOutlineDataSource() : this(IOC.Resolve<IReadableRepository>())
+        public ReadableOutlineDataSource() : this(IOC.Resolve<IDataRepository>())
         {
         }
 
-        public ReadableOutlineDataSource(IReadableRepository readableRepository)
+        public ReadableOutlineDataSource(IDataRepository dataRepository)
         {
             this.LibraryGroup = new OutlineGroup { Text = "Library" };
             this.SubjectsGroup = new OutlineGroup { Text = "Subjects" };
 
             this.groups = new[] { LibraryGroup, SubjectsGroup };
-            this.readableRepository = readableRepository ?? throw new ArgumentNullException(nameof(readableRepository));
+            this.dataRepository = dataRepository ?? throw new ArgumentNullException(nameof(dataRepository));
 
             LoadData();
         }
@@ -44,25 +44,15 @@ namespace Readables.ViewControllers.Outline
 
         private void LoadData()
         {
-            var readables = this.readableRepository.GetAllReadables();
 
-            var allLibraryItem = new[] { new OutlineItemLibrary { Text = "All readables", Count = readables.Count } };
+            var allLibraryItem = new[] { new OutlineItemLibrary { Text = "All readables", Count = this.dataRepository.LibraryItems.Sum(i => i.Count), Filter = string.Empty } };
 
             this.LibraryGroup.Items = allLibraryItem.Union(
-                readables
-                .SelectMany(r => r.Files)
-                .Where(file => !String.IsNullOrEmpty(file.Format))
-                .GroupBy(file => file.Format, StringComparer.InvariantCultureIgnoreCase)
-                .Select(x => new OutlineItemLibrary { Text = x.Key, Count = x.Count() })
-                .OrderBy(format => format.Text))
+                this.dataRepository.LibraryItems)
                 .ToArray();
 
-            this.SubjectsGroup.Items = readables
-                .SelectMany(r => r.Subjects)
-                .Where(subj => !string.IsNullOrEmpty(subj))
-                .GroupBy(subj => subj, StringComparer.InvariantCultureIgnoreCase)
-                .Select(grp => new OutlineItemSubject { Text = grp.Key, Count = grp.Count() })
-                .OrderBy(s => s.Text)
+            this.SubjectsGroup.Items = this.dataRepository
+                .Subjects
                 .ToArray();
 
         }

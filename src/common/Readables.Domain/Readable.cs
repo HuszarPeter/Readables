@@ -11,10 +11,34 @@ namespace Readables.Domain
         public string Author { get; set; }
 
         public string Description { get; set; }
+       
+        string[] subjects = { };
+        public string[] Subjects
+        {
+            get
+            {
+                return subjects;
+            }
 
-        public string[] Subjects { get; set; }
+            set
+            {
+                subjects = value;
+            }
+        }
 
-        public ReadableFile[] Files { get; set; }
+        ReadableFile[] files = { };
+        public ReadableFile[] Files
+        {
+            get
+            {
+                return files;
+            }
+
+            set
+            {
+                files = value;
+            }
+        }
 
         public string Series { get; set; }
 
@@ -26,7 +50,19 @@ namespace Readables.Domain
 
         public int PublishedYear { get; set; }
 
-        public ReadableMetadata[] Metadata { get; set; }
+        ReadableMetadata[] metadata = { };
+        public ReadableMetadata[] Metadata
+        {
+            get
+            {
+                return metadata;
+            }
+
+            set
+            {
+                metadata = value;
+            }
+        }
 
         public DateTime DateAdded { get; set; }
 

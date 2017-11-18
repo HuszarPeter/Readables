@@ -3,18 +3,17 @@ using AppKit;
 using Foundation;
 using Readables.AggregatedEvents;
 using Readables.Common;
-using Readables.Import.AggregatedEvents;
 using Readables.Data.Model;
 using Readables.ViewControllers.Outline;
 using Readables.ViewControllers.Outline.Cells;
+using Readables.Data;
 
 namespace Readables.ViewControllers
 {
-    public partial class ReadableOutlineViewController : NSViewController, INSOutlineViewDelegate,
-    IListenTo<FileImportedEvent>, 
-    IListenTo<PathImportedEvent>
+    public partial class ReadableOutlineViewController : NSViewController, INSOutlineViewDelegate, IListenTo<DataRepositoryChanged>
     {
         private IEventAggregator eventAggregator;
+        private IDataRepository dataRepository;
 
         // Called when created from unmanaged code
         public ReadableOutlineViewController(IntPtr handle) : base(handle)
@@ -33,6 +32,7 @@ namespace Readables.ViewControllers
         void Initialize()
         {
             this.eventAggregator = IOC.Resolve<IEventAggregator>();
+            this.dataRepository = IOC.Resolve<IDataRepository>();
             this.eventAggregator.AddListener(this);
         }
 
@@ -78,23 +78,22 @@ namespace Readables.ViewControllers
             var itemAtRow = this.outlineView.ItemAtRow((nint)index.FirstIndex);
             if (itemAtRow is OutlineItemLibrary item) 
             {
-                this.eventAggregator.SendMessage(new FilterForLibraryItemRequest{ Format = item.Text });
+                this.dataRepository.SetLibraryItemFilter(item);
             }
             if (itemAtRow is OutlineItemSubject subject) 
             {
-                this.eventAggregator.SendMessage(new FilterForSubjectRequest { Subject = subject.Text });
+                this.dataRepository.SetSubjectFilter(subject);
             }
 
         }
 
-        public void HandleMessage(PathImportedEvent message)
+        public void HandleMessage(DataRepositoryChanged message)
         {
-            ((ReadableOutlineDataSource)this.outlineView.DataSource).ReloadData();
-            this.outlineView.ReloadData();
-        }
-
-        public void HandleMessage(FileImportedEvent message)
-        {
+            if (message.Reason == DataRepositoryChangeReason.Filter)
+            {
+                return;
+            }
+            
             ((ReadableOutlineDataSource)this.outlineView.DataSource).ReloadData();
             this.outlineView.ReloadData();
         }

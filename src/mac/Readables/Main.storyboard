@@ -579,17 +579,17 @@
             <objects>
                 <viewController id="1vm-bw-yC8" sceneMemberID="viewController">
                     <view key="view" id="IyK-pc-tob">
-                        <rect key="frame" x="0.0" y="0.0" width="897" height="508"/>
+                        <rect key="frame" x="0.0" y="0.0" width="897" height="652"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <visualEffectView wantsLayer="YES" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="mub-xP-VNy">
-                                <rect key="frame" x="0.0" y="471" width="897" height="37"/>
+                                <rect key="frame" x="0.0" y="615" width="897" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="15D-nK-RLL"/>
                                 </constraints>
                             </visualEffectView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="ERc-JO-ui5">
-                                <rect key="frame" x="0.0" y="0.0" width="897" height="471"/>
+                                <rect key="frame" x="0.0" y="0.0" width="897" height="615"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="0Id-u2-Kd9"/>
                                 </constraints>
@@ -611,7 +611,7 @@
                 </viewController>
                 <customObject id="bkv-EB-uZl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="885.5" y="627"/>
+            <point key="canvasLocation" x="1326.5" y="317"/>
         </scene>
         <!--Readable Outline View Controller-->
         <scene sceneID="m7B-XQ-r6y">

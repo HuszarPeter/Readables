@@ -8,5 +8,7 @@ namespace Readables.Data.Model
         public string Text;
 
         public int Count;
+
+        public string Filter;
     }
 }

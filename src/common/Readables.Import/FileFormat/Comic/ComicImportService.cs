@@ -13,7 +13,7 @@ namespace Readables.Import.FileFormat.Comic
         public Readable Import(string fileName)
         {
             var fileInfo = new FileInfo(fileName);
-            return new Readable()
+            return new Readable
             {
                 Title = fileInfo.Name,
                 Author = "",
@@ -27,7 +27,7 @@ namespace Readables.Import.FileFormat.Comic
                     }
                 },
                 Description = "",
-                DateAdded = System.DateTime.Now
+                DateAdded = System.DateTime.Now,
             };
         }
     }
