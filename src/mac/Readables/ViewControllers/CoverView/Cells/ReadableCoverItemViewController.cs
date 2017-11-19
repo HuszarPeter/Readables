@@ -72,6 +72,7 @@ namespace Readables.ViewControllers.CoverView.Cells
             set
             {
                 base.Selected = value;
+                View.IsSelected = value;
             }
         }
     }

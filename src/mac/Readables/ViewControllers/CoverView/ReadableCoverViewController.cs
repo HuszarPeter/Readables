@@ -65,6 +65,12 @@ namespace Readables.ViewControllers.CoverView
             return this.presenter.PresentItemView(collectionView, readable, indexPath);
         }
 
+        [Export("collectionView:viewForSupplementaryElementOfKind:atIndexPath:")]
+        public NSView GetView(NSCollectionView collectionView, NSString kind, NSIndexPath indexPath)
+        {
+            return null;
+        }
+
         public void HandleMessage(DataRepositoryChanged message)
         {
             this.collectionView.ReloadData();

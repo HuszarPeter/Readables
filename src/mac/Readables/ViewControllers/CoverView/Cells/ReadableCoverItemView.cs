@@ -1,4 +1,5 @@
 ﻿using System;
+using AppKit;
 using Foundation;
 using Readables.Domain;
 using Readables.Extensions;
@@ -51,5 +52,20 @@ namespace Readables.ViewControllers.CoverView.Cells
                 DidChangeValue(nameof(Readable));
             }
         }
+
+        bool selected;
+        public bool IsSelected
+        {
+            get
+            {
+                return selected;
+            }
+            set
+            {
+                selected = value;
+                this.selectionBox.BorderColor = (selected) ? NSColor.AlternateSelectedControl : NSColor.Clear;
+            }
+        }
+
     }
 }

@@ -9,7 +9,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ReadableItemViewController">
             <connections>
-                <outlet property="selectionBorder" destination="wDY-po-tY2" id="5Bp-VZ-V3C"/>
                 <outlet property="view" destination="4" id="17"/>
             </connections>
         </customObject>
@@ -52,17 +51,29 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <box boxType="custom" borderWidth="2" translatesAutoresizingMaskIntoConstraints="NO" id="Xwb-o1-vWZ">
+                                <rect key="frame" x="4" y="41" width="158" height="158"/>
+                                <view key="contentView" id="jFJ-QE-oaP">
+                                    <rect key="frame" x="2" y="2" width="154" height="154"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <color key="borderColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </box>
                         </subviews>
                         <constraints>
                             <constraint firstItem="yPB-sx-2zf" firstAttribute="top" secondItem="Awg-e9-pOm" secondAttribute="bottom" constant="8" id="2YW-Hr-B8u"/>
                             <constraint firstItem="yPB-sx-2zf" firstAttribute="leading" secondItem="CBn-Gp-pPc" secondAttribute="leading" constant="4" id="33r-vf-96p"/>
                             <constraint firstAttribute="trailing" secondItem="yPB-sx-2zf" secondAttribute="trailing" constant="4" id="BoU-qr-Z2d"/>
+                            <constraint firstItem="Xwb-o1-vWZ" firstAttribute="top" secondItem="Awg-e9-pOm" secondAttribute="top" constant="-4" id="FBX-Hm-lWO"/>
                             <constraint firstAttribute="bottom" secondItem="jhG-jc-fo4" secondAttribute="bottom" constant="4" id="FIY-lf-2gU"/>
+                            <constraint firstItem="Xwb-o1-vWZ" firstAttribute="leading" secondItem="Awg-e9-pOm" secondAttribute="leading" constant="-4" id="MVs-A5-99w"/>
                             <constraint firstAttribute="trailing" secondItem="jhG-jc-fo4" secondAttribute="trailing" constant="4" id="Nn4-kG-2S5"/>
+                            <constraint firstItem="Xwb-o1-vWZ" firstAttribute="trailing" secondItem="Awg-e9-pOm" secondAttribute="trailing" constant="4" id="PL4-kP-OjA"/>
                             <constraint firstItem="jhG-jc-fo4" firstAttribute="top" secondItem="yPB-sx-2zf" secondAttribute="bottom" constant="2" id="Z8c-Ad-XSb"/>
                             <constraint firstItem="Awg-e9-pOm" firstAttribute="leading" secondItem="CBn-Gp-pPc" secondAttribute="leading" constant="8" id="cNe-qH-Nfx"/>
                             <constraint firstAttribute="trailing" secondItem="Awg-e9-pOm" secondAttribute="trailing" constant="8" id="iTj-v8-zmj"/>
                             <constraint firstItem="jhG-jc-fo4" firstAttribute="leading" secondItem="CBn-Gp-pPc" secondAttribute="leading" constant="4" id="jiW-Dp-ajx"/>
+                            <constraint firstItem="Xwb-o1-vWZ" firstAttribute="bottom" secondItem="Awg-e9-pOm" secondAttribute="bottom" constant="4" id="kKe-No-TGX"/>
                             <constraint firstItem="Awg-e9-pOm" firstAttribute="top" secondItem="CBn-Gp-pPc" secondAttribute="top" constant="8" id="rki-VF-Mea"/>
                         </constraints>
                     </view>
@@ -78,6 +89,7 @@
             <connections>
                 <outlet property="authorLabel" destination="jhG-jc-fo4" id="wit-tb-tXw"/>
                 <outlet property="coverImage" destination="Awg-e9-pOm" id="LAm-kN-4EM"/>
+                <outlet property="selectionBox" destination="Xwb-o1-vWZ" id="ho7-gC-OCH"/>
                 <outlet property="titleLabel" destination="yPB-sx-2zf" id="oRc-BS-fRS"/>
             </connections>
             <point key="canvasLocation" x="29.5" y="249"/>

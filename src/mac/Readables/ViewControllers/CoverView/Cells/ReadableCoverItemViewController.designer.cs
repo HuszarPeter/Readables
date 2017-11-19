@@ -9,18 +9,12 @@ using System.CodeDom.Compiler;
 
 namespace Readables.ViewControllers.CoverView.Cells
 {
-    [Register (nameof(ReadableCoverItemViewController))]
+	[Register ("ReadableCoverItemViewController")]
 	partial class ReadableCoverItemViewController
 	{
-		[Outlet]
-		AppKit.NSBox selectionBorder { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (selectionBorder != null) {
-				selectionBorder.Dispose ();
-				selectionBorder = null;
-			}
 		}
 	}
 }

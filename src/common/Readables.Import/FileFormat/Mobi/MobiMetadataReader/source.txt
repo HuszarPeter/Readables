@@ -1,0 +1,5 @@
+﻿Spec here:
+https://wiki.mobileread.com/wiki/MOBI
+
+implementation based on this:
+https://www.mobileread.com/forums/showthread.php?p=1927698

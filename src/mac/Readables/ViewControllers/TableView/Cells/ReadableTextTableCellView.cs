@@ -80,12 +80,12 @@ namespace Readables.ViewControllers.TableView.Cells
             {
                 case ReadableFieldView.Title:
                     {
-                        this.textField.StringValue = this.readable.Title;
+                        this.textField.StringValue = $"{this.readable.Title}";
                         break;
                     }
                 case ReadableFieldView.Author:
                     {
-                        this.textField.StringValue = this.readable.Author;
+                        this.textField.StringValue = $"{this.readable.Author}";
                         break;
                     }
                 case ReadableFieldView.DateAdded:

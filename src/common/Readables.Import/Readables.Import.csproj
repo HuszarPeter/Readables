@@ -50,6 +50,12 @@
     <Reference Include="VersOne.Epub">
       <HintPath>..\..\..\packages\VersOne.Epub.2.0.1\lib\netstandard2.0\VersOne.Epub.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetZip">
+      <HintPath>..\..\..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpCompress">
+      <HintPath>..\..\..\packages\p3-sharpcompress.0.10.5.2\lib\net40\SharpCompress.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Installer.cs" />
@@ -85,6 +91,7 @@
     <None Include="packages.config" />
     <None Include="Metadata\Moly\Sample\SearchByTitle.txt" />
     <None Include="Metadata\Moly\Sample\BookDetails.txt" />
+    <None Include="FileFormat\Mobi\MobiMetadataReader\source.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Readables.Domain\Readables.Domain.csproj">
