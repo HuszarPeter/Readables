@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Readables.Import</RootNamespace>
     <AssemblyName>Readables.Import</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,25 +31,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.1.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Castle.Core.4.1.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Castle.Windsor.4.0.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\..\packages\Castle.Core.4.1.1\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="VersOne.Epub">
-      <HintPath>..\..\..\packages\VersOne.Epub.2.0.1\lib\netstandard2.0\VersOne.Epub.dll</HintPath>
     </Reference>
     <Reference Include="DotNetZip">
       <HintPath>..\..\..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
@@ -88,6 +89,7 @@
     <Compile Include="IFileFormatImageManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Metadata\Moly\Sample\SearchByTitle.txt" />
     <None Include="Metadata\Moly\Sample\BookDetails.txt" />
@@ -106,17 +108,11 @@
       <Project>{F53E477A-0336-4435-8382-BBD6797E41D1}</Project>
       <Name>Readables.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VersOne.Epub\VersOne.Epub.csproj">
+      <Project>{b9deb080-7ffb-47e3-9571-c14243712420}</Project>
+      <Name>VersOne.Epub</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AggregatedEvents\" />
-    <Folder Include="Exceptions\" />
-    <Folder Include="FileFormat\" />
-    <Folder Include="FileFormat\Mobi\" />
-    <Folder Include="FileFormat\Comic\" />
-    <Folder Include="FileFormat\ePub\" />
-    <Folder Include="Metadata\" />
-    <Folder Include="Metadata\Moly\" />
-    <Folder Include="Metadata\Moly\Sample\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

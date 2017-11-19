@@ -24,8 +24,6 @@ namespace Readables
         public MainWindow()
         {
             InitializeComponent();
-
-            var anotherContainer = IOC.Container;
         }
     }
 }

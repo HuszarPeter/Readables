@@ -1,4 +1,5 @@
 ﻿using Readables.Common;
+using Readables.Import;
 using System;
 using System.Windows;
 
@@ -11,11 +12,10 @@ namespace Readables
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var container = IOC.Container;
-            var a  = container.Resolve<Import.IReadableImportService>();
+            IOC.Container.Install(new RootInstaller());
 
-            var readable = a.Import(@"C:\Users\Huszar Peter\Dropbox\Books\Neuromanc - William Gibson.epub");
-            Console.WriteLine(readable.Title);
+            var importService = IOC.Resolve<IImportService>();
+            importService.ImportFile(@"C:\Users\Huszar Peter\Dropbox\Books\Neuromanc - William Gibson.epub");
             base.OnStartup(e);
         }
     }

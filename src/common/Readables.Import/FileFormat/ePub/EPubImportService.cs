@@ -17,7 +17,6 @@ namespace Readables.Import.FileFormat.ePub
         {
             try
             {
-
                 var book = EpubReader.ReadBook(fileName);
                 if (book == null)
                 {
@@ -61,15 +60,17 @@ namespace Readables.Import.FileFormat.ePub
     }
 
     public static class EpubMetadataExtensions {
-        public static string GetSeries(this EpubMetadata meta) {
+        public static string GetSeries(this EpubMetadata meta)
+        {
             var item = meta.MetaItems.FirstOrDefault(m => m.Name == "calibre:series");
             return item != null ? item.Content : "";
         }
 
-        public static string GetSeriesIndex(this EpubMetadata meta) {
+        public static string GetSeriesIndex(this EpubMetadata meta)
+        {
             var item = meta.MetaItems.FirstOrDefault(m => m.Name == "calibre:series_index");
             var result = item != null ? item.Content : "";
-            if(double.TryParse(result, out double x))
+            if (double.TryParse(result, out double x))
             {
                 return $"{(int)x}";
             }
