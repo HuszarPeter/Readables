@@ -96,6 +96,9 @@ namespace Readables
             this.SetViewMode(viewMode);
         }
 
-
+        partial void onSearchValueChanged(NSSearchField sender)
+        {
+            this.eventAggregator.SendMessage(new FilterForStringRequest { FilterValue = sender.StringValue });
+        }
     }
 }

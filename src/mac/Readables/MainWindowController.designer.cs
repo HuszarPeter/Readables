@@ -15,6 +15,9 @@ namespace Readables
 		[Outlet]
 		AppKit.NSSegmentedControl changeView { get; set; }
 
+		[Action ("onSearchValueChanged:")]
+		partial void onSearchValueChanged (AppKit.NSSearchField sender);
+
 		[Action ("onViewChanged:")]
 		partial void onViewChanged (AppKit.NSSegmentedControl sender);
 		

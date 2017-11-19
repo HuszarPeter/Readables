@@ -24,6 +24,14 @@
                         <rect key="frame" x="1" y="1" width="166" height="203"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <box wantsLayer="YES" boxType="custom" borderWidth="0.0" cornerRadius="6" translatesAutoresizingMaskIntoConstraints="NO" id="Xwb-o1-vWZ">
+                                <rect key="frame" x="4" y="41" width="158" height="158"/>
+                                <view key="contentView" id="jFJ-QE-oaP">
+                                    <rect key="frame" x="0.0" y="0.0" width="158" height="158"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <color key="borderColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </box>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Awg-e9-pOm">
                                 <rect key="frame" x="8" y="45" width="150" height="150"/>
                                 <constraints>
@@ -51,14 +59,6 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <box boxType="custom" borderWidth="2" translatesAutoresizingMaskIntoConstraints="NO" id="Xwb-o1-vWZ">
-                                <rect key="frame" x="4" y="41" width="158" height="158"/>
-                                <view key="contentView" id="jFJ-QE-oaP">
-                                    <rect key="frame" x="2" y="2" width="154" height="154"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <color key="borderColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            </box>
                         </subviews>
                         <constraints>
                             <constraint firstItem="yPB-sx-2zf" firstAttribute="top" secondItem="Awg-e9-pOm" secondAttribute="bottom" constant="8" id="2YW-Hr-B8u"/>

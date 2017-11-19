@@ -6,14 +6,20 @@ using Readables.Common;
 using Readables.Data.Model;
 using Readables.DataLayer;
 using Readables.Domain;
+using Readables.Extensions;
 using Readables.Import.AggregatedEvents;
 
 namespace Readables.Data
 {
     public class DataRepository: IDataRepository,
     IListenTo<FileImportedEvent>,
-    IListenTo<PathImportedEvent>
+    IListenTo<PathImportedEvent>,
+    IListenTo<FilterForStringRequest>
     {
+        private string FilterString;
+        private OutlineItemLibrary LibraryFilter;
+        private OutlineItemSubject SubjectFilter;
+
         readonly IEventAggregator eventAggregator;
         readonly IReadableRepository readableRepository;
         private List<Readable> readables;
@@ -65,21 +71,22 @@ namespace Readables.Data
 
         public void SetLibraryItemFilter(OutlineItemLibrary item)
         {
+            this.LibraryFilter = item;
+            this.SubjectFilter = null;
             this.MakeVisibleReadables();
-            if (!string.IsNullOrEmpty(item.Filter))
-            {
-                this.visibleReadables = visibleReadables
-                    .Where(r => r.Files.Any(file => file.Format == item.Text));
-            }
-            this.eventAggregator.SendMessage(new DataRepositoryChanged { Reason = DataRepositoryChangeReason.Filter });
         }
 
         public void SetSubjectFilter(OutlineItemSubject subject)
         {
+            this.LibraryFilter = null;
+            this.SubjectFilter = subject;
             this.MakeVisibleReadables();
-            this.visibleReadables = this.visibleReadables
-                .Where(r => r.Subjects.Any(subj => subj == subject.Text));
-            this.eventAggregator.SendMessage(new DataRepositoryChanged { Reason = DataRepositoryChangeReason.Filter });
+        }
+
+        public void SetFilterString(string filter)
+        {
+            this.FilterString = filter;
+            this.MakeVisibleReadables();
         }
 
         private void FetchItems()
@@ -96,6 +103,22 @@ namespace Readables.Data
         {
             this.visibleReadables = readables
                 .OrderBy(r => r.Title);
+            if (!string.IsNullOrEmpty(this.FilterString))
+            {
+                this.visibleReadables = this.visibleReadables
+                    .Where(r => r.Title.Contains(this.FilterString, StringComparison.InvariantCultureIgnoreCase));
+            }
+            if (this.LibraryFilter != null && !string.IsNullOrEmpty(this.LibraryFilter.Filter))
+            {
+                this.visibleReadables = visibleReadables
+                    .Where(r => r.Files.Any(file => file.Format == this.LibraryFilter.Filter));
+            }
+            if(this.SubjectFilter != null)
+            {
+				this.visibleReadables = this.visibleReadables
+                    .Where(r => r.Subjects.Any(subj => subj == this.SubjectFilter.Text));
+            }
+            this.eventAggregator.SendMessage(new DataRepositoryChanged { Reason = DataRepositoryChangeReason.Filter });
         }
 
         #region Aggregated event handling
@@ -111,6 +134,11 @@ namespace Readables.Data
             this.readables = null;
             this.visibleReadables = null;
             this.eventAggregator.SendMessage(new DataRepositoryChanged { Reason = DataRepositoryChangeReason.Import });
+        }
+
+        public void HandleMessage(FilterForStringRequest message)
+        {
+            this.SetFilterString(message.FilterValue);
         }
         #endregion
     }

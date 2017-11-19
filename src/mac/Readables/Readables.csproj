@@ -196,6 +196,8 @@
     <Compile Include="Extensions\ReadableExtensions.cs" />
     <Compile Include="AggregatedEvents\DataRepositoryChanged.cs" />
     <Compile Include="Data\IDataRepository.cs" />
+    <Compile Include="AggregatedEvents\FilterForStringRequest.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

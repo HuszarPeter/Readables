@@ -15,5 +15,7 @@ namespace Readables.Data
         void SetLibraryItemFilter(OutlineItemLibrary item);
 
         void SetSubjectFilter(OutlineItemSubject subject);
+
+        void SetFilterString(string filter);
     }
 }

@@ -63,7 +63,8 @@ namespace Readables.ViewControllers.CoverView.Cells
             set
             {
                 selected = value;
-                this.selectionBox.BorderColor = (selected) ? NSColor.AlternateSelectedControl : NSColor.Clear;
+                this.selectionBox.Layer.BackgroundColor = (selected) ? NSColor.AlternateSelectedControl.CGColor : NSColor.Clear.CGColor;
+                //this.selectionBox.BorderColor = (selected) ? NSColor.AlternateSelectedControl : NSColor.Clear;
             }
         }
 
