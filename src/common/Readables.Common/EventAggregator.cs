@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using Readables.Common.Extensions;
+using NLog;
 
 namespace Readables.Common
 {
 	public class EventAggregator : IEventAggregator
 	{
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private readonly List<IListenTo> listeners = new List<IListenTo>();
 
         public void AddListener(IListenTo listener)
@@ -26,6 +28,7 @@ namespace Readables.Common
             this.listeners.CopyTo(copy);
 
 			copy.CallOnEach<IListenTo<T>>((obj) => {
+                logger.Trace($"Send message {message.GetType().Name} to {obj.GetType().Name}");
 				obj.HandleMessage(message);
 			});
 		}

@@ -8,7 +8,8 @@ namespace Readables.Common
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IEventAggregator>().ImplementedBy<EventAggregator>().LifestyleSingleton());
+            container.Register(
+                Component.For<IEventAggregator>().ImplementedBy<EventAggregator>().LifestyleSingleton());
         }
     }
 }

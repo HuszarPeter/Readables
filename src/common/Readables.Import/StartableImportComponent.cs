@@ -1,16 +1,18 @@
-﻿using System;
-using System.Linq;
-using Castle.Core;
+﻿using Castle.Core;
+using NLog;
 using Readables.Common;
 using Readables.Common.Extensions;
 using Readables.Import.AggregatedEvents;
+using System;
 
 namespace Readables.Import
 {
-    public class StartableImportComponent : IStartable,
-    IListenTo<FilesImportRequestEvent>,
-    IListenTo<FoldersImportRequestEvent>
+    public class StartableImportComponent : 
+        IStartable,
+        IListenTo<FilesImportRequestEvent>,
+        IListenTo<FoldersImportRequestEvent>
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         readonly IEventAggregator eventAggregator;
         readonly IImportService importService;
 
@@ -36,6 +38,7 @@ namespace Readables.Import
             message.Files
                    .ForEach(fileUri =>
                    {
+                       logger.Info($"File import request: {fileUri}");
                        this.importService.ImportFile(fileUri);
                    });
         }
@@ -45,6 +48,7 @@ namespace Readables.Import
             message.Folders
                    .ForEach(folderUri =>
                    {
+                       logger.Info($"Folder import request: {folderUri}");
                        this.importService.ImportFolder(folderUri);
                    });
         }

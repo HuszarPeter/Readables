@@ -8,16 +8,17 @@ using Readables.Common;
 using Readables.Import.AggregatedEvents;
 using Readables.Import.Exceptions;
 using Readables.Import.FileFormat;
+using NLog;
 
 namespace Readables.Import
 {
     public class ImportService : IImportService
     {
-        readonly IEnumerable<IReadableImportService> importServices;
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
+        readonly IEnumerable<IReadableImportService> importServices;
         readonly IDataContext dataContext;
         readonly IReadableRepository readableRepository;
-
         readonly IEventAggregator eventAggregator;
 
         public ImportService(IDataContext dataContext, IEventAggregator eventAggregator, IEnumerable<IReadableImportService> importServices, IReadableRepository readableRepository)
@@ -75,7 +76,6 @@ namespace Readables.Import
             this.eventAggregator.SendMessage(new PathImportedEvent { 
                 NumberOfFailedImport = failed, 
                 NumberOfSuccessfullyImported = success});
-
         }
 
         public void ImportFile(Uri file) 
@@ -119,11 +119,15 @@ namespace Readables.Import
 
         private Readable ReadFile(IReadableImportService importService, string fileName)
         {
+            logger.Trace("Import file");
+            logger.Trace($" ImportService {importService.GetType().FullName}");
+            logger.Trace($" FileName : {fileName}");
             return importService.Import(fileName);
         }
 
         private void StoreReadable(Readable readable)
         {
+            logger.Trace($"Store readable: {readable.Title}");
             this.readableRepository.UpsertReadable(readable);
         }
     }

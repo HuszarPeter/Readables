@@ -1,5 +1,7 @@
-﻿using Readables.Common;
+﻿using NLog;
+using Readables.Common;
 using Readables.Import;
+using Readables.Import.AggregatedEvents;
 using System;
 using System.Windows;
 
@@ -10,12 +12,21 @@ namespace Readables
     /// </summary>
     public partial class App : Application
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            IOC.Container.Install(new RootInstaller());
+            logger.Info("Application started");
 
-            var importService = IOC.Resolve<IImportService>();
-            importService.ImportFile(@"C:\Users\Huszar Peter\Dropbox\Books\Neuromanc - William Gibson.epub");
+            IOC.Container.Install(new RootInstaller());
+            var evtAggregator = IOC.Resolve<IEventAggregator>();
+            evtAggregator.SendMessage(new FilesImportRequestEvent
+            {
+                Files = new[] {
+                    new Uri(@"C:\Users\Huszar Peter\Dropbox\Books\Neuromanc - William Gibson.epub")
+                }
+            });
+
             base.OnStartup(e);
         }
     }

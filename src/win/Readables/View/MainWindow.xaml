@@ -3,13 +3,48 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Readables"
+        xmlns:utils="clr-namespace:Readables.Utils"
+        xmlns:outline="clr-namespace:Readables.View.Outline"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="600" 
         Width="800"
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome CaptionHeight="30"
+                                  GlassFrameThickness="5"
+                                  NonClientFrameEdges="None"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+    <Grid utils:GridUtils.Columns="2*||5*" 
+          utils:GridUtils.Rows="|*">
+        <Border Grid.RowSpan="2"
+                Background="AliceBlue"/>
+
+        <outline:ReadableOutlineView Grid.Column="0"
+                                     Grid.Row="1"/>
         
+        <Border Grid.Column="0"
+                Grid.Row="0"
+                Grid.ColumnSpan="3"
+                Padding="10"
+                Background="Transparent">
+            <TextBlock Text="Readables"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"/>
+        </Border>
+        <GridSplitter Grid.Column="1" 
+                      Grid.Row="0" 
+                      Grid.RowSpan="2" 
+                      HorizontalAlignment="Stretch" 
+                      BorderThickness="0"
+                      Background="Transparent"
+                      FocusVisualStyle="{x:Null}"
+                      Width="3" />
     </Grid>
 </Window>
