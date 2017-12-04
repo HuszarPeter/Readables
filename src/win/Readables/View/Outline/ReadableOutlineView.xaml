@@ -11,43 +11,71 @@
     <UserControl.Resources>
         <conv:HalfValueConverter x:Key="halfConverter" />
     </UserControl.Resources>
-    <Grid Margin="5,0">
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+    <Grid Margin="5,0"
+          utils:GridUtils.Rows="|*">
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding Outline}">
+            <TreeView ItemsSource="{Binding Outline}"
+                      Background="Transparent"
+                      BorderThickness="0">
+                <!--<TreeView.Template>
+                    <ControlTemplate TargetType="TreeView">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </TreeView.Template>-->
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="IsExpanded" Value="True" />
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Items}">
+                        <HierarchicalDataTemplate.ItemContainerStyle>
+                            <Style TargetType="TreeViewItem">
+                                <Setter Property="BorderBrush" Value="Red" />
+                                <Setter Property="BorderThickness" Value="1" />
+                            </Style>
+                        </HierarchicalDataTemplate.ItemContainerStyle>
+                        
+                        <TextBlock Text="{Binding Text}" /> <!--Group level-->
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Text}" /> <!-- item level-->
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>                
+            </TreeView>
+            <!--<ItemsControl ItemsSource="{Binding Outline}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Expander Header="{Binding Text}"
-                                  IsExpanded="{Binding IsExpanded}">
-                            <ItemsControl ItemsSource="{Binding Items}">
-                                <ItemsControl.ItemTemplate>
+                                  IsExpanded="{Binding IsExpanded}"
+                                  Style="{StaticResource OutlineExpander}">
+                            <ListBox BorderThickness="0"
+                                     Background="Transparent"
+                                     SelectionMode="Single"
+                                     ItemsSource="{Binding Items}"
+                                     SelectedItem="{Binding DataContext.SelectedOutlineItem, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid utils:GridUtils.Columns="*|auto"
-                                              Margin="20,1,0,1">
-                                            <TextBlock Text="{Binding Text}"
-                                                       Grid.Column="0"/>
-                                            <Label Grid.Column="1" 
-                                                   Content="{Binding Count}">
-                                                <Label.Template>
-                                                    <ControlTemplate TargetType="Label">
-                                                        <Border CornerRadius="{Binding Path=ActualHeight, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource halfConverter}}"
-                                                                Padding="10,3"
-                                                                Background="LightGray"
-                                                                MinWidth="{Binding Path=ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                >
-                                                            <ContentPresenter HorizontalAlignment="Center" />
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Label.Template>
-                                            </Label>
+                                        <Grid utils:GridUtils.Columns="*|auto">
+                                            <TextBlock Text="{Binding Text}" />
+                                            <Label Grid.Column="1"
+                                                   Content="{Binding Count}"
+                                                   Style="{StaticResource BadgeLabel}" />
                                         </Grid>
                                     </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            
                         </Expander>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            </ItemsControl>-->
         </ScrollViewer>
     </Grid>
 </UserControl>

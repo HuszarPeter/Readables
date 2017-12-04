@@ -23,7 +23,9 @@ namespace Readables
             evtAggregator.SendMessage(new FilesImportRequestEvent
             {
                 Files = new[] {
-                    new Uri(@"C:\Users\Huszar Peter\Dropbox\Books\Neuromanc - William Gibson.epub")
+                    new Uri(@"C:\Users\Huszar Peter\Dropbox\Books\Neuromanc - William Gibson.epub"),
+                    new Uri(@"C:\Users\Huszar Peter\Dropbox\Books\Korbacs - Clive Baker.epub"),
+                    new Uri(@"C:\Users\Huszar Peter\Dropbox\Books\James Corey - Babilon hamvai.epub")
                 }
             });
 

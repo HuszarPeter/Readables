@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Readables.Utils;
+using System.Collections.Generic;
+using System.Windows.Input;
+using System;
 
 namespace Readables.ViewModel.Outline
 {
@@ -20,6 +23,23 @@ namespace Readables.ViewModel.Outline
             }
         }
 
+
+        private OutlineItemBase selectedOutlineItem;
+        public OutlineItemBase SelectedOutlineItem
+        {
+            get
+            {
+                return selectedOutlineItem;
+            }
+            set
+            {
+                Console.WriteLine($"Prev: {selectedOutlineItem}, new: {value}");
+                OnPropertyChanging(nameof(SelectedOutlineItem));
+                selectedOutlineItem = value;
+                OnPropertyChanged(nameof(SelectedOutlineItem));
+            }
+        }
+
         public OutlineViewModel()
         {
             outline = new[]
@@ -35,13 +55,15 @@ namespace Readables.ViewModel.Outline
                         },
                         new OutlineLibraryItem
                         {
-                            Text = "Books"
+                            Text = "Books",
+                            Count = 1
                         }
                     }
                 },
                 new OutlineGroup
                 {
                     Text = "Subjects",
+                    IsExpanded = true,
                     Items = new[] {
                         new OutlineSubject
                         {
@@ -57,13 +79,6 @@ namespace Readables.ViewModel.Outline
                 }
             };
         }
-    }
-
-    public abstract class OutlineItemBase
-    {
-        public string Text { get; set; }
-
-        public int Count { get; set; }
     }
 
     public class OutlineLibraryItem: OutlineItemBase

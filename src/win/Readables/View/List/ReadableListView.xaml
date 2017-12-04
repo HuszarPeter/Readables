@@ -6,7 +6,19 @@
              xmlns:local="clr-namespace:Readables.View.List"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Background="Olive">
-            
+    <Grid>
+        <ListView BorderBrush="Transparent"
+                  BorderThickness="0"
+                  ItemsSource="{Binding Readables}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True">
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" />
+                    <GridViewColumn Header="Author" DisplayMemberBinding="{Binding Author}" />
+                    <GridViewColumn Header="Series" DisplayMemberBinding="{Binding ., Converter={StaticResource seriesFormatter}}" />
+                    <GridViewColumn Header="Formats" />
+                    <GridViewColumn Header="Date added" DisplayMemberBinding="{Binding DateAdded}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

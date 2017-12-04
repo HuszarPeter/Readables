@@ -5,46 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:utils="clr-namespace:Readables.Utils"
         xmlns:outline="clr-namespace:Readables.View.Outline"
+        xmlns:commands="clr-namespace:Readables.Commands"
+        xmlns:view="clr-namespace:Readables.View"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:viewmodel="clr-namespace:Readables.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="Readables" 
         Height="600" 
         Width="800"
         WindowStartupLocation="CenterScreen">
-    <Window.Style>
-        <Style TargetType="{x:Type Window}">
-            <Setter Property="WindowChrome.WindowChrome">
-                <Setter.Value>
-                    <WindowChrome CaptionHeight="30"
-                                  GlassFrameThickness="5"
-                                  NonClientFrameEdges="None"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Style>
     <Grid utils:GridUtils.Columns="2*||5*" 
-          utils:GridUtils.Rows="|*">
-        <Border Grid.RowSpan="2"
-                Background="AliceBlue"/>
+          utils:GridUtils.Rows="||*"
+          ShowGridLines="False">
+        <Border Grid.RowSpan="3"
+                Background="{StaticResource UtilityAreaBackgroundBrush}"/>
 
         <outline:ReadableOutlineView Grid.Column="0"
-                                     Grid.Row="1"/>
-        
-        <Border Grid.Column="0"
-                Grid.Row="0"
-                Grid.ColumnSpan="3"
-                Padding="10"
-                Background="Transparent">
-            <TextBlock Text="Readables"
-                       VerticalAlignment="Center"
-                       FontWeight="Bold"/>
-        </Border>
+                                     Grid.Row="2"/>
+
+        <ContentControl Grid.Column="2"
+                        Grid.Row="2"
+                        Content="{Binding ContentMode, Converter={StaticResource contentModeConverter}}" />
+
+
         <GridSplitter Grid.Column="1" 
-                      Grid.Row="0" 
+                      Grid.Row="1" 
                       Grid.RowSpan="2" 
                       HorizontalAlignment="Stretch" 
-                      BorderThickness="0"
+                      BorderThickness="1,0,0,0"
+                      BorderBrush="{StaticResource UtilityAreaBorderBrush}"
                       Background="Transparent"
                       FocusVisualStyle="{x:Null}"
                       Width="3" />
+
+        <Menu Grid.Column="0"
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              Background="{StaticResource UtilityAreaBackgroundBrush}"
+              Padding="3"
+              BorderBrush="{StaticResource UtilityAreaBorderBrush}"
+              BorderThickness="0,0,0,1">
+            <MenuItem Header="File">
+                <MenuItem Header="Import ..." Command="commands:ReadableCommands.ImportFileCommand"/>
+                <MenuItem Header="Import folder ..." Command="commands:ReadableCommands.ImportFolderCommand"/>
+                <Separator/>
+                <MenuItem Header="Exit" Command="commands:ReadableCommands.ExitCommand" />
+            </MenuItem>
+        </Menu>
+
+        <Border Grid.Column="2"
+                Background="{StaticResource UtilityAreaBackgroundBrush}"
+                BorderBrush="{StaticResource UtilityAreaBorderBrush}"
+                BorderThickness="0,0,0,1">
+            <Grid utils:GridUtils.Columns="*||">
+                <ListView Grid.Column="1"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          BorderBrush="Transparent"
+                          SelectionMode="Single"
+                          SelectedItem="{Binding ContentMode}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <viewmodel:ContentMode>List</viewmodel:ContentMode>
+                    <viewmodel:ContentMode>Cover</viewmodel:ContentMode>
+                </ListView>
+
+                <TextBox Grid.Column="2"
+                         Margin="4"
+                         Text="" 
+                         Width="140"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

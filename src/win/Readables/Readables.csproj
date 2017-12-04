@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon256.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.1.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Castle.Core.4.1.1\lib\net45\Castle.Core.dll</HintPath>
@@ -68,13 +71,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AggregatedEvents\ImportFileRequested.cs" />
+    <Compile Include="AggregatedEvents\ImportFolderRequested.cs" />
+    <Compile Include="Commands\ReadableCommands.cs" />
     <Compile Include="Converters\HalfValueConverter.cs" />
+    <Compile Include="Converters\ReadableContentConverter.cs" />
+    <Compile Include="Converters\ReadableSeriesFormatter.cs" />
+    <Compile Include="Utils\ActionCommand.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\List\ListViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Outline\OutlineGroup.cs" />
+    <Compile Include="ViewModel\Outline\OutlineItemBase.cs" />
     <Compile Include="ViewModel\Outline\OutlineViewModel.cs" />
+    <Compile Include="ViewModel\ContentMode.cs" />
+    <Compile Include="View\Cover\ReadableCoverView.xaml.cs">
+      <DependentUpon>ReadableCoverView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Outline\ReadableOutlineView.xaml.cs">
       <DependentUpon>ReadableOutlineView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Styles\ColorsDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ControlStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ConverterDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Cover\ReadableCoverView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\List\ReadableListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,7 +179,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\Cover\" />
+    <Folder Include="ViewModel\ReadableContent\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon256.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
