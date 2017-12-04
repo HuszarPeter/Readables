@@ -4,6 +4,7 @@ using Foundation;
 using Readables.AggregatedEvents;
 using Readables.Common;
 using Readables.Extensions;
+using Readables.UI.Model;
 using Readables.ViewControllers.TableView;
 
 namespace Readables.ViewControllers
@@ -35,7 +36,6 @@ namespace Readables.ViewControllers
 
 		public void HandleMessage(ViewChangeRequest message)
 		{
-            //Console.WriteLine($"Change embeded VC to: {message.ViewMode}");
             switch (message.ViewMode)
             {
                 case ViewMode.List:
@@ -44,14 +44,9 @@ namespace Readables.ViewControllers
                         break;
                     }
 
-                case ViewMode.Collection:
+                case ViewMode.Cover:
                     {
                         ShowCoverList();
-                        break;
-                    }
-                case ViewMode.ListWithDetails:
-                    {
-                        Console.WriteLine("Show detailed");
                         break;
                     }
             }

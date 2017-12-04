@@ -4,6 +4,7 @@ using AppKit;
 using Foundation;
 using Readables.AggregatedEvents;
 using Readables.Common;
+using Readables.UI.AggregatedEvents;
 using Readables.ViewControllers.CoverView.Cells;
 
 namespace Readables.ViewControllers.CoverView

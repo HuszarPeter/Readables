@@ -4,6 +4,9 @@ using Foundation;
 using AppKit;
 using Readables.Common;
 using Readables.AggregatedEvents;
+using AutoMapper;
+using Readables.UI.Model;
+using Readables.UI.AggregatedEvents;
 
 namespace Readables
 {
@@ -29,7 +32,7 @@ namespace Readables
             this.eventAggregator = IOC.Resolve<IEventAggregator>();
             this.eventAggregator.AddListener(this);
 
-            SetViewMode(ViewMode.Collection);
+            SetViewMode(ViewMode.Cover);
         }
 
         public new MainWindow Window
@@ -86,13 +89,13 @@ namespace Readables
 		#endregion
 
         private void SetViewMode(ViewMode viewMode) {
-            this.changeView.SetSelected(true, viewMode.AsNint());
+            this.changeView.SetSelected(true, Mapper.Map<nint>(viewMode));
             this.eventAggregator.SendMessage(new ViewChangeRequest { ViewMode = viewMode });
         }
 
         partial void onViewChanged(NSSegmentedControl sender)
         {
-            var viewMode = sender.SelectedSegment.AsViewMode();
+            var viewMode = Mapper.Map<UI.Model.ViewMode>(sender.SelectedSegment);
             this.SetViewMode(viewMode);
         }
 

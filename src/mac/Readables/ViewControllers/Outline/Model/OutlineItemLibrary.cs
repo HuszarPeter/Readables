@@ -1,7 +1,7 @@
 ﻿using System;
 using Foundation;
 
-namespace Readables.Data.Model
+namespace Readables.ViewControllers.Outline.Model
 {
     public class OutlineItemLibrary: NSObject
     {

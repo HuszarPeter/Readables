@@ -1,6 +1,6 @@
 ﻿using Readables.Common;
 
-namespace Readables.AggregatedEvents
+namespace Readables.UI.AggregatedEvents
 {
     public class DataRepositoryChanged: IEvent
     {

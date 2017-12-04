@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Readables.Common;
-using Readables.Data;
 using Readables.Domain;
+using Readables.UI;
 
 namespace Readables.ViewControllers
 {
     public class ReadableListInteractor
     {
-        readonly IDataRepository dataRepository;
+        readonly IReadableDataStore dataRepository;
 
         public IEnumerable<Readable> Readables
         {
@@ -20,7 +20,7 @@ namespace Readables.ViewControllers
 
         public ReadableListInteractor()
         {
-            this.dataRepository = IOC.Resolve<IDataRepository>() ?? throw new NullReferenceException(nameof(IDataRepository));
+            this.dataRepository = IOC.Resolve<IReadableDataStore>() ?? throw new NullReferenceException(nameof(IReadableDataStore));
         }
     }
 }

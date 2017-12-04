@@ -1,19 +1,20 @@
 using System;
 using AppKit;
 using Foundation;
-using Readables.AggregatedEvents;
 using Readables.Common;
-using Readables.Data.Model;
 using Readables.ViewControllers.Outline;
 using Readables.ViewControllers.Outline.Cells;
-using Readables.Data;
+using Readables.UI.AggregatedEvents;
+using Readables.UI;
+using AutoMapper;
+using Readables.ViewControllers.Outline.Model;
 
 namespace Readables.ViewControllers
 {
     public partial class ReadableOutlineViewController : NSViewController, INSOutlineViewDelegate, IListenTo<DataRepositoryChanged>
     {
         private IEventAggregator eventAggregator;
-        private IDataRepository dataRepository;
+        private IReadableDataStore dataRepository;
 
         // Called when created from unmanaged code
         public ReadableOutlineViewController(IntPtr handle) : base(handle)
@@ -32,7 +33,7 @@ namespace Readables.ViewControllers
         void Initialize()
         {
             this.eventAggregator = IOC.Resolve<IEventAggregator>();
-            this.dataRepository = IOC.Resolve<IDataRepository>();
+            this.dataRepository = IOC.Resolve<IReadableDataStore>();
             this.eventAggregator.AddListener(this);
         }
 
@@ -78,11 +79,11 @@ namespace Readables.ViewControllers
             var itemAtRow = this.outlineView.ItemAtRow((nint)index.FirstIndex);
             if (itemAtRow is OutlineItemLibrary item) 
             {
-                this.dataRepository.SetLibraryItemFilter(item);
+                this.dataRepository.SetLibraryItemFilter(Mapper.Map<UI.Model.UtilityItemLibrary>(item));
             }
             if (itemAtRow is OutlineItemSubject subject) 
             {
-                this.dataRepository.SetSubjectFilter(subject);
+                this.dataRepository.SetSubjectFilter(Mapper.Map<UI.Model.UtilityItemSubject>(subject));
             }
 
         }

@@ -1,4 +1,5 @@
 using AppKit;
+using AutoMapper;
 using Foundation;
 using Readables.AggregatedEvents;
 using Readables.Common;
@@ -16,6 +17,8 @@ namespace Readables
 
         public AppDelegate()
         {
+            Mapper.Initialize(cfg => cfg.AddProfile<MapperProfile>());
+
             var container = IOC.Container;
             container.Install(new RootInstaller());
 

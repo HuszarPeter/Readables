@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Readables.Extensions
+namespace Readables.Common.Extensions
 {
     public static class StringExtensions
     {

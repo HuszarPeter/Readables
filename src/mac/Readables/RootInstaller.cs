@@ -1,13 +1,10 @@
-﻿using System;
-using System.Linq;
-using AppKit;
+﻿using AppKit;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Foundation;
 using Readables.Common;
 using Readables.Common.Extensions;
-using Readables.Data;
 
 namespace Readables
 {
@@ -18,8 +15,9 @@ namespace Readables
             container
                 .Install(new Common.Installer())
                 .Install(new DataLayer.Installer())
-                .Install(new Import.Installer());
-
+                .Install(new Import.Installer())
+                .Install(new UI.Installer());
+            
             container.Register(
                 Classes.FromAssemblyInThisApplication()
                 .BasedOn<IStartup>()
@@ -34,11 +32,11 @@ namespace Readables
                 .LifestyleTransient()
             );
 
-            container.Register(
-                Component.For<IDataRepository>()
-                .ImplementedBy<DataRepository>()
-                .LifestyleSingleton()
-            );
+            //container.Register(
+                //Component.For<IReadableDataStore>()
+                //.ImplementedBy<ReadableDataStore>()
+                //.LifestyleSingleton()
+            //);
 
             var startup = container.ResolveAll<IStartup>();
             startup.ForEach(s => s.RunAtStartup());

@@ -57,7 +57,11 @@
     <Reference Include="Castle.Core">
       <HintPath>..\..\..\packages\Castle.Core.4.1.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\packages\AutoMapper.6.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json" />
@@ -114,9 +118,9 @@
     <Folder Include="ViewControllers\CoverView\Cells\" />
     <Folder Include="Assets.xcassets\cover.imageset\" />
     <Folder Include="Data\" />
-    <Folder Include="Data\Model\" />
     <Folder Include="ViewControllers\TableView\Cells\" />
     <Folder Include="ViewControllers\Outline\Cells\" />
+    <Folder Include="ViewControllers\Outline\Model\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -181,11 +185,6 @@
       <DependentUpon>ReadableCoverItemViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewControllers\CoverView\ReadableCoverViewPresenter.cs" />
-    <Compile Include="Data\DataRepository.cs" />
-    <Compile Include="Data\Model\OutlineGroup.cs" />
-    <Compile Include="Data\Model\OutlineItemLibrary.cs" />
-    <Compile Include="Data\Model\OutlineItemSubject.cs" />
-    <Compile Include="Data\Model\ReadableModel.cs" />
     <Compile Include="ViewControllers\TableView\Cells\ReadableTagsTableCellView.cs" />
     <Compile Include="ViewControllers\TableView\Cells\ReadableTextTableCellView.cs" />
     <Compile Include="ViewControllers\TableView\ReadableTableViewPresenter.cs" />
@@ -195,10 +194,10 @@
     </Compile>
     <Compile Include="ViewControllers\ReadableListInteractor.cs" />
     <Compile Include="Extensions\ReadableExtensions.cs" />
-    <Compile Include="AggregatedEvents\DataRepositoryChanged.cs" />
-    <Compile Include="Data\IDataRepository.cs" />
-    <Compile Include="AggregatedEvents\FilterForStringRequest.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="MapperProfile.cs" />
+    <Compile Include="ViewControllers\Outline\Model\OutlineGroup.cs" />
+    <Compile Include="ViewControllers\Outline\Model\OutlineItemLibrary.cs" />
+    <Compile Include="ViewControllers\Outline\Model\OutlineItemSubject.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
@@ -209,17 +208,21 @@
       <Project>{F53E477A-0336-4435-8382-BBD6797E41D1}</Project>
       <Name>Readables.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\common\Readables.DataLayer\Readables.DataLayer.csproj">
-      <Project>{C241E606-EEB4-442C-A2C7-98411C2E6236}</Project>
-      <Name>Readables.DataLayer</Name>
+    <ProjectReference Include="..\..\common\Readables.Import\Readables.Import.csproj">
+      <Project>{5BE5643C-297E-4F44-ACBB-29DBD4BD0A92}</Project>
+      <Name>Readables.Import</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\common\Readables.UI\Readables.UI.csproj">
+      <Project>{0A3EF2CC-7645-49C5-AEEE-FAA9B8010228}</Project>
+      <Name>Readables.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\common\Readables.Domain\Readables.Domain.csproj">
       <Project>{C3AC8E36-A0D2-4368-8C85-675B11E4903F}</Project>
       <Name>Readables.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\common\Readables.Import\Readables.Import.csproj">
-      <Project>{5BE5643C-297E-4F44-ACBB-29DBD4BD0A92}</Project>
-      <Name>Readables.Import</Name>
+    <ProjectReference Include="..\..\common\Readables.DataLayer\Readables.DataLayer.csproj">
+      <Project>{C241E606-EEB4-442C-A2C7-98411C2E6236}</Project>
+      <Name>Readables.DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />

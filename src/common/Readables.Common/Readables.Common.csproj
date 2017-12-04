@@ -60,6 +60,7 @@
     <Compile Include="EventAggregator.cs" />
     <Compile Include="Installer.cs" />
     <Compile Include="IStartup.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

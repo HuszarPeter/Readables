@@ -1,42 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Readables.AggregatedEvents;
 using Readables.Common;
 using Readables.Common.Extensions;
-using Readables.Data.Model;
 using Readables.DataLayer;
 using Readables.Domain;
-using Readables.Extensions;
 using Readables.Import.AggregatedEvents;
 using Readables.UI.AggregatedEvents;
+using Readables.UI.Model;
+using NLog;
 
-namespace Readables.Data
+namespace Readables.UI
 {
-    public class DataRepository: IDataRepository,
+    public class ReadableDataStore: IReadableDataStore, 
     IListenTo<FileImportedEvent>,
     IListenTo<PathImportedEvent>,
     IListenTo<FilterForStringRequest>
     {
-        private string FilterString;
-        private OutlineItemLibrary LibraryFilter;
-        private OutlineItemSubject SubjectFilter;
-
-        readonly IEventAggregator eventAggregator;
-        readonly IReadableRepository readableRepository;
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private IEnumerable<Readable> visibleReadables;
+        private readonly IEventAggregator eventAggregator;
+        private readonly IReadableRepository readableRepository;
         private List<Readable> readables;
 
-        private IEnumerable<Readable> visibleReadables;
+		private string FilterString;
+        private UtilityItemLibrary LibraryFilter;
+        private UtilityItemSubject SubjectFilter;
+
         public IEnumerable<Readable> VisibleReadables
         {
             get
             {
                 this.FetchItems();
-                return visibleReadables;    
+                return visibleReadables;
             }
         }
 
-        public IEnumerable<OutlineItemSubject> Subjects
+        public IEnumerable<UtilityItemSubject> Subjects
         {
             get
             {
@@ -45,12 +45,12 @@ namespace Readables.Data
                     .SelectMany(r => r.Subjects)
                     .Where(subject => !String.IsNullOrEmpty(subject))
                     .GroupBy(subject => subject, StringComparer.InvariantCultureIgnoreCase)
-                    .Select(grp => new OutlineItemSubject { Text = grp.Key, Count = grp.Count() })
+                    .Select(grp => new UtilityItemSubject { Text = grp.Key, Count = grp.Count() })
                     .OrderBy(item => item.Text);
             }
         }
 
-        public IEnumerable<OutlineItemLibrary> LibraryItems 
+        public IEnumerable<UtilityItemLibrary> LibraryItems
         {
             get
             {
@@ -58,38 +58,18 @@ namespace Readables.Data
                 return readables
                     .SelectMany(r => r.Files)
                     .GroupBy(file => file.Format, StringComparer.InvariantCultureIgnoreCase)
-                    .Select(grp => new OutlineItemLibrary { Text = grp.Key, Count = grp.Count(), Filter = grp.Key });
+                    .Select(grp => new UtilityItemLibrary { Text = grp.Key, Count = grp.Count(), Filter = grp.Key });
+
             }
         }
 
-
-        public DataRepository(IEventAggregator eventAggregator, IReadableRepository readableRepository)
-        {
+        public ReadableDataStore(IEventAggregator eventAggregator, IReadableRepository readableRepository)
+		{
             this.eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator));
             this.readableRepository = readableRepository ?? throw new ArgumentNullException(nameof(readableRepository));
 
             this.eventAggregator.AddListener(this);
-        }
-
-        public void SetLibraryItemFilter(OutlineItemLibrary item)
-        {
-            this.LibraryFilter = item;
-            this.SubjectFilter = null;
-            this.MakeVisibleReadables();
-        }
-
-        public void SetSubjectFilter(OutlineItemSubject subject)
-        {
-            this.LibraryFilter = null;
-            this.SubjectFilter = subject;
-            this.MakeVisibleReadables();
-        }
-
-        public void SetFilterString(string filter)
-        {
-            this.FilterString = filter;
-            this.MakeVisibleReadables();
-        }
+		}
 
         private void FetchItems()
         {
@@ -116,33 +96,52 @@ namespace Readables.Data
                 this.visibleReadables = visibleReadables
                     .Where(r => r.Files.Any(file => file.Format == this.LibraryFilter.Filter));
             }
-            if(this.SubjectFilter != null)
+            if (this.SubjectFilter != null)
             {
-				this.visibleReadables = this.visibleReadables
+                this.visibleReadables = this.visibleReadables
                     .Where(r => r.Subjects.Any(subj => subj == this.SubjectFilter.Text));
             }
             this.eventAggregator.SendMessage(new DataRepositoryChanged { Reason = DataRepositoryChangeReason.Filter });
         }
 
-        #region Aggregated event handling
         public void HandleMessage(FileImportedEvent message)
         {
             this.readables = null;
-            this.visibleReadables = null;
-            this.eventAggregator.SendMessage(new DataRepositoryChanged { Reason = DataRepositoryChangeReason.Import});
+            this.eventAggregator.SendMessage(new DataRepositoryChanged { Reason = DataRepositoryChangeReason.Import });
         }
 
         public void HandleMessage(PathImportedEvent message)
         {
             this.readables = null;
-            this.visibleReadables = null;
             this.eventAggregator.SendMessage(new DataRepositoryChanged { Reason = DataRepositoryChangeReason.Import });
+        }
+
+        public void SetLibraryItemFilter(UtilityItemLibrary item)
+        {
+            logger.Trace($"Set library item filter to: '{item.Filter}'");
+            this.LibraryFilter = item;
+            this.SubjectFilter = null;
+            this.MakeVisibleReadables();
+        }
+
+        public void SetSubjectFilter(UtilityItemSubject subject)
+        {
+            logger.Trace($"Set subject filter to: '{subject.Text}'");
+            this.LibraryFilter = null;
+            this.SubjectFilter = subject;
+            this.MakeVisibleReadables();
+        }
+
+        public void SetFilterString(string filter)
+        {
+            logger.Trace($"Set filter to: '{filter}'");
+            this.FilterString = filter;
+            this.MakeVisibleReadables();
         }
 
         public void HandleMessage(FilterForStringRequest message)
         {
             this.SetFilterString(message.FilterValue);
         }
-        #endregion
     }
 }

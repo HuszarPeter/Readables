@@ -3,8 +3,9 @@ using System.Linq;
 using AppKit;
 using Foundation;
 using Readables.Common;
-using Readables.Data.Model;
-using Readables.Data;
+using Readables.UI;
+using AutoMapper;
+using Readables.ViewControllers.Outline.Model;
 
 namespace Readables.ViewControllers.Outline
 {
@@ -15,13 +16,13 @@ namespace Readables.ViewControllers.Outline
         readonly OutlineGroup SubjectsGroup;
         readonly OutlineGroup[] groups;
 
-        readonly IDataRepository dataRepository;
+        readonly IReadableDataStore dataRepository;
 
-        public ReadableOutlineDataSource() : this(IOC.Resolve<IDataRepository>())
+        public ReadableOutlineDataSource() : this(IOC.Resolve<IReadableDataStore>())
         {
         }
 
-        public ReadableOutlineDataSource(IDataRepository dataRepository)
+        public ReadableOutlineDataSource(IReadableDataStore dataRepository)
         {
             this.LibraryGroup = new OutlineGroup { Text = "Library" };
             this.SubjectsGroup = new OutlineGroup { Text = "Subjects" };
@@ -44,17 +45,14 @@ namespace Readables.ViewControllers.Outline
 
         private void LoadData()
         {
-
             var allLibraryItem = new[] { new OutlineItemLibrary { Text = "All readables", Count = this.dataRepository.LibraryItems.Sum(i => i.Count), Filter = string.Empty } };
 
             this.LibraryGroup.Items = allLibraryItem.Union(
-                this.dataRepository.LibraryItems)
+                this.dataRepository.LibraryItems.Select(i => Mapper.Map<OutlineItemLibrary>(i)))
                 .ToArray();
 
-            this.SubjectsGroup.Items = this.dataRepository
-                .Subjects
+            this.SubjectsGroup.Items = this.dataRepository.Subjects.Select(s => Mapper.Map<OutlineItemSubject>(s))
                 .ToArray();
-
         }
 
         [Export("outlineView:isGroupItem:")]
