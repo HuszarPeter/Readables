@@ -18,7 +18,8 @@ namespace Readables
             container
                 .Install(new Common.Installer())
                 .Install(new DataLayer.Installer())
-                .Install(new Import.Installer());
+                .Install(new Import.Installer())
+                .Install(new UI.Installer());
 
             container.Register(
                 Classes.FromAssemblyInThisApplication()

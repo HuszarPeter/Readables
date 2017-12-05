@@ -1,7 +1,9 @@
-﻿using Readables.Utils;
-using System.Collections.Generic;
-using System.Windows.Input;
+﻿using AutoMapper;
+using Readables.Common;
+using Readables.UI;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Readables.ViewModel.Outline
 {
@@ -25,6 +27,8 @@ namespace Readables.ViewModel.Outline
 
 
         private OutlineItemBase selectedOutlineItem;
+        private readonly IReadableDataStore readableDataStore;
+
         public OutlineItemBase SelectedOutlineItem
         {
             get
@@ -42,50 +46,23 @@ namespace Readables.ViewModel.Outline
 
         public OutlineViewModel()
         {
+            this.readableDataStore = IOC.Resolve<IReadableDataStore>();
+
             outline = new[]
             {
                 new OutlineGroup
                 {
                     Text = "Library",
                     IsExpanded = true,
-                    Items = new[] {
-                        new OutlineLibraryItem
-                        {
-                            Text = "Comics"
-                        },
-                        new OutlineLibraryItem
-                        {
-                            Text = "Books",
-                            Count = 1
-                        }
-                    }
+                    Items = this.readableDataStore.LibraryItems.Select(i => Mapper.Map<OutlineLibraryItem>(i)).ToArray()
                 },
                 new OutlineGroup
                 {
                     Text = "Subjects",
                     IsExpanded = true,
-                    Items = new[] {
-                        new OutlineSubject
-                        {
-                            Text = "subj 1",
-                            Count = 10000
-                        },
-                        new OutlineSubject
-                        {
-                            Text = "subj2",
-                            Count = 3
-                        }
-                    }
+                    Items = this.readableDataStore.Subjects.Select(s => Mapper.Map<OutlineSubject>(s)).ToArray()
                 }
             };
         }
-    }
-
-    public class OutlineLibraryItem: OutlineItemBase
-    {
-    }
-
-    public class OutlineSubject: OutlineItemBase
-    {
     }
 }

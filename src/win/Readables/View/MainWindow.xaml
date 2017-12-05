@@ -6,14 +6,17 @@
         xmlns:utils="clr-namespace:Readables.Utils"
         xmlns:outline="clr-namespace:Readables.View.Outline"
         xmlns:commands="clr-namespace:Readables.Commands"
-        xmlns:view="clr-namespace:Readables.View"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
-        xmlns:viewmodel="clr-namespace:Readables.ViewModel"
+        xmlns:vm="clr-namespace:Readables.ViewModel"
+        xmlns:model="clr-namespace:Readables.UI.Model;assembly=Readables.UI"
+        xmlns:list="clr-namespace:Readables.ViewModel.List"
         mc:Ignorable="d"
         Title="Readables" 
         Height="600" 
         Width="800"
         WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
     <Grid utils:GridUtils.Columns="2*||5*" 
           utils:GridUtils.Rows="||*"
           ShowGridLines="False">
@@ -21,7 +24,7 @@
                 Background="{StaticResource UtilityAreaBackgroundBrush}"/>
 
         <outline:ReadableOutlineView Grid.Column="0"
-                                     Grid.Row="2"/>
+                                     Grid.Row="2" />
 
         <ContentControl Grid.Column="2"
                         Grid.Row="2"
@@ -70,8 +73,8 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
 
-                    <viewmodel:ContentMode>List</viewmodel:ContentMode>
-                    <viewmodel:ContentMode>Cover</viewmodel:ContentMode>
+                    <model:ViewMode>List</model:ViewMode>
+                    <model:ViewMode>Cover</model:ViewMode>
                 </ListView>
 
                 <TextBox Grid.Column="2"

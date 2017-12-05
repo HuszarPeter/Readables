@@ -11,17 +11,10 @@ namespace Readables
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private MainViewModel viewModel;
-
         public MainWindow()
         {
             InitializeComponent();
             logger.Info($"Initialized {this.GetType().ToString()}");
-            Loaded += (s, e) =>
-            {
-                viewModel = new MainViewModel();
-                this.DataContext = viewModel;
-            };
         }
     }
 }

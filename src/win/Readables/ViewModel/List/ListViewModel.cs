@@ -1,29 +1,19 @@
 ﻿using Readables.Common;
-using Readables.DataLayer;
 using Readables.Domain;
-using System;
+using Readables.UI;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Readables.ViewModel.List
 {
     public class ListViewModel: BaseViewModel
     {
-        private readonly IReadableRepository readableRepository;
+        private readonly IReadableDataStore readableDataStore;
 
-        public IEnumerable<Readable> Readables
-        {
-            get
-            {
-                return readableRepository.GetAllReadables();
-            }
-        }
+        public IEnumerable<Readable> Readables => this.readableDataStore.VisibleReadables;
 
         public ListViewModel()
         {
-            this.readableRepository = IOC.Resolve<IReadableRepository>();
+            this.readableDataStore = IOC.Resolve<IReadableDataStore>(); ;
         }
     }
 }

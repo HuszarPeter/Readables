@@ -6,8 +6,12 @@
              xmlns:local="clr-namespace:Readables.View.Outline"
              xmlns:utils="clr-namespace:Readables.Utils"
              xmlns:conv="clr-namespace:Readables.Converters"
+             xmlns:vm="clr-namespace:Readables.ViewModel.Outline"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <vm:OutlineViewModel />
+    </UserControl.DataContext>
     <UserControl.Resources>
         <conv:HalfValueConverter x:Key="halfConverter" />
     </UserControl.Resources>
@@ -19,11 +23,6 @@
             <TreeView ItemsSource="{Binding Outline}"
                       Background="Transparent"
                       BorderThickness="0">
-                <!--<TreeView.Template>
-                    <ControlTemplate TargetType="TreeView">
-                        <ContentPresenter />
-                    </ControlTemplate>
-                </TreeView.Template>-->
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="TreeViewItem">
                         <Setter Property="BorderBrush" Value="Black" />
@@ -49,33 +48,6 @@
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>                
             </TreeView>
-            <!--<ItemsControl ItemsSource="{Binding Outline}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Expander Header="{Binding Text}"
-                                  IsExpanded="{Binding IsExpanded}"
-                                  Style="{StaticResource OutlineExpander}">
-                            <ListBox BorderThickness="0"
-                                     Background="Transparent"
-                                     SelectionMode="Single"
-                                     ItemsSource="{Binding Items}"
-                                     SelectedItem="{Binding DataContext.SelectedOutlineItem, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid utils:GridUtils.Columns="*|auto">
-                                            <TextBlock Text="{Binding Text}" />
-                                            <Label Grid.Column="1"
-                                                   Content="{Binding Count}"
-                                                   Style="{StaticResource BadgeLabel}" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                            
-                        </Expander>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>-->
         </ScrollViewer>
     </Grid>
 </UserControl>

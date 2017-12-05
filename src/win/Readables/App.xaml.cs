@@ -1,6 +1,6 @@
-﻿using NLog;
+﻿using AutoMapper;
+using NLog;
 using Readables.Common;
-using Readables.Import;
 using Readables.Import.AggregatedEvents;
 using System;
 using System.Windows;
@@ -17,6 +17,8 @@ namespace Readables
         protected override void OnStartup(StartupEventArgs e)
         {
             logger.Info("Application started");
+
+            Mapper.Initialize(cfg => cfg.AddProfile<MapperProfile>());
 
             IOC.Container.Install(new RootInstaller());
             var evtAggregator = IOC.Resolve<IEventAggregator>();

@@ -1,6 +1,6 @@
-﻿using Readables.View.Cover;
+﻿using Readables.UI.Model;
+using Readables.View.Cover;
 using Readables.View.List;
-using Readables.ViewModel;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -11,13 +11,13 @@ namespace Readables.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is ContentMode cm)
+            if(value is ViewMode cm)
             {
                 switch (cm)
                 {
-                    case ContentMode.List:
+                    case ViewMode.List:
                         return new ReadableListView();
-                    case ContentMode.Cover:
+                    case ViewMode.Cover:
                         return new ReadableCoverView();
                 }
             }

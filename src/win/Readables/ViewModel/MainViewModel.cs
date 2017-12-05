@@ -1,9 +1,11 @@
-﻿namespace Readables.ViewModel
+﻿using Readables.UI.Model;
+
+namespace Readables.ViewModel
 {
     public class MainViewModel: BaseViewModel
     {
-        private ContentMode contentMode;
-        public ContentMode ContentMode
+        private ViewMode contentMode;
+        public ViewMode ContentMode
         {
             get
             {
@@ -15,6 +17,6 @@
                 contentMode = value;
                 OnPropertyChanged(nameof(ContentMode));
             }
-        }       
+        }
     }
 }

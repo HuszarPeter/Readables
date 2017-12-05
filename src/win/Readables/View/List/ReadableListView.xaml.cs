@@ -8,16 +8,9 @@ namespace Readables.View.List
     /// </summary>
     public partial class ReadableListView : UserControl
     {
-
-        private ListViewModel viewModel;
         public ReadableListView()
         {
             InitializeComponent();
-            Loaded += (s, e) =>
-            {
-                viewModel = new ListViewModel();
-                DataContext = viewModel;
-            };
         }
     }
 }
