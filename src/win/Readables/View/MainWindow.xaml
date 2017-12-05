@@ -9,6 +9,7 @@
         xmlns:vm="clr-namespace:Readables.ViewModel"
         xmlns:model="clr-namespace:Readables.UI.Model;assembly=Readables.UI"
         xmlns:list="clr-namespace:Readables.ViewModel.List"
+        xmlns:controls="clr-namespace:Readables.Controls"
         mc:Ignorable="d"
         Title="Readables" 
         Height="600" 
@@ -77,10 +78,10 @@
                     <model:ViewMode>Cover</model:ViewMode>
                 </ListView>
 
-                <TextBox Grid.Column="2"
-                         Margin="4"
-                         Text="" 
-                         Width="140"/>
+                <controls:WatermarkTextBox Grid.Column="2"
+                                           Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                           Margin="4"
+                                           Width="140"/>
             </Grid>
         </Border>
     </Grid>

@@ -78,6 +78,7 @@
     <Compile Include="AggregatedEvents\ImportFileRequested.cs" />
     <Compile Include="AggregatedEvents\ImportFolderRequested.cs" />
     <Compile Include="Commands\ReadableCommands.cs" />
+    <Compile Include="Controls\WatermarkTextBox.cs" />
     <Compile Include="Converters\HalfValueConverter.cs" />
     <Compile Include="Converters\ReadableContentConverter.cs" />
     <Compile Include="Converters\ReadableSeriesFormatter.cs" />
@@ -97,6 +98,10 @@
     <Compile Include="View\Outline\ReadableOutlineView.xaml.cs">
       <DependentUpon>ReadableOutlineView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\WatermarkTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\ColorsDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +113,10 @@
     <Page Include="Styles\ConverterDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Cover\ReadableCoverView.xaml">
       <SubType>Designer</SubType>

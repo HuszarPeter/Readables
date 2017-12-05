@@ -1,4 +1,5 @@
-﻿using Readables.ViewModel.List;
+﻿using Readables.Common;
+using Readables.ViewModel.List;
 using System.Windows.Controls;
 
 namespace Readables.View.List
@@ -11,6 +12,22 @@ namespace Readables.View.List
         public ReadableListView()
         {
             InitializeComponent();
+
+            this.Loaded += (s, e) =>
+            {
+                if (this.DataContext is IEventAggregatorSubscriber sub)
+                {
+                    sub.SubscribeToAggregatedEvents();
+                }
+            };
+
+            this.Unloaded += (s, e) =>
+            {
+                if (this.DataContext is IEventAggregatorSubscriber sub)
+                {
+                    sub.UnSubscribeFromAggregatedEvents();
+                }
+            };
         }
     }
 }
