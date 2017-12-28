@@ -14,6 +14,80 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <conv:HalfValueConverter x:Key="halfConverter" />
+
+        <Style x:Key="ShowHideToggleButton" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid x:Name="bd">
+                            <TextBlock x:Name="showText" Text="Show"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Text" TargetName="showText" Value="Hide" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="OutlineGroupItemStyle" TargetType="TreeViewItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TreeViewItem">
+                        <Grid utils:GridUtils.Columns="*|"
+                              utils:GridUtils.Rows="|*"
+                              Margin="0,10,0,0"
+                              x:Name="bd"
+                              Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="PART_Header"
+                                              ContentSource="Header" />
+                            <ToggleButton x:Name="expander" 
+                                          Grid.Column="1" 
+                                          IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+                                          Style="{StaticResource ShowHideToggleButton}"
+                                          Visibility="Hidden" />
+                            <ItemsPresenter x:Name="ItemsHost"
+                                            Grid.ColumnSpan="2"
+                                            Grid.Row="1" 
+                                            Margin="10,0,0,0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="false">
+                                <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Visibility" TargetName="expander" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="OutlineItemStyle" TargetType="TreeViewItem" >
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TreeViewItem">
+                        <Grid x:Name="bd" Background="{TemplateBinding Background}" >
+                            <ContentPresenter x:Name="PART_Header"
+                                              ContentSource="Header" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" TargetName="bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </UserControl.Resources>
     <Grid Margin="5,0"
           utils:GridUtils.Rows="|*">
@@ -22,27 +96,27 @@
                       VerticalScrollBarVisibility="Auto">
             <TreeView ItemsSource="{Binding Outline}"
                       Background="Transparent"
-                      BorderThickness="0">
-                <TreeView.ItemContainerStyle>
-                    <Style TargetType="TreeViewItem">
-                        <Setter Property="BorderBrush" Value="Black" />
-                        <Setter Property="BorderThickness" Value="1" />
-                        <Setter Property="IsExpanded" Value="True" />
-                    </Style>
-                </TreeView.ItemContainerStyle>
+                      BorderThickness="0"
+                      ItemContainerStyle="{StaticResource OutlineGroupItemStyle}"
+                      SelectedItemChanged="selectedItemChanged">
                 <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Items}">
-                        <HierarchicalDataTemplate.ItemContainerStyle>
-                            <Style TargetType="TreeViewItem">
-                                <Setter Property="BorderBrush" Value="Red" />
-                                <Setter Property="BorderThickness" Value="1" />
-                            </Style>
-                        </HierarchicalDataTemplate.ItemContainerStyle>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Items}"
+                                              ItemContainerStyle="{StaticResource OutlineItemStyle}">
                         
-                        <TextBlock Text="{Binding Text}" /> <!--Group level-->
+                        <!--Group level data template-->
+                        <TextBlock Text="{Binding Text}" 
+                                   FontWeight="SemiBold"/>
+                        
                         <HierarchicalDataTemplate.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Text}" /> <!-- item level-->
+                                <!--Item level data template-->
+                                <Grid utils:GridUtils.Columns="*|"
+                                      Margin="1">
+                                    <TextBlock Text="{Binding Text}" />
+                                    <Label Grid.Column="1"
+                                           Content="{Binding Count}"
+                                           Style="{StaticResource BadgeLabel}"/>
+                                </Grid>
                             </DataTemplate>
                         </HierarchicalDataTemplate.ItemTemplate>
                     </HierarchicalDataTemplate>

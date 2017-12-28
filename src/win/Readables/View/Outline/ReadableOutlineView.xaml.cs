@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Readables.ViewModel.Outline;
+using System.Windows.Controls;
 
 namespace Readables.View.Outline
 {
@@ -10,6 +11,14 @@ namespace Readables.View.Outline
         public ReadableOutlineView()
         {
             InitializeComponent();
+        }
+
+        private void selectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
+        {
+            if(this.DataContext is OutlineViewModel vm)
+            {
+                vm.SelectedOutlineItem = e.NewValue as OutlineItemBase;
+            }
         }
     }
 }

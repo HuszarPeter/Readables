@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Readables.Common;
 using Readables.UI;
-using System;
+using Readables.UI.Model;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,9 +37,16 @@ namespace Readables.ViewModel.Outline
             }
             set
             {
-                Console.WriteLine($"Prev: {selectedOutlineItem}, new: {value}");
                 OnPropertyChanging(nameof(SelectedOutlineItem));
                 selectedOutlineItem = value;
+                if (selectedOutlineItem is OutlineLibraryItem itm)
+                {
+                    this.readableDataStore.SetLibraryItemFilter(Mapper.Map<UtilityItemLibrary>(itm));
+                }
+                else if (selectedOutlineItem is OutlineSubject subj)
+                {
+                    this.readableDataStore.SetSubjectFilter(Mapper.Map<UtilityItemSubject>(subj));
+                }
                 OnPropertyChanged(nameof(SelectedOutlineItem));
             }
         }
@@ -48,13 +55,25 @@ namespace Readables.ViewModel.Outline
         {
             this.readableDataStore = IOC.Resolve<IReadableDataStore>();
 
+            var realLibraryItems = this.readableDataStore.LibraryItems.Select(i => Mapper.Map<OutlineLibraryItem>(i));
+            var libraryItems = new[] {
+                new OutlineLibraryItem
+                {
+                    Text = "All items",
+                    Count = realLibraryItems.Sum(i => i.Count),
+                    Filter = string.Empty
+                }
+            }
+            .Union(realLibraryItems)
+            .ToArray();
+
             outline = new[]
             {
                 new OutlineGroup
                 {
                     Text = "Library",
                     IsExpanded = true,
-                    Items = this.readableDataStore.LibraryItems.Select(i => Mapper.Map<OutlineLibraryItem>(i)).ToArray()
+                    Items = libraryItems
                 },
                 new OutlineGroup
                 {

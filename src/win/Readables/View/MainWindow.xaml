@@ -11,8 +11,8 @@
         xmlns:controls="clr-namespace:Readables.Controls"
         mc:Ignorable="d"
         Title="Readables" 
-        Height="600" 
-        Width="800"
+        Height="717" 
+        Width="1000"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:MainViewModel />

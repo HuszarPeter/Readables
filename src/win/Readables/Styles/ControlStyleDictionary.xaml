@@ -13,7 +13,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Label">
-                    <Border Padding="10, 3"
+                    <Border Padding="7, 0"
                             Background="{StaticResource UtilityAreaBadgeBackgroundBrush}"
                             CornerRadius="{Binding Path=ActualHeight, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource halfConverter}}"
                             MinWidth="{Binding Path=ActualHeight, RelativeSource={RelativeSource TemplatedParent}}">
