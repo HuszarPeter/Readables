@@ -7,5 +7,12 @@ namespace Readables.Common.Extensions
         {
             return source != null && toCheck != null && source.IndexOf(toCheck, comp) >= 0;
         }        
+
+        public static bool IsPicture(this string str)
+        {
+            return str.EndsWith(".jpg", StringComparison.InvariantCultureIgnoreCase) ||
+                str.EndsWith(".png", StringComparison.InvariantCultureIgnoreCase) ||
+                str.EndsWith(".gif", StringComparison.InvariantCultureIgnoreCase);
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.IO;
 using Ionic.Zip;
 using Readables.Domain;
 using SharpCompress.Reader;
+using System.Collections.Generic;
+using Readables.Common.Extensions;
 
 namespace Readables.Import.FileFormat.Comic
 {
@@ -31,7 +33,7 @@ namespace Readables.Import.FileFormat.Comic
                     }
                 },
                 Description = "",
-                DateAdded = System.DateTime.Now,
+                DateAdded = DateTime.Now,
                 CoverImageBytes = CoverImage(fileName)
             };
         }
@@ -40,24 +42,52 @@ namespace Readables.Import.FileFormat.Comic
         {
             if (ZipFile.IsZipFile(fileName))
             {
-                using (var zipFile = ZipFile.Read(fileName))
-                {
-                    var coverEntry = zipFile.Entries.FirstOrDefault(e => !e.IsDirectory);
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        coverEntry.Extract(memoryStream);
-                        return memoryStream.ToArray();
-                    }
-                }
+                return ReadFirstImageFromZipArchive(fileName);
             }
             else
             {
-                using (var fileStream = File.Open(fileName, FileMode.Open))
+                return ReadFirstImageFromRarArchive(fileName);
+            }
+        }
+
+        private byte[] ReadFirstImageFromZipArchive(string fileName)
+        {
+            using (var zipFile = ZipFile.Read(fileName))
+            {
+                var coverEntry = zipFile.Entries
+                    .OrderBy(e => e.FileName)
+                    .FirstOrDefault(e => !e.IsDirectory && e.FileName.IsPicture());
+                using (var memoryStream = new MemoryStream())
                 {
-                    var reader = ReaderFactory.Open(fileStream);
+                    coverEntry.Extract(memoryStream);
+                    return memoryStream.ToArray();
+                }
+            }
+        }
+
+        private byte[] ReadFirstImageFromRarArchive(string fileName)
+        {
+            using (var fileStream = File.Open(fileName, FileMode.Open))
+            {
+                fileStream.Seek(0, SeekOrigin.Begin);
+                var fileNames = new List<String>();
+                using (var fileNameReader = ReaderFactory.Open(fileStream))
+                {
+                    while (fileNameReader.MoveToNextEntry())
+                    {
+                        if (!fileNameReader.Entry.IsDirectory)
+                        {
+                            fileNames.Add(fileNameReader.Entry.Key);
+                        }
+                    }
+                }
+
+                fileStream.Seek(0, SeekOrigin.Begin);
+                using (var reader = ReaderFactory.Open(fileStream))
+                {
                     while (reader.MoveToNextEntry())
                     {
-                        if (!reader.Entry.IsDirectory)
+                        if (reader.Entry.Key == fileNames.OrderBy(s => s).First(s => s.IsPicture()))
                         {
                             using (var ms = new MemoryStream())
                             {
@@ -66,8 +96,8 @@ namespace Readables.Import.FileFormat.Comic
                             }
                         }
                     }
-                    return null;
                 }
+                return null;
             }
         }
     }

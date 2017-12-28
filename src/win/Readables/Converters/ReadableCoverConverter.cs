@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -12,30 +13,42 @@ namespace Readables.Converters
 {
     public class ReadableCoverConverter : IValueConverter
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        private const string DefaultImagePackUri = "pack://application:,,,/Resources/default_cover.png";
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if(value is byte[] bytes)
             {
-                if (bytes == null || bytes.Length == 0)
+                try
                 {
-                    return null;
-                }
+                    if (bytes == null || bytes.Length == 0)
+                    {
+                        return null;
+                    }
 
-                var result = new BitmapImage();
-                using(var mem = new MemoryStream(bytes))
-                {
-                    mem.Position = 0;
-                    result.BeginInit();
-                    result.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                    result.CacheOption = BitmapCacheOption.OnLoad;
-                    result.UriSource = null;
-                    result.StreamSource = mem;
-                    result.EndInit();
+                    var result = new BitmapImage();
+                    using (var mem = new MemoryStream(bytes))
+                    {
+                        mem.Position = 0;
+                        result.BeginInit();
+                        result.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                        result.CacheOption = BitmapCacheOption.OnLoad;
+                        result.UriSource = null;
+                        result.StreamSource = mem;
+                        result.EndInit();
+                    }
+                    result.Freeze();
+                    return result;
                 }
-                result.Freeze();
-                return result;
+                catch (Exception ex)
+                {
+                    logger.Error(ex);
+                    return DefaultImagePackUri;
+                }
             }
-            return "pack://application:,,,/Resources/default_cover.png";
+            return DefaultImagePackUri;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

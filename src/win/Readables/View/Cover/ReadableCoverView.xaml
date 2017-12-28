@@ -27,7 +27,7 @@
                           Margin="4"
                           Width="150"
                           Height="200">
-                        <Image x:Name="img" Source="{Binding CoverImageBytes, Converter={StaticResource coverConverter}}">
+                        <Image x:Name="img" Source="{Binding CoverImageBytes, Converter={StaticResource coverConverter}, IsAsync=True}">
                             <Image.Effect>
                                 <DropShadowEffect BlurRadius="8"
                                                     Direction="0"

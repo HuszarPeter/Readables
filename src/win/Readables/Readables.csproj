@@ -213,15 +213,6 @@
     <Resource Include="icon256.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\format_epub.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\format_comic.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\format_azw3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\default_cover.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
