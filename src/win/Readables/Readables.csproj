@@ -79,11 +79,13 @@
     <Compile Include="AggregatedEvents\ImportFolderRequested.cs" />
     <Compile Include="Commands\ReadableCommands.cs" />
     <Compile Include="Controls\WatermarkTextBox.cs" />
+    <Compile Include="Converters\FileFormatToColorCode.cs" />
     <Compile Include="Converters\FileFormatToPackUriConverter.cs" />
     <Compile Include="Converters\HalfValueConverter.cs" />
     <Compile Include="Converters\ReadableContentConverter.cs" />
     <Compile Include="Converters\ReadableSeriesFormatter.cs" />
     <Compile Include="MapperProfile.cs" />
+    <Compile Include="Styles\AppColors.cs" />
     <Compile Include="Utils\ActionCommand.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\List\ListViewModel.cs" />

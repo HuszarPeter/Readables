@@ -24,7 +24,14 @@
                                 <ItemsControl ItemsSource="{Binding Files}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Image Source="{Binding Format, Converter={StaticResource formatToPackUri}}" SnapsToDevicePixels="True"/>
+                                            <Border CornerRadius="3"
+                                                    BorderBrush="Black"
+                                                    BorderThickness="1"
+                                                    Background="{Binding Format, Converter={StaticResource formatToColor}}"
+                                                    Padding="2,0">
+                                                <TextBlock Text="{Binding Format}"
+                                                           Foreground="Black"/>
+                                            </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

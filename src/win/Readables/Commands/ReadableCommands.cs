@@ -48,12 +48,12 @@ namespace Readables.Commands
 
         private static void ImportFolder(object obj)
         {
-            IOC.Resolve<IEventAggregator>().SendMessage(new ImportFileRequested());
+            IOC.Resolve<IEventAggregator>().SendMessage(new ImportFolderRequested());
         }
 
         private static void ImportFile(object obj)
         {
-            IOC.Resolve<IEventAggregator>().SendMessage(new ImportFolderRequested());
+            IOC.Resolve<IEventAggregator>().SendMessage(new ImportFileRequested());
         }
     }
 }

@@ -89,7 +89,7 @@ namespace Readables.UI
             if (!string.IsNullOrEmpty(this.FilterString))
             {
                 this.visibleReadables = this.visibleReadables
-                    .Where(r => r.Title.Contains(this.FilterString, StringComparison.InvariantCultureIgnoreCase));
+                    .Where(r => r.Title.Contains(this.FilterString, StringComparison.InvariantCultureIgnoreCase) || r.Author.Contains(this.FilterString, StringComparison.InvariantCultureIgnoreCase));
             }
             if (this.LibraryFilter != null && !string.IsNullOrEmpty(this.LibraryFilter.Filter))
             {

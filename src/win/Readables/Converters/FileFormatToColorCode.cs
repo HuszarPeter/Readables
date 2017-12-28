@@ -1,34 +1,36 @@
 ﻿using NLog;
+using Readables.Styles;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Readables.Converters
 {
-    public class FileFormatToPackUriConverter : IValueConverter
+    public class FileFormatToColorCode : IValueConverter
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is String str)
+            if (value is String str)
             {
                 switch (str)
                 {
                     case "epub":
-                        return "pack://application:,,,/Resources/format_epub.png";
+                        return AppColors.EpubFormatBackgroundBrush;
                     case "comic":
-                        return "pack://application:,,,/Resources/format_comic.png";
+                        return AppColors.ComicFormatBackgroundBrush;
                     case "mobi":
-                        return "pack://application:,,,/Resources/format_azw3.png";
+                        return AppColors.MobiFormatBackgroundBrush;
                     default:
                         logger.Warn($"Unknown file format '{str}'");
                         break;
-
                 }
             }
             return null;
