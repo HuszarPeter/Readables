@@ -9,6 +9,7 @@ using Microsoft.Win32;
 using Readables.Import.AggregatedEvents;
 using Readables.Import;
 using Readables.Import.FileFormat;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Readables
 {
@@ -32,7 +33,19 @@ namespace Readables
 
         public void HandleMessage(ImportFolderRequested message)
         {
-            
+            var dlg = new CommonOpenFileDialog
+            {
+                IsFolderPicker = true,
+                Multiselect = true
+            };
+
+            if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                this.eventAggregator.SendMessage(new FoldersImportRequestEvent
+                {
+                    Folders = dlg.FileNames.Select(fn => new Uri(fn)).ToArray()
+                });
+            }
         }
 
         public void HandleMessage(ImportFileRequested message)
@@ -43,13 +56,11 @@ namespace Readables
                 .Union(
                 importServices.Select(importSrv => $"{importSrv.FormatName}|{String.Join(";", importSrv.SupportedExtensions.Select(ext => $"*{ext}"))}")));
 
-            logger.Debug($"Format filter : {formatFilter}");
             var openDialog = new OpenFileDialog()
             {
                 Multiselect = true,
                 Filter = formatFilter
             };
-
 
             var dlgResult = openDialog.ShowDialog();
             if (dlgResult.HasValue && dlgResult.Value)
