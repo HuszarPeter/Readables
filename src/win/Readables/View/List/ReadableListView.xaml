@@ -18,7 +18,19 @@
                     <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" />
                     <GridViewColumn Header="Author" DisplayMemberBinding="{Binding Author}" />
                     <GridViewColumn Header="Series" DisplayMemberBinding="{Binding ., Converter={StaticResource seriesFormatter}}" />
-                    <GridViewColumn Header="Formats" />
+                    <GridViewColumn Header="Formats">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Files}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Format, Converter={StaticResource formatToPackUri}}" SnapsToDevicePixels="True"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Date added" DisplayMemberBinding="{Binding DateAdded}" />
                 </GridView>
             </ListView.View>

@@ -6,4 +6,5 @@
     <converters:HalfValueConverter x:Key="halfConverter" />
     <converters:ReadableContentConverter x:Key="contentModeConverter" />
     <converters:ReadableSeriesFormatter x:Key="seriesFormatter" />
+    <converters:FileFormatToPackUriConverter x:Key="formatToPackUri" />
 </ResourceDictionary>

@@ -79,6 +79,7 @@
     <Compile Include="AggregatedEvents\ImportFolderRequested.cs" />
     <Compile Include="Commands\ReadableCommands.cs" />
     <Compile Include="Controls\WatermarkTextBox.cs" />
+    <Compile Include="Converters\FileFormatToPackUriConverter.cs" />
     <Compile Include="Converters\HalfValueConverter.cs" />
     <Compile Include="Converters\ReadableContentConverter.cs" />
     <Compile Include="Converters\ReadableSeriesFormatter.cs" />
@@ -202,6 +203,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon256.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\format_epub.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\format_comic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\format_azw3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
