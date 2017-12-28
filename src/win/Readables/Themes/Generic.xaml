@@ -1,5 +1,8 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Readables;component/Controls/WatermarkTextBox.xaml" />
+        <ResourceDictionary Source="/Readables;component/Controls/FormatBadge.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    
 </ResourceDictionary>

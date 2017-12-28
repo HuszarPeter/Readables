@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:Readables.ViewModel.List"
+             xmlns:controls="clr-namespace:Readables.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
@@ -24,14 +25,7 @@
                                 <ItemsControl ItemsSource="{Binding Files}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Border CornerRadius="3"
-                                                    BorderBrush="Black"
-                                                    BorderThickness="1"
-                                                    Background="{Binding Format, Converter={StaticResource formatToColor}}"
-                                                    Padding="2,0">
-                                                <TextBlock Text="{Binding Format}"
-                                                           Foreground="Black"/>
-                                            </Border>
+                                            <controls:FormatBadge Format="{Binding Format}" />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Readables.Common;
+using System.Windows.Controls;
 
 namespace Readables.View.Cover
 {
@@ -10,6 +11,22 @@ namespace Readables.View.Cover
         public ReadableCoverView()
         {
             InitializeComponent();
+
+            this.Loaded += (s, e) =>
+            {
+                if (this.DataContext is IEventAggregatorSubscriber sub)
+                {
+                    sub.SubscribeToAggregatedEvents();
+                }
+            };
+
+            this.Unloaded += (s, e) =>
+            {
+                if (this.DataContext is IEventAggregatorSubscriber sub)
+                {
+                    sub.UnSubscribeFromAggregatedEvents();
+                }
+            };
         }
     }
 }

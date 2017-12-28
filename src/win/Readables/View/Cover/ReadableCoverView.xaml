@@ -4,11 +4,70 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Readables.View.Cover"
+             xmlns:utils="clr-namespace:Readables.Utils"
+             xmlns:list="clr-namespace:Readables.ViewModel.List"
+             xmlns:controls="clr-namespace:Readables.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <list:ListViewModel />
+    </UserControl.DataContext>
     <Grid>
-        <ListView BorderBrush="Transparent"
-                  BorderThickness="0">
-        </ListView>
+        <ListBox ItemsSource="{Binding Readables}"
+                 BorderBrush="Transparent"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid utils:GridUtils.Rows="*||"
+                          Margin="4"
+                          Width="150"
+                          Height="200">
+                        <Image x:Name="img" Source="{Binding CoverImageBytes, Converter={StaticResource coverConverter}}">
+                            <Image.Effect>
+                                <DropShadowEffect BlurRadius="8"
+                                                    Direction="0"
+                                                    ShadowDepth="0"
+                                                    Color="Black" />
+                            </Image.Effect>
+                        </Image>
+                        <Border Width="{Binding ActualWidth, ElementName=img}"
+                                HorizontalAlignment="Center">
+                            <ItemsControl ItemsSource="{Binding Files}"
+                                          BorderThickness="1"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Bottom">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <controls:FormatBadge Format="{Binding Format}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.LayoutTransform>
+                                    <ScaleTransform ScaleX="0.7" ScaleY="0.7" />
+                                </ItemsControl.LayoutTransform>
+                            </ItemsControl>
+                            
+                        </Border>
+
+                        <TextBlock Grid.Row="1"
+                                   Text="{Binding Title}"
+                                   HorizontalAlignment="Center"
+                                   TextWrapping="NoWrap"
+                                   TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Grid.Row="2"
+                                   Text="{Binding Author}" 
+                                   HorizontalAlignment="Center"
+                                   TextWrapping="NoWrap"
+                                   TextTrimming="CharacterEllipsis"
+                                   FontSize="10"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
     </Grid>
 </UserControl>

@@ -8,7 +8,6 @@
         xmlns:commands="clr-namespace:Readables.Commands"
         xmlns:vm="clr-namespace:Readables.ViewModel"
         xmlns:model="clr-namespace:Readables.UI.Model;assembly=Readables.UI"
-        xmlns:list="clr-namespace:Readables.ViewModel.List"
         xmlns:controls="clr-namespace:Readables.Controls"
         mc:Ignorable="d"
         Title="Readables" 
@@ -18,71 +17,66 @@
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
-    <Grid utils:GridUtils.Columns="2*||5*" 
-          utils:GridUtils.Rows="||*"
-          ShowGridLines="False">
-        <Border Grid.RowSpan="3"
-                Background="{StaticResource UtilityAreaBackgroundBrush}"/>
+    <Grid utils:GridUtils.Columns="2*||5*"
+          utils:GridUtils.Rows="|*">
+        <!--Menu, view switch and filter-->
+        <Border Background="{StaticResource UtilityAreaBackgroundBrush}"
+                BorderBrush="{StaticResource UtilityAreaBorderBrush}"
+                BorderThickness="0,0,0,1"
+                Grid.Column="0"
+                Grid.Row="0"
+                Grid.ColumnSpan="3">
+            <Grid utils:GridUtils.Columns="*|">
+                <Menu VerticalAlignment="Center" Background="Transparent">
+                    <MenuItem Header="File">
+                        <MenuItem Header="Import ..." Command="commands:ReadableCommands.ImportFileCommand"/>
+                        <MenuItem Header="Import folder ..." Command="commands:ReadableCommands.ImportFolderCommand"/>
+                        <Separator/>
+                        <MenuItem Header="Exit" Command="commands:ReadableCommands.ExitCommand" />
+                    </MenuItem>
+                </Menu>
+            
+                <!--View switch and filter-->
+                <Grid utils:GridUtils.Columns="|"
+                      Grid.Column="1">
+                    <!--View switch--> 
+                    <ListView Background="Transparent"
+                              BorderThickness="0"
+                              BorderBrush="Transparent"
+                              VerticalAlignment="Center"
+                              SelectionMode="Single"
+                              SelectedItem="{Binding ContentMode}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
 
+                        <model:ViewMode>List</model:ViewMode>
+                        <model:ViewMode>Cover</model:ViewMode>
+                    </ListView>
+                    <!--Filter-->
+                    <controls:WatermarkTextBox Grid.Column="1"
+                                               Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                               Margin="4"
+                                               Width="140"/>
+                </Grid>
+            </Grid>
+        </Border>
+        <!--Content area-->
+        
         <outline:ReadableOutlineView Grid.Column="0"
-                                     Grid.Row="2" />
-
-        <ContentControl Grid.Column="2"
-                        Grid.Row="2"
-                        Content="{Binding ContentMode, Converter={StaticResource contentModeConverter}}" />
-
+                                     Grid.Row="1"
+                                     Background="{StaticResource UtilityAreaBackgroundBrush}"/>
 
         <GridSplitter Grid.Column="1" 
                       Grid.Row="1" 
-                      Grid.RowSpan="2" 
-                      HorizontalAlignment="Stretch" 
-                      BorderThickness="1,0,0,0"
-                      BorderBrush="{StaticResource UtilityAreaBorderBrush}"
-                      Background="Transparent"
-                      FocusVisualStyle="{x:Null}"
-                      Width="3" />
+                      Style="{StaticResource HorizontalGridSplitter}" />
 
-        <Menu Grid.Column="0"
-              Grid.Row="0"
-              Grid.ColumnSpan="2"
-              Background="{StaticResource UtilityAreaBackgroundBrush}"
-              Padding="3"
-              BorderBrush="{StaticResource UtilityAreaBorderBrush}"
-              BorderThickness="0,0,0,1">
-            <MenuItem Header="File">
-                <MenuItem Header="Import ..." Command="commands:ReadableCommands.ImportFileCommand"/>
-                <MenuItem Header="Import folder ..." Command="commands:ReadableCommands.ImportFolderCommand"/>
-                <Separator/>
-                <MenuItem Header="Exit" Command="commands:ReadableCommands.ExitCommand" />
-            </MenuItem>
-        </Menu>
+        <!--Content--> 
+        <ContentControl Grid.Column="2"
+                        Grid.Row="1"
+                        Content="{Binding ContentMode, Converter={StaticResource contentModeConverter}}" />
 
-        <Border Grid.Column="2"
-                Background="{StaticResource UtilityAreaBackgroundBrush}"
-                BorderBrush="{StaticResource UtilityAreaBorderBrush}"
-                BorderThickness="0,0,0,1">
-            <Grid utils:GridUtils.Columns="*||">
-                <ListView Grid.Column="1"
-                          Background="Transparent"
-                          BorderThickness="0"
-                          BorderBrush="Transparent"
-                          SelectionMode="Single"
-                          SelectedItem="{Binding ContentMode}">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-
-                    <model:ViewMode>List</model:ViewMode>
-                    <model:ViewMode>Cover</model:ViewMode>
-                </ListView>
-
-                <controls:WatermarkTextBox Grid.Column="2"
-                                           Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                                           Margin="4"
-                                           Width="140"/>
-            </Grid>
-        </Border>
     </Grid>
 </Window>

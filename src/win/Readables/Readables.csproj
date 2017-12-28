@@ -78,11 +78,13 @@
     <Compile Include="AggregatedEvents\ImportFileRequested.cs" />
     <Compile Include="AggregatedEvents\ImportFolderRequested.cs" />
     <Compile Include="Commands\ReadableCommands.cs" />
+    <Compile Include="Controls\FormatBadge.cs" />
     <Compile Include="Controls\WatermarkTextBox.cs" />
     <Compile Include="Converters\FileFormatToColorCode.cs" />
     <Compile Include="Converters\FileFormatToPackUriConverter.cs" />
     <Compile Include="Converters\HalfValueConverter.cs" />
     <Compile Include="Converters\ReadableContentConverter.cs" />
+    <Compile Include="Converters\ReadableCoverConverter.cs" />
     <Compile Include="Converters\ReadableSeriesFormatter.cs" />
     <Compile Include="MapperProfile.cs" />
     <Compile Include="Styles\AppColors.cs" />
@@ -101,6 +103,10 @@
     <Compile Include="View\Outline\ReadableOutlineView.xaml.cs">
       <DependentUpon>ReadableOutlineView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\FormatBadge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\WatermarkTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,6 +220,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\format_azw3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\default_cover.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

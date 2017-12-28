@@ -8,4 +8,5 @@
     <converters:ReadableSeriesFormatter x:Key="seriesFormatter" />
     <converters:FileFormatToPackUriConverter x:Key="formatToPackUri" />
     <converters:FileFormatToColorCode x:Key="formatToColor" />
+    <converters:ReadableCoverConverter x:Key="coverConverter" />
 </ResourceDictionary>

@@ -23,5 +23,14 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="HorizontalGridSplitter" TargetType="GridSplitter">
+        <Setter Property="BorderThickness" Value="1,0,0,0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UtilityAreaBorderBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Width" Value="3"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
     
 </ResourceDictionary>

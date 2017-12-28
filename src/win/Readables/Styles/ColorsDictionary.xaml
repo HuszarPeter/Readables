@@ -1,22 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:styles="clr-namespace:Readables.Styles"
-                    >
-
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Color x:Key="UtilityAreaBackgroundColor">AliceBlue</Color>
     <Color x:Key="UtilityAreaBorderColor">LightSkyBlue</Color>
-
     <Color x:Key="ContentAreaBackgroundColor">White</Color>
-
     <Color x:Key="UtilityAreaBadgeBackgroundColor">LightSlateGray</Color>
     <Color x:Key="UtilityAreaBadgeForegroundColor">White</Color>
 
     <SolidColorBrush x:Key="UtilityAreaBackgroundBrush" Color="{StaticResource UtilityAreaBackgroundColor}" />
     <SolidColorBrush x:Key="UtilityAreaBorderBrush" Color="{StaticResource UtilityAreaBorderColor}"/>
     <SolidColorBrush x:Key="ContentAreaBackgroundBrush" Color="{StaticResource ContentAreaBackgroundColor}" />
-
     <SolidColorBrush x:Key="UtilityAreaBadgeBackgroundBrush" Color="{StaticResource UtilityAreaBadgeBackgroundColor}" />
     <SolidColorBrush x:Key="UtilityAreaBadgeForegroundBrush" Color="{StaticResource UtilityAreaBadgeForegroundColor}" />
-
-    <SolidColorBrush x:Key="FileFormatEpubBrush" Color="{x:Static styles:AppColors.EpubFormatColor}" />
 </ResourceDictionary>
